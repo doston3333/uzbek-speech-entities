@@ -1,0 +1,177 @@
+{
+  "release": "public-ner-v5n6-20260808",
+  "parent_baseline": {
+    "clean_f1": 0.7547368421052632,
+    "fixture_f1": 0.9263157894736842,
+    "speech_year_exact_f1": 0.990138067061144,
+    "parent_sha256": "f9bd0067927c8268905f753f80189b85270c28be5e981aec59cc132af8b0558c"
+  },
+  "promotion_decision": "do_not_promote_no_both_seed_parent_pass",
+  "parent_pass_seeds": [
+    "public-v5n6-ft6-lr3e6-ep1-seed2",
+    "public-v5n6-ft6-lr2e6-ep1-seed1",
+    "public-v5n6-ft6-lr1e6-ep2-seed1"
+  ],
+  "candidates": [
+    {
+      "name": "public-v5n6-ft6-lr3e6-ep1-seed2",
+      "clean_f1": 0.7573221757322176,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": true,
+      "pass_v1": true,
+      "delta_clean": 0.002585333626954456,
+      "delta_fixture": 0.011184210526315796
+    },
+    {
+      "name": "public-v5n6-ft6-lr2e6-ep1-seed1",
+      "clean_f1": 0.7566718995290425,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": true,
+      "pass_v1": true,
+      "delta_clean": 0.0019350574237793072,
+      "delta_fixture": 0.0
+    },
+    {
+      "name": "public-v5n6-ft6-lr1e6-ep2-seed1",
+      "clean_f1": 0.7565582371458551,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": true,
+      "pass_v1": true,
+      "delta_clean": 0.0018213950405919777,
+      "delta_fixture": 0.011184210526315796
+    },
+    {
+      "name": "public-v5n6-ft6-lr5e7-ep1-seed1",
+      "clean_f1": 0.7547169811320753,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -1.9860973187846298e-05,
+      "delta_fixture": 0.011184210526315796
+    },
+    {
+      "name": "public-v5n6-ft6-lr1e6-ep1-seed1",
+      "clean_f1": 0.7545787545787547,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0001580875265084769,
+      "delta_fixture": 0.011184210526315796
+    },
+    {
+      "name": "public-v5n6-ft6-lr1e6-ep1-seed2",
+      "clean_f1": 0.75418410041841,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0005527416868531532,
+      "delta_fixture": 0.011184210526315796
+    },
+    {
+      "name": "public-v5n6-ft6-lr2e6-ep2-seed2",
+      "clean_f1": 0.75418410041841,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0005527416868531532,
+      "delta_fixture": 0.0
+    },
+    {
+      "name": "public-v5n6-ft6-lr2e6-ep1-seed2",
+      "clean_f1": 0.7537898588604286,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0009469832448345539,
+      "delta_fixture": 0.011184210526315796
+    },
+    {
+      "name": "public-v5n6-ft6-lr5e7-ep2-seed1",
+      "clean_f1": 0.7536687631027252,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0010680790025379139,
+      "delta_fixture": 0.011184210526315796
+    },
+    {
+      "name": "public-v5n6-ft6-lr5e7-ep2-seed2",
+      "clean_f1": 0.753273965426925,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0014628766783381097,
+      "delta_fixture": 0.011184210526315796
+    },
+    {
+      "name": "public-v5n6-ft6-lr3e6-ep2-seed2",
+      "clean_f1": 0.7531380753138075,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0015987667914556525,
+      "delta_fixture": 0.0
+    },
+    {
+      "name": "public-v5n6-ft6-lr5e7-ep1-seed2",
+      "clean_f1": 0.7528795811518325,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0018572609534306395,
+      "delta_fixture": 0.011184210526315796
+    },
+    {
+      "name": "public-v5n6-ft6-lr1e6-ep2-seed2",
+      "clean_f1": 0.7519582245430809,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0027786175621822284,
+      "delta_fixture": 0.0
+    },
+    {
+      "name": "public-v5n6-ft6-lr3e6-ep1-seed1",
+      "clean_f1": 0.7577184720041863,
+      "fixture_f1": 0.9148936170212766,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false,
+      "delta_clean": 0.002981629898923144,
+      "delta_fixture": -0.01142217245240762
+    },
+    {
+      "name": "public-v5n6-ft6-lr2e6-ep2-seed1",
+      "clean_f1": 0.7524856096284669,
+      "fixture_f1": 0.9148936170212766,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false,
+      "delta_clean": -0.002251232476796261,
+      "delta_fixture": -0.01142217245240762
+    },
+    {
+      "name": "public-v5n6-ft6-lr3e6-ep2-seed1",
+      "clean_f1": 0.7511786275536931,
+      "fixture_f1": 0.9032258064516129,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false,
+      "delta_clean": -0.003558214551570016,
+      "delta_fixture": -0.023089983022071325
+    }
+  ]
+}

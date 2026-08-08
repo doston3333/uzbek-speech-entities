@@ -1,0 +1,24 @@
+dataset:
+  metadata_path: ./tests/fixtures/evaluation_smoke.jsonl
+  compliance_report_path: ./output/phase8-smoke/evaluation_dataset.json
+  require_compliance: true
+
+stt:
+  model_ids:
+    base: navai-uz/whisper-base-uzbek
+    small: navai-uz/whisper-small-uzbek
+  summary_path: ./output/phase8-smoke/stt_benchmark.csv
+  predictions_path: ./output/phase8-smoke/stt_predictions.jsonl
+  local_files_only: true
+
+pipeline:
+  clean_ner_run_path: ./models/ner/clean
+  augmented_ner_run_path: ./models/ner/augmented
+  summary_path: ./output/phase8-smoke/end_to_end_results.csv
+  predictions_path: ./output/phase8-smoke/pipeline_predictions.jsonl
+  selection_path: ./output/phase8-smoke/ner_end_to_end_selection.json
+
+reports:
+  primary_ablation: E
+  error_summary_path: ./output/phase8-smoke/error_analysis.md
+  error_records_path: ./output/phase8-smoke/error_analysis.jsonl

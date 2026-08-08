@@ -1,0 +1,15 @@
+{
+  "id": "uzinfocom-curated-train-00019076",
+  "source_dataset": "uzinfocom-edu-ai/uzbek-asr-curated-701h",
+  "source_revision": "35a00f63fc5c7f09b44cbce7f3968db6001457a5",
+  "source_path": "audios/00/00019076.wav",
+  "source_split": "train",
+  "source_collection": "uzbekvoice",
+  "source_license": "Apache-2.0",
+  "expected_transcript": "Target Systems toʻliqligicha Alisher Abduvohidovga tegishli. Eslatib oʻtamiz, Ortiq Xoʻjayev poytaxt hokimi lavozimiga ikki ming oʻn sakkiz-yil aprelda tayinlanib, ikki ming yigirma uch-yil oʻn olti-yanvarda energetika inqirozi fonida ishdan olingandi.",
+  "maximum_wer": 0.35,
+  "audio_sha256": "b941bdc802bc6a6a7e8d8d94ac4c80934e2f2dfbd383d07757eccc6a1146efb0",
+  "sample_rate": 16000,
+  "channels": 1,
+  "duration_seconds": 17.882875
+}

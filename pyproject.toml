@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uzbek-speech-entities"
+version = "0.1.0"
+description = "Local Uzbek speech transcription and entity extraction"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = { text = "MIT" }
+authors = [
+  { name = "doston3333", email = "dostonbps@gmail.com" },
+]
+dependencies = [
+  "accelerate>=1.14,<2",
+  "datasets>=4.3,<6",
+  "fastapi>=0.110",
+  "huggingface-hub>=0.36,<1",
+  "jiwer>=3.0",
+  "librosa>=0.10",
+  "numpy>=1.26",
+  "psutil>=7.0,<8",
+  "python-multipart>=0.0.9",
+  "pydantic>=2.0",
+  "protobuf>=3.20,<7",
+  "PyYAML>=6.0",
+  "seqeval==1.2.2",
+  "soundfile>=0.12",
+  "safetensors>=0.4,<1",
+  "torch>=2.10,<2.14",
+  "transformers>=4.57,<5",
+  "uvicorn>=0.29",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+uzbek_speech_entities = ["ner/resources/*.json"]
+
+[tool.pytest.ini_options]
+addopts = "-m 'not slow'"
+testpaths = ["tests"]
+markers = ["slow: requires audio or model resources"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src", "training", "evaluation"]
+exclude = ["^tests/"]

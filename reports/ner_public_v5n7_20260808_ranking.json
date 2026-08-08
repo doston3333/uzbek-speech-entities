@@ -1,0 +1,140 @@
+{
+  "release": "public-ner-v5n7-20260808",
+  "parent_baseline": {
+    "clean_f1": 0.7547368421052632,
+    "fixture_f1": 0.9263157894736842,
+    "speech_year_exact_f1": 0.990138067061144
+  },
+  "promotion_decision": "do_not_promote_no_both_seed_parent_pass",
+  "parent_pass_seeds": [],
+  "candidates": [
+    {
+      "name": "public-v5n7-ft7-lr1e6-ep1-seed1",
+      "clean_f1": 0.7547169811320753,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr5e7-ep1-seed1",
+      "clean_f1": 0.7537898588604286,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr1e6-ep2-seed2",
+      "clean_f1": 0.7531380753138075,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr1e6-ep2-seed1",
+      "clean_f1": 0.7530152071316204,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr5e7-ep1-seed2",
+      "clean_f1": 0.7526205450733753,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr5e7-ep2-seed2",
+      "clean_f1": 0.7524856096284669,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr5e7-ep2-seed1",
+      "clean_f1": 0.7502612330198537,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr3e6-ep2-seed1",
+      "clean_f1": 0.7499999999999999,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr1e6-ep1-seed2",
+      "clean_f1": 0.7498694516971279,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr2e6-ep2-seed1",
+      "clean_f1": 0.7489539748953975,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n7-ft7-lr2e6-ep2-seed2",
+      "clean_f1": 0.7527443805541036,
+      "fixture_f1": 0.9148936170212766,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false
+    },
+    {
+      "name": "public-v5n7-ft7-lr3e6-ep2-seed2",
+      "clean_f1": 0.7494780793319415,
+      "fixture_f1": 0.9148936170212766,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false
+    },
+    {
+      "name": "public-v5n7-ft7-lr2e6-ep1-seed1",
+      "clean_f1": 0.7480356207438449,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false
+    },
+    {
+      "name": "public-v5n7-ft7-lr3e6-ep1-seed2",
+      "clean_f1": 0.7464862051015095,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false
+    },
+    {
+      "name": "public-v5n7-ft7-lr3e6-ep1-seed1",
+      "clean_f1": 0.7462061747776034,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false
+    },
+    {
+      "name": "public-v5n7-ft7-lr2e6-ep1-seed2",
+      "clean_f1": 0.7451797811360082,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false
+    }
+  ]
+}

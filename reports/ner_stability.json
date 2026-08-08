@@ -1,0 +1,68 @@
+{
+  "definition": "Two independent training seeds per clean/augmented candidate, using identical data and hyperparameters except for the seed; each score comes from the checkpoint selected by validation overall_f1.",
+  "device": "mps",
+  "runs": {
+    "augmented": {
+      "seed_42": {
+        "best_checkpoint": "models/ner/augmented/checkpoint-1495",
+        "duration_seconds": 762.6007081670105,
+        "model_safetensors_sha256": "66ae3a3b9945fcc129372d2717240fbaa4506bcb18dccbfa2d2bef05bb8cb961",
+        "test_four_class_macro_f1": 0.8278558646769363,
+        "test_overall_f1": 0.7336734693877551,
+        "validation_four_class_macro_f1": 0.8301329943090553,
+        "validation_overall_f1": 0.783126014061655
+      },
+      "seed_43": {
+        "best_checkpoint": "models/ner/stability-augmented-seed43/checkpoint-897",
+        "duration_seconds": 869.3732594999892,
+        "model_safetensors_sha256": "e89b8b4c6ec00f026ccc9120d1388748f6c20d0f7081aa64315d81341ba93799",
+        "test_four_class_macro_f1": 0.8262448758066637,
+        "test_overall_f1": 0.7319021467798302,
+        "validation_four_class_macro_f1": 0.8273271485204725,
+        "validation_overall_f1": 0.781449893390192
+      },
+      "test_four_class_macro_f1_summary": {
+        "mean": 0.8270503702418,
+        "population_stddev": 0.000805494435136278,
+        "range": 0.001610988870272556
+      },
+      "validation_four_class_macro_f1_summary": {
+        "mean": 0.8287300714147638,
+        "population_stddev": 0.0014029228942913918,
+        "range": 0.0028058457885827837
+      }
+    },
+    "clean": {
+      "seed_42": {
+        "best_checkpoint": "models/ner/clean/checkpoint-1045",
+        "duration_seconds": 591.2843102919869,
+        "model_safetensors_sha256": "68403e76980e62410afc4c9eab2d079c5066d179777a61ead12c0e93b93a8b48",
+        "test_four_class_macro_f1": 0.8323429508111595,
+        "test_overall_f1": 0.7476828012358394,
+        "validation_four_class_macro_f1": 0.833252638863514,
+        "validation_overall_f1": 0.7852494577006508
+      },
+      "seed_43": {
+        "best_checkpoint": "models/ner/stability-clean-seed43/checkpoint-1045",
+        "duration_seconds": 618.007923875004,
+        "model_safetensors_sha256": "5f480006d50b7110f9de9291f85835cb6e430de5017977dedfc73a9ef065f3a2",
+        "test_four_class_macro_f1": 0.8208817700708712,
+        "test_overall_f1": 0.7282051282051282,
+        "validation_four_class_macro_f1": 0.8527092295502763,
+        "validation_overall_f1": 0.79004329004329
+      },
+      "test_four_class_macro_f1_summary": {
+        "mean": 0.8266123604410154,
+        "population_stddev": 0.005730590370144173,
+        "range": 0.011461180740288346
+      },
+      "validation_four_class_macro_f1_summary": {
+        "mean": 0.8429809342068951,
+        "population_stddev": 0.009728295343381155,
+        "range": 0.01945659068676231
+      }
+    }
+  },
+  "status": "complete_for_clean_and_augmented_candidates",
+  "test_metrics_role": "Report-only. Test metrics did not select checkpoints or models."
+}

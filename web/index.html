@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="O‘zbekcha audio matnini mahalliy qurilmada tahlil qilish vositasi.">
+    <title>Nutq daftari — O‘zbek tahlili</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23272b28'/%3E%3Cpath d='M18 35h6l4-16 7 29 5-21 4 8h4' fill='none' stroke='%23f2c75c' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Asosiy mazmunga o‘tish</a>
+    <header class="masthead">
+      <p class="eyebrow">Mahalliy nutq daftari</p>
+      <div class="masthead-row">
+        <h1>Nutqdan<br><em>ma’noga.</em></h1>
+        <p class="masthead-note">O‘zbekcha yozuvni tinglang, o‘qing va undagi muhim nomlarni ajrating.</p>
+      </div>
+    </header>
+    <main id="main-content" class="desk" tabindex="-1">
+      <aside class="capture-rail" aria-labelledby="capture-title">
+        <div class="rail-heading"><p class="section-number" aria-hidden="true">01</p><h2 id="capture-title">Ovoz manbasi</h2></div>
+        <p class="rail-intro">Yozib oling yoki audio fayl tanlang. Fayl faqat shu brauzer va mahalliy serverda qayta ishlanadi.</p>
+        <section class="recorder" aria-labelledby="record-title">
+          <div class="signal" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          <h3 id="record-title">Jonli yozuv</h3><p id="recording-timer" class="timer" aria-live="polite">00:00 / 01:00</p>
+          <div class="button-row"><button id="record-button" class="button button-record" type="button" title="Mikrofondan yozishni boshlash">Yozishni boshlash</button><button id="stop-button" class="button button-quiet" type="button" title="Yozuvni to‘xtatish" disabled>To‘xtatish</button></div>
+        </section>
+        <fieldset class="upload-fieldset"><legend>Yoki audio fayl</legend><label class="file-picker" for="audio-file">Faylni tanlash<input id="audio-file" type="file" accept=".wav,.mp3,.m4a,.ogg,.webm,.flac,audio/*" aria-describedby="file-help"></label><p id="file-help" class="field-help">WAV, MP3, M4A, OGG, WebM yoki FLAC · 25 MB gacha</p></fieldset>
+        <section class="preview-section" aria-labelledby="preview-title"><h3 id="preview-title">Tinglab ko‘rish</h3><p id="source-name" class="source-name">Hali audio tanlanmagan.</p><audio id="audio-preview" controls hidden aria-label="Tanlangan audioni tinglash"></audio></section>
+        <p class="local-note"><strong>Mahalliy ishlaydi.</strong> Audio va tahlil ushbu qurilmada qayta ishlanadi; pullik API yoki bulutli saqlash ishlatilmaydi.</p>
+      </aside>
+      <section class="work-surface" aria-labelledby="analysis-title">
+        <div class="work-header"><div><p class="section-number" aria-hidden="true">02</p><h2 id="analysis-title">Tahlil varag‘i</h2></div><div class="health-wrap"><p id="health-status" class="health-status" role="status" aria-live="polite" data-health="checking">Holat tekshirilmoqda…</p><button id="health-retry" class="text-button" type="button" title="Mahalliy model holatini qayta tekshirish">Qayta tekshirish</button></div></div>
+        <div class="analysis-actions"><button id="analyze-button" class="button button-analyze" type="button" disabled>Tahlil qilish</button><button id="clear-button" class="button button-quiet" type="button" title="Audio va natijalarni tozalash">Tozalash</button><p id="activity-status" class="activity-status" aria-live="polite">Avval ovoz manbasini tanlang.</p></div>
+        <p id="error-message" class="error-message" role="alert" tabindex="-1" hidden></p>
+        <section id="results" class="results" aria-live="polite" aria-busy="false" aria-labelledby="results-title">
+          <div class="results-heading"><div><p class="section-number" aria-hidden="true">03</p><h2 id="results-title">O‘qilgan matn</h2></div><p class="results-kicker">Natija</p></div>
+          <div id="results-empty" class="results-empty"><p class="empty-mark" aria-hidden="true">—</p><p>Audio tayyor bo‘lgach, “Tahlil qilish” tugmasi nutq matni, normallashtirilgan yozuv va undagi nomlarni ko‘rsatadi.</p></div>
+          <div id="results-content" hidden>
+            <section class="transcript-block" aria-labelledby="raw-title"><h3 id="raw-title">Asl transkript</h3><p id="raw-transcript" class="transcript-text"></p></section>
+            <section class="transcript-block normalized-block" aria-labelledby="normalized-title"><h3 id="normalized-title">Normallashtirilgan transkript</h3><p id="normalized-transcript" class="transcript-text"></p></section>
+            <section class="transcript-block highlighted-block" aria-labelledby="highlighted-title"><h3 id="highlighted-title">Belgilangan transkript</h3><p id="highlighted-transcript" class="transcript-text"></p></section>
+            <section class="legend" aria-labelledby="legend-title"><h3 id="legend-title">Belgilash kaliti</h3><ul><li><span class="legend-swatch entity-per" aria-hidden="true"></span><span><strong>PER</strong> — shaxs</span></li><li><span class="legend-swatch entity-loc" aria-hidden="true"></span><span><strong>LOC</strong> — joy</span></li><li><span class="legend-swatch entity-org" aria-hidden="true"></span><span><strong>ORG</strong> — tashkilot</span></li><li><span class="legend-swatch entity-date" aria-hidden="true"></span><span><strong>DATE</strong> — sana/vaqt</span></li></ul></section>
+            <section class="timing-section" aria-labelledby="timing-title"><h3 id="timing-title">Ishlov vaqti</h3><div class="timing-scroll"><table><thead><tr><th scope="col">Bosqich</th><th scope="col">Vaqt</th></tr></thead><tbody><tr><th scope="row">Audio tayyorlash</th><td id="time-audio">—</td></tr><tr><th scope="row">Nutqni matnga o‘girish</th><td id="time-stt">—</td></tr><tr><th scope="row">Normallashtirish</th><td id="time-normalization">—</td></tr><tr><th scope="row">Nomlarni topish</th><td id="time-ner">—</td></tr><tr class="total-row"><th scope="row">Jami</th><td id="time-total">—</td></tr></tbody></table></div></section>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

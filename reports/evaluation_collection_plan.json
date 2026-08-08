@@ -1,0 +1,42 @@
+{
+  "condition_coverage": [
+    "background_noise",
+    "conversational_speech",
+    "fast_speech",
+    "formal_speech",
+    "laptop_microphone",
+    "phone_microphone",
+    "quiet",
+    "slow_speech",
+    "uzbek_russian_code_switching"
+  ],
+  "consent_requirement": "Every speaker must explicitly consent before their checklist rows are recorded.",
+  "content_coverage": [
+    "cities",
+    "common_names",
+    "districts",
+    "inflected_entities",
+    "numeric_dates",
+    "organizations",
+    "rare_names",
+    "regions",
+    "relative_dates",
+    "times",
+    "villages"
+  ],
+  "entity_counts": {
+    "DATE": 150,
+    "LOC": 150,
+    "ORG": 150,
+    "PER": 150
+  },
+  "limitations": [
+    "The plan is not evaluation evidence until every referenced audio file exists.",
+    "Actual duration, microphone, noise, speaking rate, and annotation quality must be validated after recording."
+  ],
+  "planned_recording_count": 150,
+  "prompt_count": 30,
+  "recorded_count": 0,
+  "speaker_count": 5,
+  "status": "planned_not_recorded"
+}

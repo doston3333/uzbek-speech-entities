@@ -1,0 +1,144 @@
+{
+  "release": "public-ner-v5n6-20260808",
+  "wave": "v5n8",
+  "parent": "public-v5n5-ft5-lr3e6-ep1-seed2",
+  "note": "baseline volume cache was stale (old parent); ranked vs true parent metrics",
+  "parent_baseline": {
+    "clean_f1": 0.7577184720041863,
+    "fixture_f1": 0.9278350515463918,
+    "speech_year_exact_f1": 1.0,
+    "sha256": "498d6bf27179d49af48cfb264bd6eb5cf534f9ed507eaf4435e275157888b976"
+  },
+  "promotion_decision": "do_not_promote_no_both_seed_parent_pass",
+  "parent_pass_seeds": [],
+  "candidates": [
+    {
+      "name": "public-v5n8-ft8-lr5e7-ep1-seed1",
+      "clean_f1": 0.7556253270538984,
+      "fixture_f1": 0.9278350515463918,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr1e6-ep1-seed1",
+      "clean_f1": 0.755485893416928,
+      "fixture_f1": 0.9278350515463918,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr1e6-ep2-seed2",
+      "clean_f1": 0.7553693033001573,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr3e6-ep2-seed1",
+      "clean_f1": 0.7545787545787547,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr3e6-ep1-seed2",
+      "clean_f1": 0.754440961337513,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr5e7-ep1-seed2",
+      "clean_f1": 0.75418410041841,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr5e7-ep2-seed1",
+      "clean_f1": 0.75418410041841,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr3e6-ep1-seed1",
+      "clean_f1": 0.753910323253389,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr1e6-ep2-seed1",
+      "clean_f1": 0.7535321821036107,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr2e6-ep1-seed2",
+      "clean_f1": 0.7533960292580983,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr2e6-ep1-seed1",
+      "clean_f1": 0.7528675703858185,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr1e6-ep1-seed2",
+      "clean_f1": 0.7526096033402924,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr2e6-ep2-seed2",
+      "clean_f1": 0.7514390371533229,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr2e6-ep2-seed1",
+      "clean_f1": 0.7488250652741514,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true
+    },
+    {
+      "name": "public-v5n8-ft8-lr3e6-ep2-seed2",
+      "clean_f1": 0.7560209424083769,
+      "fixture_f1": 0.9148936170212766,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false
+    },
+    {
+      "name": "public-v5n8-ft8-lr5e7-ep2-seed2",
+      "clean_f1": 0.7523510971786833,
+      "fixture_f1": 0.9166666666666666,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false
+    }
+  ]
+}

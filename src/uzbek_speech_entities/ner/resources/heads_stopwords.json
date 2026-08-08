@@ -1,0 +1,10 @@
+{
+  "organization_heads": ["universitet", "institut", "akademiya", "maktab", "vazirlik", "qo'mita", "agentlik", "departament", "kompaniya", "korxona", "bank", "markaz", "jamiyat", "uyushma", "zavod", "fabrika", "teatr", "kollej", "litsey", "idora", "fond", "tashkilot", "klinika", "kasalxona"],
+  "location_heads": ["park", "bog'", "ko'cha", "xiyobon", "maydon", "shahar", "viloyat", "tuman", "qishloq", "mahalla", "bekat", "aeroport", "stadion", "bozor", "daryo", "ko'l", "tog'", "metro", "stansiya", "ko'prik", "mavze"],
+  "safe_modifiers": ["yangi", "davlat", "milliy", "xalqaro", "markaziy", "respublika", "xalqaro", "oliy", "eski", "buyuk", "sharqiy", "g'arbiy", "shimoliy", "janubiy", "katta", "kichik", "asosiy"],
+  "intro_fillers": ["am", "um", "ee", "eh", "xa", "ha", "hmm"],
+  "intro_boundaries": ["va", "lekin", "ammo", "yoki", "bilan", "uchun", "men", "biz", "siz", "u", "ular", "bugun", "kecha", "ertaga", "kelasi", "keyingi", "otgan", "shu", "boraman", "boramiz", "bo'laman", "bo'lamiz", "kelaman", "keldik", "keladi"],
+  "person_reject": ["mi", "nima", "kim", "emas", "yo'q", "yoq", "men", "biz", "siz", "u", "ular", "assalomu", "alaykum", "salom", "xayr", "rahmat"],
+  "boundary_stopwords": ["am", "um", "ee", "eh", "ha", "xa", "men", "biz", "siz", "u", "ular", "va", "lekin", "ammo", "yoki", "bilan", "uchun", "bugun", "kecha", "ertaga", "kelasi", "keyingi", "otgan", "shu", "boraman", "boramiz", "bo'laman", "bo'lamiz", "kelaman", "keldik", "keladi"],
+  "social_verbs": ["ko'rishamiz", "uchrashamiz", "gaplashamiz", "gaplashdim", "boramiz", "keldik", "keladi", "kutamiz"]
+}

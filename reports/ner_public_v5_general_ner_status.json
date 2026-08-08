@@ -1,0 +1,77 @@
+{
+  "as_of": "2026-08-08",
+  "parent": {
+    "name": "public-v5n5-ft5-lr3e6-ep1-seed2",
+    "sha256": "498d6bf27179d49af48cfb264bd6eb5cf534f9ed507eaf4435e275157888b976",
+    "clean": 0.7577184720041863,
+    "fixture": 0.9278350515463918,
+    "year": 1.0,
+    "PER": 0.9489489489489489,
+    "ORG": 0.7799999999999999,
+    "LOC": 0.824390243902439,
+    "TEMPORAL": 0.7549668874172186
+  },
+  "promotion_decision": "do_not_promote",
+  "promotion_reason": "No hyperparameter cell cleared type-safe non-regression on both seeds for PER/ORG/LOC/TEMPORAL. Live models/ner/final must not be replaced.",
+  "key_findings": [
+    "Year-only speech mining diluted general NER; expert-only + capped temporal helped.",
+    "Mapping noisy UzNER types to MISC/ORG hurt; strip-to-O unlocked more PER/ORG/LOC sentences.",
+    "Systematic LOC miss was gold span mamlakatda; hard-LOC upsample fixed LOC non-regression.",
+    "Remaining ORG gap is often a single span (e.g. Chempionshipida); hard-ORG liga upsample narrowed but did not clear both-seed type-safe gates."
+  ],
+  "downloaded_local_candidates": [
+    {
+      "name": "public-v5n24-ft24-lr4e7-ep2-p6-seed1",
+      "path": "models/ner/candidates/public-v5n24-ft24-lr4e7-ep2-p6-seed1",
+      "model_sha256_prefix": "c7cb6f9bffa3990e",
+      "note": "gate PASS; LOC+; ORG -0.0017 (closest type-safe miss among gate PASSes)"
+    },
+    {
+      "name": "public-v5n24-ft24-lr4e7-ep2-p3-seed1",
+      "path": "models/ner/candidates/public-v5n24-ft24-lr4e7-ep2-p3-seed1",
+      "model_sha256_prefix": "094d52ed60f7f67e",
+      "note": "gate PASS; LOC+; ORG -0.0019"
+    },
+    {
+      "name": "public-v5n24-ft24-lr4e7-ep2-p6-seed2",
+      "path": "models/ner/candidates/public-v5n24-ft24-lr4e7-ep2-p6-seed2",
+      "model_sha256_prefix": "3f1ec23a1183ed33",
+      "note": "paired seed for p6; check both-seed type-safe together"
+    },
+    {
+      "name": "public-v5n23-ft23-lr4e7-ep2-p6-seed2",
+      "path": "models/ner/candidates/public-v5n23-ft23-lr4e7-ep2-p6-seed2",
+      "model_sha256_prefix": "6ba0b6a701214aa6",
+      "note": "gate PASS before hard-ORG; LOC+; ORG -0.0028"
+    },
+    {
+      "name": "public-v5n15-ft15-lr5e7-ep1-seed1",
+      "path": "models/ner/candidates/public-v5n15-ft15-lr5e7-ep1-seed1",
+      "model_sha256_prefix": "059da695fe5fa2c6",
+      "note": "first gate PASS; blocked only by LOC -0.0029 (mamlakatda)"
+    },
+    {
+      "name": "public-v5n5-ft5-lr3e6-ep1-seed2",
+      "path": "models/ner/candidates/public-v5n5-ft5-lr3e6-ep1-seed2",
+      "model_sha256": "498d6bf27179d49af48cfb264bd6eb5cf534f9ed507eaf4435e275157888b976",
+      "note": "approved parent; still best promoted candidate; not replaced"
+    }
+  ],
+  "note_models_gitignored": "Weight files under models/ner/** are gitignored; download from Modal volume uzbek-speech-ner-public-v5-runs.",
+  "waves_ranked": [
+    "reports/ner_public_v5n11_20260808_ranking.json",
+    "reports/ner_public_v5n12_20260808_ranking.json",
+    "reports/ner_public_v5n13_20260808_ranking.json",
+    "reports/ner_public_v5n14_20260808_ranking.json",
+    "reports/ner_public_v5n15_20260808_ranking.json",
+    "reports/ner_public_v5n16_20260808_ranking.json",
+    "reports/ner_public_v5n17_20260808_ranking.json",
+    "reports/ner_public_v5n18_20260808_ranking.json",
+    "reports/ner_public_v5n19_20260808_ranking.json",
+    "reports/ner_public_v5n20_20260808_ranking.json",
+    "reports/ner_public_v5n21_20260808_ranking.json",
+    "reports/ner_public_v5n22_20260808_ranking.json",
+    "reports/ner_public_v5n23_20260808_ranking.json",
+    "reports/ner_public_v5n24_20260808_ranking.json"
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "augmented": {
+    "checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/augmented/checkpoint-1495",
+    "device": "mps",
+    "duration_seconds": 762.6007081670105,
+    "run_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/augmented",
+    "runtime_metadata": {
+      "augmentation": true,
+      "best_checkpoint": "checkpoint-1495",
+      "device": "mps",
+      "duration_seconds": 762.6007081670105,
+      "model": {
+        "model_type": "distilbert",
+        "requested_checkpoint": "distilbert/distilbert-base-multilingual-cased",
+        "resolved_commit": "45c032ab32cc946ad88a166f7cb282f58c753c2e"
+      },
+      "resume_from_checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/augmented/checkpoint-299"
+    },
+    "test_metrics": {
+      "LOC_f1": 0.7732696897374702,
+      "ORG_f1": 0.7294117647058824,
+      "PER_f1": 0.9373134328358209,
+      "TEMPORAL_f1": 0.8714285714285713,
+      "four_class_macro_f1": 0.8278558646769363,
+      "overall_f1": 0.7336734693877551,
+      "token_accuracy": 0.9285361435863659
+    },
+    "validation_metrics": {
+      "eval_LOC_f1": 0.8183716075156575,
+      "eval_ORG_f1": 0.7746478873239436,
+      "eval_PER_f1": 0.9424657534246575,
+      "eval_TEMPORAL_f1": 0.7850467289719626,
+      "eval_four_class_macro_f1": 0.8301329943090553,
+      "eval_overall_f1": 0.783126014061655,
+      "eval_runtime": 2.7726,
+      "eval_token_accuracy": 0.9422572178477691
+    }
+  },
+  "clean": {
+    "checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean/checkpoint-1045",
+    "device": "mps",
+    "duration_seconds": 591.2843102919869,
+    "run_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean",
+    "runtime_metadata": {
+      "best_checkpoint": "checkpoint-1045",
+      "device": "mps",
+      "duration_seconds": 591.2843102919869,
+      "model": {
+        "model_type": "distilbert",
+        "requested_checkpoint": "distilbert/distilbert-base-multilingual-cased",
+        "resolved_commit": "45c032ab32cc946ad88a166f7cb282f58c753c2e"
+      },
+      "resume_from_checkpoint": null
+    },
+    "test_metrics": {
+      "LOC_f1": 0.8009478672985781,
+      "ORG_f1": 0.75,
+      "PER_f1": 0.9498525073746312,
+      "TEMPORAL_f1": 0.8285714285714286,
+      "four_class_macro_f1": 0.8323429508111595,
+      "overall_f1": 0.7476828012358394,
+      "token_accuracy": 0.9300181129589988
+    },
+    "validation_metrics": {
+      "eval_LOC_f1": 0.825,
+      "eval_ORG_f1": 0.7645687645687647,
+      "eval_PER_f1": 0.9591280653950953,
+      "eval_TEMPORAL_f1": 0.7843137254901961,
+      "eval_four_class_macro_f1": 0.833252638863514,
+      "eval_overall_f1": 0.7852494577006508,
+      "eval_runtime": 1.6494,
+      "eval_token_accuracy": 0.9455818022747157
+    }
+  },
+  "deltas_augmented_minus_clean": {
+    "test": {
+      "LOC_f1": -0.02767817756110791,
+      "ORG_f1": -0.020588235294117574,
+      "PER_f1": -0.012539074538810313,
+      "TEMPORAL_f1": 0.042857142857142705,
+      "four_class_macro_f1": -0.004487086134223217,
+      "overall_f1": -0.014009331848084283,
+      "token_accuracy": -0.0014819693726328964
+    },
+    "validation": {
+      "eval_LOC_f1": -0.006628392484342438,
+      "eval_ORG_f1": 0.01007912275517897,
+      "eval_PER_f1": -0.01666231197043777,
+      "eval_TEMPORAL_f1": 0.0007330034817665254,
+      "eval_four_class_macro_f1": -0.003119644554458678,
+      "eval_overall_f1": -0.002123443638995748,
+      "eval_runtime": 1.1232000000000002,
+      "eval_token_accuracy": -0.0033245844269466085
+    }
+  },
+  "improvements": {
+    "test": {
+      "TEMPORAL_f1": 0.042857142857142705
+    },
+    "validation": {
+      "eval_ORG_f1": 0.01007912275517897,
+      "eval_TEMPORAL_f1": 0.0007330034817665254,
+      "eval_runtime": 1.1232000000000002
+    }
+  },
+  "limitation": "Selection is provisional: end-to-end STT macro F1 and cross-seed training stability are deferred.",
+  "provisional": true,
+  "regressions": {
+    "test": {
+      "LOC_f1": -0.02767817756110791,
+      "ORG_f1": -0.020588235294117574,
+      "PER_f1": -0.012539074538810313,
+      "four_class_macro_f1": -0.004487086134223217,
+      "overall_f1": -0.014009331848084283,
+      "token_accuracy": -0.0014819693726328964
+    },
+    "validation": {
+      "eval_LOC_f1": -0.006628392484342438,
+      "eval_PER_f1": -0.01666231197043777,
+      "eval_four_class_macro_f1": -0.003119644554458678,
+      "eval_overall_f1": -0.002123443638995748,
+      "eval_token_accuracy": -0.0033245844269466085
+    }
+  },
+  "selected_checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean/checkpoint-1045",
+  "selected_run": "clean",
+  "selection_criteria": [
+    "higher eval_four_class_macro_f1",
+    "higher minimum of eval_PER_f1, eval_LOC_f1, eval_ORG_f1, and eval_TEMPORAL_f1",
+    "higher eval_overall_f1",
+    "lower positive eval_runtime",
+    "exact ties prefer clean conservatively"
+  ],
+  "selection_ranking_values": {
+    "augmented": {
+      "four_class_macro_f1": 0.8301329943090553,
+      "overall_f1": 0.783126014061655,
+      "runtime_seconds": 2.7726,
+      "weakest_primary_class_f1": 0.7746478873239436
+    },
+    "clean": {
+      "four_class_macro_f1": 0.833252638863514,
+      "overall_f1": 0.7852494577006508,
+      "runtime_seconds": 1.6494,
+      "weakest_primary_class_f1": 0.7645687645687647
+    }
+  },
+  "test_metrics_role": "report-only; test metrics do not participate in model selection"
+}

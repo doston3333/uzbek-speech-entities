@@ -1,0 +1,139 @@
+{
+  "decision": {
+    "promoted": false,
+    "reason": "Neither seed is a strict clean-test upgrade, and neither extracts the complete held-out spoken-year span.",
+    "production_model_unchanged": true
+  },
+  "lineage": {
+    "parent": "models/ner/final/model.safetensors",
+    "parent_sha256": "af2993de66f7a36b4ff5c8b6bd68e08f04183e56e9ea160a745238f3d06ed2a0",
+    "seed1": {
+      "config": "configs/ner_speech_continuation_v4_seed1.yaml",
+      "selected_checkpoint": "checkpoint-418",
+      "inference_model_sha256": "2ec01b0fc0c6ebc4da6312e5ed4bf186951403ab8d0cc36b5547f3732c9d5ed1"
+    },
+    "seed2": {
+      "config": "configs/ner_speech_continuation_v4_seed2.yaml",
+      "selected_checkpoint": "checkpoint-836",
+      "inference_model_sha256": "794368a1fedf3620a07ac4feea969b89a656067590f96138ffa322059ae62ca4"
+    },
+    "modal_run": "https://modal.com/apps/doston3333/main/ap-GUen2GoixpVhpz9D1bEqdG"
+  },
+  "artifact_integrity": {
+    "download_method": "exact files from the staged inference bundle",
+    "manifest_verified_file_count_per_seed": 6,
+    "parent_hash_verified": true,
+    "seed1_manifest_verified": true,
+    "seed2_manifest_verified": true
+  },
+  "training_data": {
+    "path": "data/processed/ner/train_speech_augmented_v3.jsonl",
+    "sha256": "16ec7b50f65b3c659b47723ee11a0df926076b9943e193eac17596aed8c11f28",
+    "source_record_count": 3340,
+    "retained_source_record_count": 3339,
+    "output_record_count": 6681,
+    "augmented_record_count": 3342,
+    "spoken_year_template_count": 165,
+    "protected_authored_ngram_overlap_count": 0,
+    "protected_full_text_overlap_count": 0,
+    "denylisted_ogg_fingerprint_overlap_count": 0
+  },
+  "clean_test": {
+    "v1": {
+      "overall_f1": 0.7483409903011741,
+      "four_class_macro_f1": 0.8381029795507878,
+      "LOC_f1": 0.8028503562945368,
+      "ORG_f1": 0.7448275862068966,
+      "PER_f1": 0.9618768328445748,
+      "TEMPORAL_f1": 0.8428571428571429
+    },
+    "seed1": {
+      "overall_f1": 0.7455012853470437,
+      "four_class_macro_f1": 0.8393493488193345,
+      "LOC_f1": 0.8133971291866028,
+      "ORG_f1": 0.7596153846153847,
+      "PER_f1": 0.9498525073746312,
+      "TEMPORAL_f1": 0.8345323741007195
+    },
+    "seed2": {
+      "overall_f1": 0.7497446373850868,
+      "four_class_macro_f1": 0.8366010673349717,
+      "LOC_f1": 0.8105515587529977,
+      "ORG_f1": 0.7511737089201878,
+      "PER_f1": 0.9501466275659822,
+      "TEMPORAL_f1": 0.8345323741007195
+    }
+  },
+  "immutable_speech_fixture": {
+    "fixture": "tests/fixtures/speech_ner_eval.jsonl",
+    "fixture_sha256": "fb226f90bbb8a3685184327bc208189701e66333ae171225946c536585425f02",
+    "confidence_threshold": 0.8,
+    "v1": {
+      "precision": 0.9565217391304348,
+      "recall": 0.88,
+      "f1": 0.9166666666666666,
+      "true_positive": 44,
+      "false_positive": 2,
+      "false_negative": 6
+    },
+    "seed1": {
+      "precision": 0.9387755102040817,
+      "recall": 0.92,
+      "f1": 0.9292929292929293,
+      "true_positive": 46,
+      "false_positive": 3,
+      "false_negative": 4
+    },
+    "seed2": {
+      "precision": 0.9387755102040817,
+      "recall": 0.92,
+      "f1": 0.9292929292929293,
+      "true_positive": 46,
+      "false_positive": 3,
+      "false_negative": 4
+    }
+  },
+  "held_out_audio_diagnostic": {
+    "input": {
+      "codec": "opus",
+      "container": "ogg",
+      "duration_seconds": 30.74,
+      "sample_rate": 48000,
+      "sha256": "252ca1659d8d8c5e0fdebd6c8e17e8342159e3d35d10a8957b46f0e1368f586f"
+    },
+    "preprocessing": "temporary PCM 16-bit mono 16 kHz WAV",
+    "transcription": "fresh local whisper-small-uzbek inference; transcript not persisted",
+    "v1": {
+      "complete_spoken_year_detected": false,
+      "partial_date_spans": [
+        {
+          "text": "ikki ming",
+          "score": 0.804650604724884
+        }
+      ]
+    },
+    "seed1": {
+      "complete_spoken_year_detected": false,
+      "partial_date_spans": [
+        {
+          "text": "ikki ming",
+          "score": 0.8902176022529602
+        }
+      ]
+    },
+    "seed2": {
+      "complete_spoken_year_detected": false,
+      "connector_gap_split_the_year": true,
+      "partial_date_spans": [
+        {
+          "text": "ikki ming",
+          "score": 0.9219725131988525
+        },
+        {
+          "text": "besh yilni",
+          "score": 0.8147090971469879
+        }
+      ]
+    }
+  }
+}

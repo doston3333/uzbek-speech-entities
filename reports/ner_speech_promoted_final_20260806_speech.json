@@ -1,0 +1,166 @@
+{
+  "checkpoint": {
+    "artifact_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/final",
+    "resolved_path": "/Users/doston/Documents/ChatGPT/stt/models/ner/final",
+    "sha256": "b392d96aa2f8a8143a21ac018abbcb9ccca7bac096e457e6d65f03ea99d2194c"
+  },
+  "combined_final": {
+    "DATE": {
+      "count": 15,
+      "f1": 1.0,
+      "false_negative": 0,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positive": 15
+    },
+    "LOC": {
+      "count": 10,
+      "f1": 0.8235294117647058,
+      "false_negative": 3,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.7,
+      "true_positive": 7
+    },
+    "ORG": {
+      "count": 10,
+      "f1": 0.7777777777777777,
+      "false_negative": 3,
+      "false_positive": 1,
+      "precision": 0.875,
+      "recall": 0.7,
+      "true_positive": 7
+    },
+    "PER": {
+      "count": 15,
+      "f1": 0.967741935483871,
+      "false_negative": 0,
+      "false_positive": 1,
+      "precision": 0.9375,
+      "recall": 1.0,
+      "true_positive": 15
+    },
+    "overall": {
+      "count": 50,
+      "f1": 0.9166666666666666,
+      "false_negative": 6,
+      "false_positive": 2,
+      "precision": 0.9565217391304348,
+      "recall": 0.88,
+      "true_positive": 44
+    }
+  },
+  "fixture": {
+    "path": "tests/fixtures/speech_ner_eval.jsonl",
+    "record_count": 50,
+    "sha256": "fb226f90bbb8a3685184327bc208189701e66333ae171225946c536585425f02"
+  },
+  "latency": {
+    "mean_milliseconds": 57.538655000389554,
+    "total_seconds": 2.8769327500194777
+  },
+  "model_confidence_threshold": 0.8,
+  "normalized_confidence_threshold": 0.7,
+  "normalized_only_projected_candidates": {
+    "DATE": {
+      "count": 15,
+      "f1": 0.33333333333333337,
+      "false_negative": 12,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.2,
+      "true_positive": 3
+    },
+    "LOC": {
+      "count": 10,
+      "f1": 0.6666666666666666,
+      "false_negative": 5,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.5,
+      "true_positive": 5
+    },
+    "ORG": {
+      "count": 10,
+      "f1": 0.8235294117647058,
+      "false_negative": 3,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.7,
+      "true_positive": 7
+    },
+    "PER": {
+      "count": 15,
+      "f1": 0.6363636363636364,
+      "false_negative": 8,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.4666666666666667,
+      "true_positive": 7
+    },
+    "overall": {
+      "count": 50,
+      "f1": 0.6111111111111112,
+      "false_negative": 28,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.44,
+      "true_positive": 22
+    }
+  },
+  "raw_display_model": {
+    "DATE": {
+      "count": 15,
+      "f1": 0.4,
+      "false_negative": 11,
+      "false_positive": 1,
+      "precision": 0.8,
+      "recall": 0.26666666666666666,
+      "true_positive": 4
+    },
+    "LOC": {
+      "count": 10,
+      "f1": 0.625,
+      "false_negative": 5,
+      "false_positive": 1,
+      "precision": 0.8333333333333334,
+      "recall": 0.5,
+      "true_positive": 5
+    },
+    "ORG": {
+      "count": 10,
+      "f1": 0.5555555555555556,
+      "false_negative": 5,
+      "false_positive": 3,
+      "precision": 0.625,
+      "recall": 0.5,
+      "true_positive": 5
+    },
+    "PER": {
+      "count": 15,
+      "f1": 0.7741935483870969,
+      "false_negative": 3,
+      "false_positive": 4,
+      "precision": 0.75,
+      "recall": 0.8,
+      "true_positive": 12
+    },
+    "overall": {
+      "count": 50,
+      "f1": 0.6117647058823529,
+      "false_negative": 24,
+      "false_positive": 9,
+      "precision": 0.7428571428571429,
+      "recall": 0.52,
+      "true_positive": 26
+    }
+  },
+  "transform_counts": {
+    "filler_comma": 2,
+    "location_case": 10,
+    "organization_case": 9,
+    "person_name": 8,
+    "temporal_itn": 6
+  }
+}

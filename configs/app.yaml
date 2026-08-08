@@ -1,0 +1,51 @@
+app:
+  name: Uzbek Speech Entity Extractor
+  host: 127.0.0.1
+  port: 8000
+
+audio:
+  target_sample_rate: 16000
+  mono: true
+  max_seconds: 60
+  max_upload_mb: 25
+  allowed_extensions:
+    - wav
+    - mp3
+    - m4a
+    - ogg
+    - webm
+    - flac
+
+stt:
+  model_id: navai-uz/whisper-small-uzbek
+  fallback_model_id: navai-uz/whisper-base-uzbek
+  language: uz
+  task: transcribe
+  chunk_length_seconds: 30
+  batch_size: 1
+  device_preference:
+    - mps
+    - cpu
+
+normalization:
+  canonical_apostrophe: "ʻ"
+
+ner:
+  model_path: ./models/ner/final
+  max_length: 128
+  confidence_threshold: 0.80
+  speech_rescue_enabled: true
+  analysis_normalization_enabled: true
+  normalized_confidence_threshold: 0.70
+
+  visible_labels:
+    - PER
+    - LOC
+    - ORG
+    - DATE
+
+  model_to_application_labels:
+    PER: PER
+    LOC: LOC
+    ORG: ORG
+    TEMPORAL: DATE

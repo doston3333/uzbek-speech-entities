@@ -1,0 +1,165 @@
+{
+  "checkpoint": {
+    "artifact_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1",
+    "resolved_path": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1/checkpoint-1197",
+    "sha256": "8cac3537dc115f6b0abb997eb59129a71f7362d60bd7e2e2baf97ee90f32d340"
+  },
+  "combined_final": {
+    "DATE": {
+      "count": 15,
+      "f1": 1.0,
+      "false_negative": 0,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positive": 15
+    },
+    "LOC": {
+      "count": 10,
+      "f1": 0.888888888888889,
+      "false_negative": 2,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.8,
+      "true_positive": 8
+    },
+    "ORG": {
+      "count": 10,
+      "f1": 0.6666666666666666,
+      "false_negative": 3,
+      "false_positive": 4,
+      "precision": 0.6363636363636364,
+      "recall": 0.7,
+      "true_positive": 7
+    },
+    "PER": {
+      "count": 15,
+      "f1": 0.967741935483871,
+      "false_negative": 0,
+      "false_positive": 1,
+      "precision": 0.9375,
+      "recall": 1.0,
+      "true_positive": 15
+    },
+    "overall": {
+      "count": 50,
+      "f1": 0.9,
+      "false_negative": 5,
+      "false_positive": 5,
+      "precision": 0.9,
+      "recall": 0.9,
+      "true_positive": 45
+    }
+  },
+  "fixture": {
+    "path": "tests/fixtures/speech_ner_eval.jsonl",
+    "record_count": 50,
+    "sha256": "fb226f90bbb8a3685184327bc208189701e66333ae171225946c536585425f02"
+  },
+  "latency": {
+    "mean_milliseconds": 54.21938583953306,
+    "total_seconds": 2.710969291976653
+  },
+  "normalized_confidence_threshold": 0.7,
+  "normalized_only_projected_candidates": {
+    "DATE": {
+      "count": 15,
+      "f1": 0.33333333333333337,
+      "false_negative": 12,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.2,
+      "true_positive": 3
+    },
+    "LOC": {
+      "count": 10,
+      "f1": 0.888888888888889,
+      "false_negative": 2,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.8,
+      "true_positive": 8
+    },
+    "ORG": {
+      "count": 10,
+      "f1": 0.8235294117647058,
+      "false_negative": 3,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.7,
+      "true_positive": 7
+    },
+    "PER": {
+      "count": 15,
+      "f1": 0.6363636363636364,
+      "false_negative": 8,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.4666666666666667,
+      "true_positive": 7
+    },
+    "overall": {
+      "count": 50,
+      "f1": 0.6666666666666666,
+      "false_negative": 25,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.5,
+      "true_positive": 25
+    }
+  },
+  "raw_display_model": {
+    "DATE": {
+      "count": 15,
+      "f1": 0.47619047619047616,
+      "false_negative": 10,
+      "false_positive": 1,
+      "precision": 0.8333333333333334,
+      "recall": 0.3333333333333333,
+      "true_positive": 5
+    },
+    "LOC": {
+      "count": 10,
+      "f1": 0.7777777777777777,
+      "false_negative": 3,
+      "false_positive": 1,
+      "precision": 0.875,
+      "recall": 0.7,
+      "true_positive": 7
+    },
+    "ORG": {
+      "count": 10,
+      "f1": 0.4347826086956522,
+      "false_negative": 5,
+      "false_positive": 8,
+      "precision": 0.38461538461538464,
+      "recall": 0.5,
+      "true_positive": 5
+    },
+    "PER": {
+      "count": 15,
+      "f1": 0.7222222222222222,
+      "false_negative": 2,
+      "false_positive": 8,
+      "precision": 0.6190476190476191,
+      "recall": 0.8666666666666667,
+      "true_positive": 13
+    },
+    "overall": {
+      "count": 50,
+      "f1": 0.6122448979591836,
+      "false_negative": 20,
+      "false_positive": 18,
+      "precision": 0.625,
+      "recall": 0.6,
+      "true_positive": 30
+    }
+  },
+  "transform_counts": {
+    "filler_comma": 2,
+    "location_case": 10,
+    "organization_case": 9,
+    "person_name": 8,
+    "temporal_itn": 6
+  }
+}

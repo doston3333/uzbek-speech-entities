@@ -1,0 +1,13 @@
+{
+  "months": ["yanvar", "fevral", "mart", "aprel", "may", "iyun", "iyul", "avgust", "sentabr", "sentyabr", "oktabr", "oktyabr", "noyabr", "dekabr"],
+  "weekdays": ["dushanba", "seshanba", "chorshanba", "payshanba", "juma", "shanba", "yakshanba"],
+  "relative_dates": ["bugun", "kecha", "ertaga", "indin", "hozir"],
+  "relative_modifiers": ["kelasi", "keyingi", "otgan", "shu"],
+  "periods": ["hafta", "oy", "yil"],
+  "date_tails": ["kun", "kuni", "kunida", "yil", "yili", "yilda"],
+  "time_markers": ["soat", "soati", "soatda"],
+  "time_specials": ["yarim", "chorak"],
+  "number_words": ["bir", "ikki", "uch", "tort", "besh", "olti", "yetti", "sakkiz", "toqqiz", "on", "yigirma", "ottiz", "qirq", "ellik", "oltmish", "yetmish", "sakson", "toqson", "yuz", "ming"],
+  "ordinal_words": ["birinchi", "ikkinchi", "uchinchi", "tortinchi", "beshinchi", "oltinchi", "yettinchi", "sakkizinchi", "toqqizinchi", "oninchi", "yigirmanchi", "ottizinchi", "qirqinchi", "elliginchi", "oltmishinchi", "yetmishinchi", "saksoninchi", "toqsoninchi", "yuzinchi", "minginchi"],
+  "bridge_stopwords": ["va", "am", "um", "ee", "eh", "ha", "xa", "men", "biz", "u", "ular", "bilan", "uchun", "lekin", "ammo", "yoki", "mi", "emas", "yoq"]
+}

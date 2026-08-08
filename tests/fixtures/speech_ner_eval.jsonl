@@ -1,0 +1,50 @@
+{"id":"per-01","text":"salom mening ismim akmal","hard_negative":true,"model_entities":[{"text":"salom","label":"PER","start":0,"end":5,"score":0.9}],"entities":[{"text":"akmal","label":"PER","start":19,"end":24}]}
+{"id":"per-02","text":"assalomu alaykum ismim doston","hard_negative":true,"model_entities":[{"text":"assalomu alaykum","label":"PER","start":0,"end":16,"score":0.9}],"entities":[{"text":"doston","label":"PER","start":23,"end":29}]}
+{"id":"per-03","text":"mening ismim um sardor men oʻn sakkiz yoshdaman","hard_negative":true,"model_entities":[],"entities":[{"text":"sardor","label":"PER","start":16,"end":22}]}
+{"id":"per-04","text":"rahmat ismim nodir","hard_negative":true,"model_entities":[{"text":"rahmat","label":"PER","start":0,"end":6,"score":0.9}],"entities":[{"text":"nodir","label":"PER","start":13,"end":18}]}
+{"id":"per-05","text":"xayr mening ismim aziz","hard_negative":true,"model_entities":[{"text":"xayr","label":"PER","start":0,"end":4,"score":0.9}],"entities":[{"text":"aziz","label":"PER","start":18,"end":22}]}
+{"id":"per-06","text":"ismim dilafruz men universitetda boʻlaman","hard_negative":false,"model_entities":[],"entities":[{"text":"dilafruz","label":"PER","start":6,"end":14}]}
+{"id":"per-07","text":"mening ismim rajabov doston am men","hard_negative":false,"model_entities":[],"entities":[{"text":"rajabov doston","label":"PER","start":13,"end":27}]}
+{"id":"per-08","text":"salom ismim farangiz nematova","hard_negative":false,"model_entities":[],"entities":[{"text":"farangiz nematova","label":"PER","start":12,"end":29}]}
+{"id":"per-09","text":"mening ismim shoxrux xolmatov men","hard_negative":false,"model_entities":[],"entities":[{"text":"shoxrux xolmatov","label":"PER","start":13,"end":29}]}
+{"id":"per-10","text":"ismim gulchehra tursunova","hard_negative":false,"model_entities":[],"entities":[{"text":"gulchehra tursunova","label":"PER","start":6,"end":25}]}
+{"id":"per-11","text":"biz sardor bilan birga ko'rishamiz","hard_negative":false,"model_entities":[],"entities":[{"text":"sardor","label":"PER","start":4,"end":10}]}
+{"id":"per-12","text":"men doston bilan gaplashdim","hard_negative":false,"model_entities":[],"entities":[{"text":"doston","label":"PER","start":4,"end":10}]}
+{"id":"per-13","text":"karimov bilan uchrashamiz","hard_negative":false,"model_entities":[],"entities":[{"text":"karimov","label":"PER","start":0,"end":7}]}
+{"id":"per-14","text":"aziz bilan boramiz","hard_negative":false,"model_entities":[],"entities":[{"text":"aziz","label":"PER","start":0,"end":4}]}
+{"id":"per-15","text":"nodir bilan kutamiz","hard_negative":false,"model_entities":[],"entities":[{"text":"nodir","label":"PER","start":0,"end":5}]}
+{"id":"date-01","text":"oltinchi avgust kuni men oʻn sakkiz yoshdaman","hard_negative":true,"model_entities":[],"entities":[{"text":"oltinchi avgust kuni","label":"DATE","start":0,"end":20}]}
+{"id":"date-02","text":"oltinchi yu avgust kuni soati uchida uchta kitob","hard_negative":true,"model_entities":[],"entities":[{"text":"oltinchi yu avgust kuni soati uchida","label":"DATE","start":0,"end":36}]}
+{"id":"date-03","text":"avgustda soat sotib oldim","hard_negative":true,"model_entities":[],"entities":[{"text":"avgustda","label":"DATE","start":0,"end":8}]}
+{"id":"date-04","text":"soat uchda men oʻn sakkiz yoshdaman","hard_negative":true,"model_entities":[],"entities":[{"text":"soat uchda","label":"DATE","start":0,"end":10}]}
+{"id":"date-05","text":"soati oʻn beshda uchta kitob oldim","hard_negative":true,"model_entities":[],"entities":[{"text":"soati oʻn beshda","label":"DATE","start":0,"end":16}]}
+{"id":"date-06","text":"ertaga soat to'rtda kelaman","hard_negative":false,"model_entities":[],"entities":[{"text":"ertaga soat to'rtda","label":"DATE","start":0,"end":19}]}
+{"id":"date-07","text":"kelasi dushanba uchrashamiz","hard_negative":false,"model_entities":[],"entities":[{"text":"kelasi dushanba","label":"DATE","start":0,"end":15}]}
+{"id":"date-08","text":"keyingi hafta boramiz","hard_negative":false,"model_entities":[],"entities":[{"text":"keyingi hafta","label":"DATE","start":0,"end":13}]}
+{"id":"date-09","text":"oʻtgan oy gaplashdik","hard_negative":false,"model_entities":[],"entities":[{"text":"oʻtgan oy","label":"DATE","start":0,"end":9}]}
+{"id":"date-10","text":"shu hafta kutamiz","hard_negative":false,"model_entities":[],"entities":[{"text":"shu hafta","label":"DATE","start":0,"end":9}]}
+{"id":"date-11","text":"sentabrda qaytaman","hard_negative":false,"model_entities":[],"entities":[{"text":"sentabrda","label":"DATE","start":0,"end":9}]}
+{"id":"date-12","text":"2026-yil 5-avgust kuni kelaman","hard_negative":false,"model_entities":[],"entities":[{"text":"2026-yil 5-avgust kuni","label":"DATE","start":0,"end":22}]}
+{"id":"date-13","text":"12/08/2026 uchrashamiz","hard_negative":false,"model_entities":[],"entities":[{"text":"12/08/2026","label":"DATE","start":0,"end":10}]}
+{"id":"date-14","text":"soat yarim yoʻlga chiqamiz","hard_negative":false,"model_entities":[],"entities":[{"text":"soat yarim","label":"DATE","start":0,"end":10}]}
+{"id":"date-15","text":"oʻn oltinchi oktabr kuni boraman","hard_negative":false,"model_entities":[],"entities":[{"text":"oʻn oltinchi oktabr kuni","label":"DATE","start":0,"end":24}]}
+{"id":"org-01","text":"yangi oʻzbekiston universitetida parkda sayr qildim","hard_negative":true,"model_entities":[{"text":"oʻzbekiston","label":"LOC","start":6,"end":17,"score":0.9}],"entities":[{"text":"yangi oʻzbekiston universitetida","label":"ORG","start":0,"end":32}]}
+{"id":"org-02","text":"davlat fanlar akademiyasida parkda sayr qildim","hard_negative":true,"model_entities":[{"text":"fanlar","label":"ORG","start":7,"end":13,"score":0.9}],"entities":[{"text":"davlat fanlar akademiyasida","label":"ORG","start":0,"end":27}]}
+{"id":"org-03","text":"xalqaro taraqqiyot bankida maktabda boʻlaman","hard_negative":true,"model_entities":[{"text":"taraqqiyot","label":"LOC","start":8,"end":18,"score":0.9}],"entities":[{"text":"xalqaro taraqqiyot bankida","label":"ORG","start":0,"end":26}]}
+{"id":"org-04","text":"milliy yoshlar agentligida universitetda boʻlaman","hard_negative":true,"model_entities":[{"text":"yoshlar","label":"ORG","start":7,"end":14,"score":0.9}],"entities":[{"text":"milliy yoshlar agentligida","label":"ORG","start":0,"end":26}]}
+{"id":"org-05","text":"respublika suv vazirligida parkda kutaman","hard_negative":true,"model_entities":[{"text":"suv","label":"LOC","start":11,"end":14,"score":0.9}],"entities":[{"text":"respublika suv vazirligida","label":"ORG","start":0,"end":26}]}
+{"id":"org-06","text":"markaziy innovatsiya markazida ishlayman","hard_negative":false,"model_entities":[{"text":"innovatsiya","label":"ORG","start":9,"end":20,"score":0.9}],"entities":[{"text":"markaziy innovatsiya markazida","label":"ORG","start":0,"end":30}]}
+{"id":"org-07","text":"ucell bilan ishlaymiz","hard_negative":false,"model_entities":[{"text":"ucell","label":"ORG","start":0,"end":5,"score":0.9}],"entities":[{"text":"ucell","label":"ORG","start":0,"end":5}]}
+{"id":"org-08","text":"artel zavodi ochildi","hard_negative":false,"model_entities":[{"text":"artel","label":"ORG","start":0,"end":5,"score":0.9}],"entities":[{"text":"artel zavodi","label":"ORG","start":0,"end":12}]}
+{"id":"org-09","text":"xalq bankida uchrashamiz","hard_negative":false,"model_entities":[{"text":"xalq","label":"ORG","start":0,"end":4,"score":0.9}],"entities":[{"text":"xalq bankida","label":"ORG","start":0,"end":12}]}
+{"id":"org-10","text":"turizm qo'mitasida ishlayman","hard_negative":false,"model_entities":[{"text":"turizm","label":"LOC","start":0,"end":6,"score":0.9}],"entities":[{"text":"turizm qo'mitasida","label":"ORG","start":0,"end":18}]}
+{"id":"loc-01","text":"ashxobod parkida universitetda boʻlaman","hard_negative":true,"model_entities":[{"text":"ashxobod","label":"LOC","start":0,"end":8,"score":0.9}],"entities":[{"text":"ashxobod parkida","label":"LOC","start":0,"end":16}]}
+{"id":"loc-02","text":"navoiy ko'chasida bankda ishlayman","hard_negative":true,"model_entities":[{"text":"navoiy","label":"LOC","start":0,"end":6,"score":0.9}],"entities":[{"text":"navoiy ko'chasida","label":"LOC","start":0,"end":17}]}
+{"id":"loc-03","text":"toshkent shahrida universitetda boʻlaman","hard_negative":true,"model_entities":[{"text":"toshkent","label":"LOC","start":0,"end":8,"score":0.9}],"entities":[{"text":"toshkent shahrida","label":"LOC","start":0,"end":17}]}
+{"id":"loc-04","text":"chilonzor tumanida maktabda ishlayman","hard_negative":true,"model_entities":[{"text":"chilonzor","label":"LOC","start":0,"end":9,"score":0.9}],"entities":[{"text":"chilonzor tumanida","label":"LOC","start":0,"end":18}]}
+{"id":"loc-05","text":"zomin qishlogʻida bankda ishlayman","hard_negative":true,"model_entities":[{"text":"zomin","label":"LOC","start":0,"end":5,"score":0.9}],"entities":[{"text":"zomin qishlogʻida","label":"LOC","start":0,"end":17}]}
+{"id":"loc-06","text":"mustaqillik maydonida uchrashamiz","hard_negative":false,"model_entities":[{"text":"mustaqillik","label":"LOC","start":0,"end":11,"score":0.9}],"entities":[{"text":"mustaqillik maydonida","label":"LOC","start":0,"end":21}]}
+{"id":"loc-07","text":"navoiy aeroportida kutamiz","hard_negative":false,"model_entities":[{"text":"navoiy","label":"LOC","start":0,"end":6,"score":0.9}],"entities":[{"text":"navoiy aeroportida","label":"LOC","start":0,"end":18}]}
+{"id":"loc-08","text":"bunyodkor stadionida koʻrishamiz","hard_negative":false,"model_entities":[{"text":"bunyodkor","label":"LOC","start":0,"end":9,"score":0.9}],"entities":[{"text":"bunyodkor stadionida","label":"LOC","start":0,"end":20}]}
+{"id":"loc-09","text":"amir temur xiyobonida sayr qilamiz","hard_negative":false,"model_entities":[{"text":"amir temur","label":"LOC","start":0,"end":10,"score":0.9}],"entities":[{"text":"amir temur xiyobonida","label":"LOC","start":0,"end":21}]}
+{"id":"loc-10","text":"chirchiq daryosida suzamiz","hard_negative":false,"model_entities":[{"text":"chirchiq","label":"LOC","start":0,"end":8,"score":0.9}],"entities":[{"text":"chirchiq daryosida","label":"LOC","start":0,"end":18}]}

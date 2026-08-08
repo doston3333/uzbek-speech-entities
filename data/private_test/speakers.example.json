@@ -1,0 +1,22 @@
+[
+  {
+    "speaker_id": "speaker-01",
+    "conditions": ["quiet", "laptop_microphone", "slow_speech"]
+  },
+  {
+    "speaker_id": "speaker-02",
+    "conditions": ["quiet", "phone_microphone", "fast_speech"]
+  },
+  {
+    "speaker_id": "speaker-03",
+    "conditions": ["background_noise", "laptop_microphone", "slow_speech"]
+  },
+  {
+    "speaker_id": "speaker-04",
+    "conditions": ["background_noise", "phone_microphone", "fast_speech"]
+  },
+  {
+    "speaker_id": "speaker-05",
+    "conditions": ["quiet", "phone_microphone"]
+  }
+]

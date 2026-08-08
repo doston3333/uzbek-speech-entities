@@ -1,0 +1,148 @@
+{
+  "augmented": {
+    "checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1/checkpoint-798",
+    "device": "mps",
+    "duration_seconds": 631.3006638749794,
+    "run_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1",
+    "runtime_metadata": {
+      "augmentation": true,
+      "best_checkpoint": "checkpoint-798",
+      "device": "mps",
+      "duration_seconds": 631.3006638749794,
+      "model": {
+        "model_type": "distilbert",
+        "requested_checkpoint": "./models/ner/final",
+        "resolved_commit": null
+      },
+      "resume_from_checkpoint": null
+    },
+    "test_metrics": {
+      "LOC_f1": 0.8028503562945368,
+      "ORG_f1": 0.7448275862068966,
+      "PER_f1": 0.9618768328445748,
+      "TEMPORAL_f1": 0.8428571428571429,
+      "four_class_macro_f1": 0.8381029795507878,
+      "overall_f1": 0.7483409903011741,
+      "token_accuracy": 0.9300181129589988
+    },
+    "validation_metrics": {
+      "eval_LOC_f1": 0.8235294117647058,
+      "eval_ORG_f1": 0.7868852459016393,
+      "eval_PER_f1": 0.9619565217391305,
+      "eval_TEMPORAL_f1": 0.7647058823529411,
+      "eval_four_class_macro_f1": 0.8342692654396042,
+      "eval_overall_f1": 0.7863340563991325,
+      "eval_runtime": 1.7091,
+      "eval_token_accuracy": 0.9429571303587052
+    }
+  },
+  "clean": {
+    "checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean/checkpoint-1045",
+    "device": "mps",
+    "duration_seconds": 591.2843102919869,
+    "run_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean",
+    "runtime_metadata": {
+      "best_checkpoint": "checkpoint-1045",
+      "device": "mps",
+      "duration_seconds": 591.2843102919869,
+      "model": {
+        "model_type": "distilbert",
+        "requested_checkpoint": "distilbert/distilbert-base-multilingual-cased",
+        "resolved_commit": "45c032ab32cc946ad88a166f7cb282f58c753c2e"
+      },
+      "resume_from_checkpoint": null
+    },
+    "test_metrics": {
+      "LOC_f1": 0.8009478672985781,
+      "ORG_f1": 0.75,
+      "PER_f1": 0.9498525073746312,
+      "TEMPORAL_f1": 0.8285714285714286,
+      "four_class_macro_f1": 0.8323429508111595,
+      "overall_f1": 0.7476828012358394,
+      "token_accuracy": 0.9300181129589988
+    },
+    "validation_metrics": {
+      "eval_LOC_f1": 0.825,
+      "eval_ORG_f1": 0.7645687645687647,
+      "eval_PER_f1": 0.9591280653950953,
+      "eval_TEMPORAL_f1": 0.7843137254901961,
+      "eval_four_class_macro_f1": 0.833252638863514,
+      "eval_overall_f1": 0.7852494577006508,
+      "eval_runtime": 1.6494,
+      "eval_token_accuracy": 0.9455818022747157
+    }
+  },
+  "deltas_augmented_minus_clean": {
+    "test": {
+      "LOC_f1": 0.0019024889959586844,
+      "ORG_f1": -0.005172413793103403,
+      "PER_f1": 0.012024325469943586,
+      "TEMPORAL_f1": 0.014285714285714235,
+      "four_class_macro_f1": 0.005760028739628331,
+      "overall_f1": 0.0006581890653346578,
+      "token_accuracy": 0.0
+    },
+    "validation": {
+      "eval_LOC_f1": -0.0014705882352941124,
+      "eval_ORG_f1": 0.02231648133287467,
+      "eval_PER_f1": 0.0028284563440351684,
+      "eval_TEMPORAL_f1": -0.019607843137254943,
+      "eval_four_class_macro_f1": 0.0010166265760902515,
+      "eval_overall_f1": 0.0010845986984816536,
+      "eval_runtime": 0.059700000000000086,
+      "eval_token_accuracy": -0.002624671916010457
+    }
+  },
+  "improvements": {
+    "test": {
+      "LOC_f1": 0.0019024889959586844,
+      "PER_f1": 0.012024325469943586,
+      "TEMPORAL_f1": 0.014285714285714235,
+      "four_class_macro_f1": 0.005760028739628331,
+      "overall_f1": 0.0006581890653346578
+    },
+    "validation": {
+      "eval_ORG_f1": 0.02231648133287467,
+      "eval_PER_f1": 0.0028284563440351684,
+      "eval_four_class_macro_f1": 0.0010166265760902515,
+      "eval_overall_f1": 0.0010845986984816536,
+      "eval_runtime": 0.059700000000000086
+    }
+  },
+  "limitation": "Selection is provisional: end-to-end STT macro F1 and cross-seed training stability are deferred.",
+  "provisional": true,
+  "regressions": {
+    "test": {
+      "ORG_f1": -0.005172413793103403
+    },
+    "validation": {
+      "eval_LOC_f1": -0.0014705882352941124,
+      "eval_TEMPORAL_f1": -0.019607843137254943,
+      "eval_token_accuracy": -0.002624671916010457
+    }
+  },
+  "selected_checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1/checkpoint-798",
+  "selected_run": "augmented",
+  "selection_criteria": [
+    "higher eval_four_class_macro_f1",
+    "higher minimum of eval_PER_f1, eval_LOC_f1, eval_ORG_f1, and eval_TEMPORAL_f1",
+    "higher eval_overall_f1",
+    "lower positive eval_runtime",
+    "exact ties prefer clean conservatively"
+  ],
+  "selection_ranking_values": {
+    "augmented": {
+      "four_class_macro_f1": 0.8342692654396042,
+      "overall_f1": 0.7863340563991325,
+      "runtime_seconds": 1.7091,
+      "weakest_primary_class_f1": 0.7647058823529411
+    },
+    "clean": {
+      "four_class_macro_f1": 0.833252638863514,
+      "overall_f1": 0.7852494577006508,
+      "runtime_seconds": 1.6494,
+      "weakest_primary_class_f1": 0.7645687645687647
+    }
+  },
+  "test_metrics_role": "report-only; test metrics do not participate in model selection"
+}

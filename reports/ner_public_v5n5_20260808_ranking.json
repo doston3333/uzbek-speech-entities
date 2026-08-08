@@ -1,0 +1,194 @@
+{
+  "release": "public-ner-v5n5-20260808",
+  "parent_baseline": {
+    "clean_f1": 0.7547368421052632,
+    "fixture_f1": 0.9263157894736842,
+    "speech_year_exact_f1": 0.9900990099009901,
+    "parent_sha256": "f9bd0067927c8268905f753f80189b85270c28be5e981aec59cc132af8b0558c"
+  },
+  "promotion_decision": "do_not_promote_no_both_seed_parent_pass",
+  "candidates": [
+    {
+      "name": "public-v5n5-ft5-lr3e6-ep1-seed2",
+      "clean_f1": 0.7577184720041863,
+      "fixture_f1": 0.9278350515463918,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": true,
+      "pass_v1": true,
+      "delta_clean": 0.002981629898923144,
+      "delta_fixture": 0.0015192620727075834,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr3e6-ep2-seed1",
+      "clean_f1": 0.7573529411764707,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": true,
+      "pass_v1": true,
+      "delta_clean": 0.0026160990712075227,
+      "delta_fixture": 0.0,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr2e6-ep1-seed2",
+      "clean_f1": 0.7568134171907757,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": true,
+      "pass_v1": true,
+      "delta_clean": 0.002076575085512511,
+      "delta_fixture": 0.011184210526315796,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr2e6-ep2-seed1",
+      "clean_f1": 0.7552521008403361,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": true,
+      "pass_v1": true,
+      "delta_clean": 0.0005152587350729654,
+      "delta_fixture": 0.011184210526315796,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr1e6-ep1-seed1",
+      "clean_f1": 0.7545980031529165,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.00013883895234667598,
+      "delta_fixture": 0.0,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr1e6-ep1-seed2",
+      "clean_f1": 0.7544596012591815,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0002772408460816056,
+      "delta_fixture": 0.011184210526315796,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr5e7-ep2-seed1",
+      "clean_f1": 0.7539267015706806,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0008101405345825041,
+      "delta_fixture": 0.0,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr5e7-ep1-seed2",
+      "clean_f1": 0.7536842105263157,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.001052631578947416,
+      "delta_fixture": 0.011184210526315796,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr5e7-ep1-seed1",
+      "clean_f1": 0.7531512605042017,
+      "fixture_f1": 0.9375,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.001585581601061481,
+      "delta_fixture": 0.011184210526315796,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr1e6-ep2-seed2",
+      "clean_f1": 0.7524856096284669,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.002251232476796261,
+      "delta_fixture": 0.0,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr5e7-ep2-seed2",
+      "clean_f1": 0.7513116474291709,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.003425194676092258,
+      "delta_fixture": 0.0,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr1e6-ep2-seed1",
+      "clean_f1": 0.7509138381201044,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.0038230039851587794,
+      "delta_fixture": 0.0,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr3e6-ep2-seed2",
+      "clean_f1": 0.7489539748953975,
+      "fixture_f1": 0.9263157894736842,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": true,
+      "delta_clean": -0.00578286720986565,
+      "delta_fixture": 0.0,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr2e6-ep1-seed1",
+      "clean_f1": 0.7552521008403361,
+      "fixture_f1": 0.9148936170212766,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false,
+      "delta_clean": 0.0005152587350729654,
+      "delta_fixture": -0.01142217245240762,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr3e6-ep1-seed1",
+      "clean_f1": 0.7548556430446195,
+      "fixture_f1": 0.9148936170212766,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false,
+      "delta_clean": 0.00011880093935634495,
+      "delta_fixture": -0.01142217245240762,
+      "delta_year": 0.00990099009900991
+    },
+    {
+      "name": "public-v5n5-ft5-lr2e6-ep2-seed2",
+      "clean_f1": 0.7531512605042017,
+      "fixture_f1": 0.9166666666666666,
+      "speech_year_exact_f1": 1.0,
+      "pass_parent": false,
+      "pass_v1": false,
+      "delta_clean": -0.001585581601061481,
+      "delta_fixture": -0.009649122807017574,
+      "delta_year": 0.00990099009900991
+    }
+  ],
+  "parent_pass_seeds": [
+    "public-v5n5-ft5-lr3e6-ep1-seed2",
+    "public-v5n5-ft5-lr3e6-ep2-seed1",
+    "public-v5n5-ft5-lr2e6-ep1-seed2",
+    "public-v5n5-ft5-lr2e6-ep2-seed1"
+  ]
+}

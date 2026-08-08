@@ -1,0 +1,15 @@
+{
+  "id": "uzinfocom-curated-test-00013464",
+  "source_dataset": "uzinfocom-edu-ai/uzbek-asr-curated-701h",
+  "source_revision": "35a00f63fc5c7f09b44cbce7f3968db6001457a5",
+  "source_path": "audios/00/00013464.wav",
+  "source_split": "test",
+  "source_collection": "uzbekvoice",
+  "source_license": "Apache-2.0",
+  "expected_transcript": "vaqtlar turizmni rivojlantirish maqsadida xorijdan qancha-qancha bloggerlar ehtimol pul evaziga olib kelingandi.",
+  "maximum_wer": 0.35,
+  "audio_sha256": "e0b39da8dd6601b76f716057b5a949cd0e90c93ad0f0d67a34ca44cdce5166cc",
+  "sample_rate": 16000,
+  "channels": 1,
+  "duration_seconds": 17.9961875
+}

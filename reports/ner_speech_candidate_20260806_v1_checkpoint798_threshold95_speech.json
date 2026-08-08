@@ -1,0 +1,166 @@
+{
+  "checkpoint": {
+    "artifact_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1",
+    "resolved_path": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1/checkpoint-798",
+    "sha256": "92792e772dd49bfcfbc7d10f50303a6729cfc03eda26d67f2bfc6c3d0d951619"
+  },
+  "combined_final": {
+    "DATE": {
+      "count": 15,
+      "f1": 1.0,
+      "false_negative": 0,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positive": 15
+    },
+    "LOC": {
+      "count": 10,
+      "f1": 0.33333333333333337,
+      "false_negative": 8,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.2,
+      "true_positive": 2
+    },
+    "ORG": {
+      "count": 10,
+      "f1": 0.7499999999999999,
+      "false_negative": 4,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.6,
+      "true_positive": 6
+    },
+    "PER": {
+      "count": 15,
+      "f1": 1.0,
+      "false_negative": 0,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_positive": 15
+    },
+    "overall": {
+      "count": 50,
+      "f1": 0.8636363636363636,
+      "false_negative": 12,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.76,
+      "true_positive": 38
+    }
+  },
+  "fixture": {
+    "path": "tests/fixtures/speech_ner_eval.jsonl",
+    "record_count": 50,
+    "sha256": "fb226f90bbb8a3685184327bc208189701e66333ae171225946c536585425f02"
+  },
+  "latency": {
+    "mean_milliseconds": 53.3183724997798,
+    "total_seconds": 2.66591862498899
+  },
+  "model_confidence_threshold": 0.95,
+  "normalized_confidence_threshold": 0.7,
+  "normalized_only_projected_candidates": {
+    "DATE": {
+      "count": 15,
+      "f1": 0.23529411764705882,
+      "false_negative": 13,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.13333333333333333,
+      "true_positive": 2
+    },
+    "LOC": {
+      "count": 10,
+      "f1": 0.33333333333333337,
+      "false_negative": 8,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.2,
+      "true_positive": 2
+    },
+    "ORG": {
+      "count": 10,
+      "f1": 0.5714285714285715,
+      "false_negative": 6,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.4,
+      "true_positive": 4
+    },
+    "PER": {
+      "count": 15,
+      "f1": 0.5,
+      "false_negative": 10,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "true_positive": 5
+    },
+    "overall": {
+      "count": 50,
+      "f1": 0.41269841269841273,
+      "false_negative": 37,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.26,
+      "true_positive": 13
+    }
+  },
+  "raw_display_model": {
+    "DATE": {
+      "count": 15,
+      "f1": 0.4210526315789474,
+      "false_negative": 11,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.26666666666666666,
+      "true_positive": 4
+    },
+    "LOC": {
+      "count": 10,
+      "f1": 0.33333333333333337,
+      "false_negative": 8,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.2,
+      "true_positive": 2
+    },
+    "ORG": {
+      "count": 10,
+      "f1": 0.625,
+      "false_negative": 5,
+      "false_positive": 1,
+      "precision": 0.8333333333333334,
+      "recall": 0.5,
+      "true_positive": 5
+    },
+    "PER": {
+      "count": 15,
+      "f1": 0.4545454545454545,
+      "false_negative": 10,
+      "false_positive": 2,
+      "precision": 0.7142857142857143,
+      "recall": 0.3333333333333333,
+      "true_positive": 5
+    },
+    "overall": {
+      "count": 50,
+      "f1": 0.463768115942029,
+      "false_negative": 34,
+      "false_positive": 3,
+      "precision": 0.8421052631578947,
+      "recall": 0.32,
+      "true_positive": 16
+    }
+  },
+  "transform_counts": {
+    "filler_comma": 2,
+    "location_case": 10,
+    "organization_case": 9,
+    "person_name": 8,
+    "temporal_itn": 6
+  }
+}

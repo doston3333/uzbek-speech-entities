@@ -1,0 +1,55 @@
+- generic [active] [ref=e1]:
+  - link "Asosiy mazmunga o‘tish" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - paragraph [ref=e4]: Mahalliy nutq daftari
+    - generic [ref=e5]:
+      - heading [level=1] [ref=e6]:
+        - text: Nutqdan
+        - emphasis [ref=e7]: ma’noga.
+      - paragraph [ref=e8]: O‘zbekcha yozuvni tinglang, o‘qing va undagi muhim nomlarni ajrating.
+  - main [ref=e9]:
+    - complementary [ref=e10]:
+      - generic [ref=e11]:
+        - paragraph [ref=e12]: "01"
+        - heading "Ovoz manbasi" [level=2] [ref=e13]
+      - paragraph [ref=e14]: Yozib oling yoki audio fayl tanlang. Fayl faqat shu brauzer va mahalliy serverda qayta ishlanadi.
+      - region [ref=e15]:
+        - heading "Jonli yozuv" [level=3] [ref=e22]
+        - paragraph [ref=e23]: 00:00 / 01:00
+        - generic [ref=e24]:
+          - button "Yozishni boshlash" [ref=e25] [cursor=pointer]
+          - button "To‘xtatish" [disabled] [ref=e26]
+      - group "Yoki audio fayl" [ref=e27]:
+        - generic [ref=e29] [cursor=pointer]:
+          - text: Faylni tanlash
+          - button "Faylni tanlash" [ref=e30]
+        - paragraph [ref=e31]: WAV, MP3, M4A, WebM yoki FLAC · 25 MB gacha
+      - region [ref=e32]:
+        - heading "Tinglab ko‘rish" [level=3] [ref=e33]
+        - paragraph [ref=e34]: "Yozib olindi: yozuv.webm"
+        - generic "Tanlangan audioni tinglash" [ref=e58]
+      - paragraph [ref=e35]:
+        - strong [ref=e36]: Mahalliy ishlaydi.
+        - text: Audio va tahlil ushbu qurilmada qayta ishlanadi; pullik API yoki bulutli saqlash ishlatilmaydi.
+    - region [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - paragraph [ref=e40]: "02"
+          - heading "Tahlil varag‘i" [level=2] [ref=e41]
+        - generic [ref=e42]:
+          - status [ref=e43]: Mahalliy modellar tayyor
+          - button "Qayta tekshirish" [ref=e44] [cursor=pointer]
+      - generic [ref=e45]:
+        - button "Tahlil qilish" [ref=e46] [cursor=pointer]
+        - button "Tozalash" [ref=e47] [cursor=pointer]
+        - paragraph [ref=e48]: Yozuv tayyor. Tahlil qilish tugmasini bosing.
+      - region [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: "03"
+            - heading "O‘qilgan matn" [level=2] [ref=e53]
+          - paragraph [ref=e54]: Natija
+        - generic [ref=e55]:
+          - paragraph [ref=e56]: —
+          - paragraph [ref=e57]: Audio tayyor bo‘lgach, “Tahlil qilish” tugmasi nutq matni, normallashtirilgan yozuv va undagi nomlarni ko‘rsatadi.

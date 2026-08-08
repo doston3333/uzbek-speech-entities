@@ -1,0 +1,55 @@
+- generic [ref=f2e1]:
+  - link "Asosiy mazmunga o‘tish" [ref=f2e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f2e3]:
+    - paragraph [ref=f2e4]: Mahalliy nutq daftari
+    - generic [ref=f2e5]:
+      - heading [level=1] [ref=f2e6]:
+        - text: Nutqdan
+        - emphasis [ref=f2e7]: ma’noga.
+      - paragraph [ref=f2e8]: O‘zbekcha yozuvni tinglang, o‘qing va undagi muhim nomlarni ajrating.
+  - main [ref=f2e9]:
+    - complementary [ref=f2e10]:
+      - generic [ref=f2e11]:
+        - paragraph [ref=f2e12]: "01"
+        - heading "Ovoz manbasi" [level=2] [ref=f2e13]
+      - paragraph [ref=f2e14]: Yozib oling yoki audio fayl tanlang. Fayl faqat shu brauzer va mahalliy serverda qayta ishlanadi.
+      - region [ref=f2e15]:
+        - heading "Jonli yozuv" [level=3] [ref=f2e22]
+        - paragraph [ref=f2e23]: 00:00 / 01:00
+        - generic [ref=f2e24]:
+          - button "Yozishni boshlash" [ref=f2e25] [cursor=pointer]
+          - button "To‘xtatish" [disabled] [ref=f2e26]
+      - group "Yoki audio fayl" [ref=f2e27]:
+        - generic [ref=f2e29] [cursor=pointer]:
+          - text: Faylni tanlash
+          - button "Faylni tanlash" [ref=f2e30]
+        - paragraph [ref=f2e31]: WAV, MP3, M4A, WebM yoki FLAC · 25 MB gacha
+      - region [ref=f2e32]:
+        - heading "Tinglab ko‘rish" [level=3] [ref=f2e33]
+        - paragraph [ref=f2e34]: Hali audio tanlanmagan.
+      - paragraph [ref=f2e35]:
+        - strong [ref=f2e36]: Mahalliy ishlaydi.
+        - text: Audio va tahlil ushbu qurilmada qayta ishlanadi; pullik API yoki bulutli saqlash ishlatilmaydi.
+    - region [ref=f2e37]:
+      - generic [ref=f2e38]:
+        - generic [ref=f2e39]:
+          - paragraph [ref=f2e40]: "02"
+          - heading "Tahlil varag‘i" [level=2] [ref=f2e41]
+        - generic [ref=f2e42]:
+          - status [ref=f2e43]: Mahalliy modellar tayyor
+          - button "Qayta tekshirish" [ref=f2e44] [cursor=pointer]
+      - generic [ref=f2e45]:
+        - button "Tahlil qilish" [disabled] [ref=f2e46]
+        - button "Tozalash" [ref=f2e47] [cursor=pointer]
+        - paragraph [ref=f2e48]: Fayl tanlanmadi.
+      - alert [active] [ref=f2e112]: Fayl turi qo‘llab-quvvatlanmaydi. WAV, MP3, M4A, WebM yoki FLAC fayl tanlang.
+      - region [ref=f2e49]:
+        - generic [ref=f2e50]:
+          - generic [ref=f2e51]:
+            - paragraph [ref=f2e52]: "03"
+            - heading "O‘qilgan matn" [level=2] [ref=f2e53]
+          - paragraph [ref=f2e54]: Natija
+        - generic [ref=f2e55]:
+          - paragraph [ref=f2e56]: —
+          - paragraph [ref=f2e57]: Audio tayyor bo‘lgach, “Tahlil qilish” tugmasi nutq matni, normallashtirilgan yozuv va undagi nomlarni ko‘rsatadi.

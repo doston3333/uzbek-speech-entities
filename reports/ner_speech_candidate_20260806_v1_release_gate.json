@@ -1,0 +1,65 @@
+{
+  "candidate": {
+    "checkpoint": "models/ner/speech-candidate-20260806-v1/checkpoint-798",
+    "model_safetensors_sha256": "af2993de66f7a36b4ff5c8b6bd68e08f04183e56e9ea160a745238f3d06ed2a0"
+  },
+  "evaluation": {
+    "baseline_speech_report": "reports/ner_speech_baseline_20260806_speech.json",
+    "candidate_clean_test_report": "models/ner/speech-candidate-20260806-v1/evaluation_test_metrics.json",
+    "candidate_speech_report": "reports/ner_speech_candidate_20260806_v1_checkpoint798_threshold80_speech.json",
+    "fixture": "tests/fixtures/speech_ner_eval.jsonl"
+  },
+  "gates": {
+    "clean_four_class_macro_f1": {
+      "baseline": 0.8323429508111595,
+      "candidate": 0.8381029795507878,
+      "minimum": 0.8123429508111595,
+      "passed": true
+    },
+    "combined_final_precision": {
+      "baseline": 0.9545454545454546,
+      "candidate": 0.9565217391304348,
+      "minimum": 0.95,
+      "passed": true
+    },
+    "combined_final_recall": {
+      "baseline": 0.84,
+      "candidate": 0.88,
+      "minimum": 0.84,
+      "passed": true
+    },
+    "normalized_only_precision": {
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "minimum": 0.95,
+      "passed": true
+    },
+    "normalized_only_recall": {
+      "baseline": 0.34,
+      "candidate": 0.44,
+      "minimum": 0.34,
+      "passed": true
+    }
+  },
+  "held_out_audio_diagnostic": {
+    "candidate_raw_date": {
+      "score": 0.8237453699111938,
+      "text": "ikki ming"
+    },
+    "input": {
+      "codec": "opus",
+      "container": "ogg",
+      "duration_seconds": 30.74,
+      "sample_rate": 48000,
+      "sha256": "252ca1659d8d8c5e0fdebd6c8e17e8342159e3d35d10a8957b46f0e1368f586f"
+    },
+    "preprocessing": "temporary PCM 16-bit mono 16 kHz WAV",
+    "previous_raw_date_count": 0
+  },
+  "production": {
+    "confidence_threshold": 0.8,
+    "final_model_path": "models/ner/final",
+    "promoted": true
+  },
+  "remaining_limitation": "The learned spoken-year span is partial on the held-out OGG; cross-seed training stability has not been measured."
+}
