@@ -29,9 +29,9 @@ from uzbek_speech_entities.ner.public_corpora import (
     OASST2_UZ,
     PODCASTS_TASHKENT_UZ,
     USC_UZ,
+    UZBEK_NEWS_TEXT,
     UZBEKVOICE2_UZ,
     UZBEKVOICE_UZ,
-    UZBEK_NEWS_TEXT,
     UZNER_SHA256,
     UZNER_URL,
     WIKIPEDIA_UZ,
@@ -545,7 +545,11 @@ def finalize_release(
             REMOTE_DATA_DIR / "train_speech_augmented.jsonl",
             job_dir("uzner-expert") / "records.jsonl",
             job_dir("uzner-temporal") / "records.jsonl",
-            tuple(job_dir(name) / "records.jsonl" for name in JOB_NAMES if name not in {"uzner-expert", "uzner-temporal"}),
+            tuple(
+                job_dir(name) / "records.jsonl"
+                for name in JOB_NAMES
+                if name not in {"uzner-expert", "uzner-temporal"}
+            ),
             local_directory / "train_public_v5.jsonl",
             local_directory / "public_v5_statistics.json",
             local_directory / "speech_year_dev.jsonl",

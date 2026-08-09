@@ -1,7 +1,7 @@
 {
   "checkpoint": {
-    "artifact_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1",
-    "resolved_path": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1/checkpoint-1197",
+    "artifact_root": "<project-root>/models/ner/speech-candidate-20260806-v1",
+    "resolved_path": "<project-root>/models/ner/speech-candidate-20260806-v1/checkpoint-1197",
     "sha256": "8cac3537dc115f6b0abb997eb59129a71f7362d60bd7e2e2baf97ee90f32d340"
   },
   "combined_final": {

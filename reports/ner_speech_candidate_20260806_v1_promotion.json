@@ -1,9 +1,9 @@
 {
   "augmented": {
-    "checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1/checkpoint-798",
+    "checkpoint": "<project-root>/models/ner/speech-candidate-20260806-v1/checkpoint-798",
     "device": "mps",
     "duration_seconds": 631.3006638749794,
-    "run_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1",
+    "run_root": "<project-root>/models/ner/speech-candidate-20260806-v1",
     "runtime_metadata": {
       "augmentation": true,
       "best_checkpoint": "checkpoint-798",
@@ -37,10 +37,10 @@
     }
   },
   "clean": {
-    "checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean/checkpoint-1045",
+    "checkpoint": "<project-root>/models/ner/clean/checkpoint-1045",
     "device": "mps",
     "duration_seconds": 591.2843102919869,
-    "run_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean",
+    "run_root": "<project-root>/models/ner/clean",
     "runtime_metadata": {
       "best_checkpoint": "checkpoint-1045",
       "device": "mps",
@@ -121,7 +121,7 @@
       "eval_token_accuracy": -0.002624671916010457
     }
   },
-  "selected_checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/speech-candidate-20260806-v1/checkpoint-798",
+  "selected_checkpoint": "<project-root>/models/ner/speech-candidate-20260806-v1/checkpoint-798",
   "selected_run": "augmented",
   "selection_criteria": [
     "higher eval_four_class_macro_f1",

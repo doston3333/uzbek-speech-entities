@@ -11,9 +11,12 @@ M4A/WebM/OGG directly (`brew install ffmpeg` on macOS).
 python3.11 -m venv .venv
 source .venv/bin/activate
 make install-dev
+make setup-models   # NER GitHub Release + Whisper Uzbek prefetch
 ```
 
-Pass `PYTHON=python3.12` to Make targets if you prefer Python 3.12.
+On macOS/Linux you can instead run `./scripts/setup_macos.sh`. On Windows use
+`.\scripts\setup_windows.ps1`. Pass `PYTHON=python3.12` to Make targets if you prefer
+Python 3.12.
 
 Copy `.env.example` if you need local overrides; never commit real secrets.
 
@@ -50,8 +53,9 @@ GPU/model-backed checks remain a local responsibility.
 ## Running the app locally
 
 ```bash
+make setup-models   # once per machine / when models/ is empty
 make run
 ```
 
-Open <http://127.0.0.1:8000>. Host and port come from `configs/app.yaml`
-(`APP_HOST` / `APP_PORT` override).
+On Windows: `.\scripts\run_windows.ps1`. Open <http://127.0.0.1:8000>. Host and port
+come from `configs/app.yaml` (`APP_HOST` / `APP_PORT` override).

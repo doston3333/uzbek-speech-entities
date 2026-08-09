@@ -95,7 +95,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print("STT:      no models prefetched")
     if shutil.which("ffmpeg"):
-        print("Ready:    run `make run` (macOS/Linux) or `.\\scripts\\run.ps1` (Windows).")
+        print("Ready:    run `make run` (macOS/Linux) or `.\\scripts\\run_windows.ps1` (Windows).")
     else:
         print(
             "Ready:    models are installed; install FFmpeg for broader audio formats, "

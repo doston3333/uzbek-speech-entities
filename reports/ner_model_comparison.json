@@ -1,9 +1,9 @@
 {
   "augmented": {
-    "checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/augmented/checkpoint-1495",
+    "checkpoint": "<project-root>/models/ner/augmented/checkpoint-1495",
     "device": "mps",
     "duration_seconds": 762.6007081670105,
-    "run_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/augmented",
+    "run_root": "<project-root>/models/ner/augmented",
     "runtime_metadata": {
       "augmentation": true,
       "best_checkpoint": "checkpoint-1495",
@@ -14,7 +14,7 @@
         "requested_checkpoint": "distilbert/distilbert-base-multilingual-cased",
         "resolved_commit": "45c032ab32cc946ad88a166f7cb282f58c753c2e"
       },
-      "resume_from_checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/augmented/checkpoint-299"
+      "resume_from_checkpoint": "<project-root>/models/ner/augmented/checkpoint-299"
     },
     "test_metrics": {
       "LOC_f1": 0.7732696897374702,
@@ -37,10 +37,10 @@
     }
   },
   "clean": {
-    "checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean/checkpoint-1045",
+    "checkpoint": "<project-root>/models/ner/clean/checkpoint-1045",
     "device": "mps",
     "duration_seconds": 591.2843102919869,
-    "run_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean",
+    "run_root": "<project-root>/models/ner/clean",
     "runtime_metadata": {
       "best_checkpoint": "checkpoint-1045",
       "device": "mps",
@@ -122,7 +122,7 @@
       "eval_token_accuracy": -0.0033245844269466085
     }
   },
-  "selected_checkpoint": "/Users/doston/Documents/ChatGPT/stt/models/ner/clean/checkpoint-1045",
+  "selected_checkpoint": "<project-root>/models/ner/clean/checkpoint-1045",
   "selected_run": "clean",
   "selection_criteria": [
     "higher eval_four_class_macro_f1",

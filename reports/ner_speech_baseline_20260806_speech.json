@@ -1,7 +1,7 @@
 {
   "checkpoint": {
-    "artifact_root": "/Users/doston/Documents/ChatGPT/stt/models/ner/final",
-    "resolved_path": "/Users/doston/Documents/ChatGPT/stt/models/ner/final",
+    "artifact_root": "<project-root>/models/ner/final",
+    "resolved_path": "<project-root>/models/ner/final",
     "sha256": "89bbd641c0dc93e92c8ce47fed47a847997b7ccb931e7881f468137ea5ee50fa"
   },
   "combined_final": {

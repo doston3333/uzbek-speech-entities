@@ -228,12 +228,22 @@ outputs only. Detailed transcript-bearing rows stay under the Git-ignored
 
 ## Current measured results
 
-The promoted speech-aware NER candidate passed its local 50-record speech fixture release gates:
-combined precision **0.9565**, recall **0.8800**, F1 **0.9167**, and mean NER latency
-**57.5 ms**. On the prepared clean NER test split its four-class macro F1 is **0.8381** (PER
-0.9619, LOC 0.8029, ORG 0.7448, TEMPORAL 0.8429). Exact artifacts and hashes are in
-`reports/ner_speech_candidate_20260806_v1_release_gate.json` and
-`reports/ner_speech_promoted_final_20260806_clean_test.json`.
+The default runtime NER bundle (`runtime-models-v1` → `models/ner/final`) is the public V5
+continuation candidate `public-v5n24-ft24-lr4e7-ep2-p6-seed1`. On the immutable 50-record speech
+fixture it scores combined F1 **0.9375** (PER 0.9677, ORG 0.8889, LOC 0.8235, DATE **1.0**). On
+the prepared clean NER test split its overall entity F1 is **0.7581** and four-class macro F1 is
+**0.8312** (PER 0.9489, LOC 0.8273, ORG 0.7783, TEMPORAL 0.7703). Bundle metrics ship beside the
+weights; ranking context is in `reports/ner_public_v5n24_20260808_ranking.json` and
+`reports/ner_public_v5_general_ner_status.json`.
+
+This runtime package is for local demos and reproducibility. Public V5 continuation runs did not
+clear the stricter both-seed type-safe promotion gate against the approved parent on every entity
+type (ORG remained slightly under), so treat these as candidate scores—not a claim that every
+internal promotion rule passed.
+
+Earlier speech-rescue work (August 2026) is still documented under
+`reports/ner_speech_candidate_20260806_v1_release_gate.json` for history; those numbers describe a
+different checkpoint than the GitHub Release zip.
 
 These are NER and controlled speech-fixture results—not the required private end-to-end
 benchmark. No compliant real-recording corpus has been collected yet, so Base-vs-Small WER/CER,

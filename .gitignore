@@ -40,3 +40,6 @@ reports/evaluation_collection_progress.json
 !tests/fixtures/sample_audio.wav
 !tests/fixtures/sample_uzbek.wav
 !tests/fixtures/sample_uzbek_2.wav
+
+# Local Playwright exploration dumps
+output/playwright/phase7/

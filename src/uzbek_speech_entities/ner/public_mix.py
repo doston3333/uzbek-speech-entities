@@ -182,7 +182,7 @@ def _record_has_hard_entity(
     if len(tokens) != len(tags):
         return False
     suffix = f"-{entity_type}"
-    for token, tag in zip(tokens, tags):
+    for token, tag in zip(tokens, tags, strict=True):
         if not isinstance(tag, str) or not tag.endswith(suffix):
             continue
         surface = normalize_uzbek_token(str(token)).replace("'", "")
