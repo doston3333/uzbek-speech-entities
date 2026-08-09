@@ -61,15 +61,9 @@ RESERVATION_DICT_NAME = "uzbek-speech-ner-public-v5-reservations"
 DEFAULT_RELEASE = "public-ner-v5n24-20260808"
 # Wave-24 parent: best v5n5 PASS; hard-LOC + hard-ORG (liga) upsample.
 LOCAL_PARENT_DIR = (
-    PROJECT_ROOT
-    / "models"
-    / "ner"
-    / "candidates"
-    / "public-v5n5-ft5-lr3e6-ep1-seed2"
+    PROJECT_ROOT / "models" / "ner" / "candidates" / "public-v5n5-ft5-lr3e6-ep1-seed2"
 )
-EXPECTED_PARENT_MODEL_SHA256 = (
-    "498d6bf27179d49af48cfb264bd6eb5cf534f9ed507eaf4435e275157888b976"
-)
+EXPECTED_PARENT_MODEL_SHA256 = "498d6bf27179d49af48cfb264bd6eb5cf534f9ed507eaf4435e275157888b976"
 PARENT_CHECKPOINT_FILES = frozenset(
     {
         "config.json",
@@ -151,13 +145,7 @@ data_image = (
         "pyarrow>=15,<24",
         "pydantic>=2,<3",
     )
-    .env(
-        {
-            "PYTHONPATH": ":".join(
-                (str(REMOTE_ROOT / "training"), str(REMOTE_ROOT / "src"))
-            )
-        }
-    )
+    .env({"PYTHONPATH": ":".join((str(REMOTE_ROOT / "training"), str(REMOTE_ROOT / "src")))})
     .add_local_dir(PROJECT_ROOT / "src", remote_path=str(REMOTE_ROOT / "src"))
     .add_local_dir(PROJECT_ROOT / "training", remote_path=str(REMOTE_ROOT / "training"))
     .add_local_file(
@@ -322,8 +310,7 @@ def _write_jsonl(path: Path, records: Sequence[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         "".join(
-            json.dumps(record, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-            + "\n"
+            json.dumps(record, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
             for record in records
         ),
         encoding="utf-8",
@@ -366,9 +353,7 @@ def _verify_manifest(directory: Path) -> dict[str, Any]:
         if not isinstance(relative, str) or not isinstance(expected, dict):
             raise ValueError(f"invalid manifest entry at {manifest_path}")
         path = directory / relative
-        if path.stat().st_size != expected.get("bytes") or _sha256(path) != expected.get(
-            "sha256"
-        ):
+        if path.stat().st_size != expected.get("bytes") or _sha256(path) != expected.get("sha256"):
             raise ValueError(f"manifest integrity mismatch: {path}")
     return manifest
 
@@ -395,9 +380,7 @@ def _download_uzner(destination: Path) -> None:
         raise ValueError(f"downloaded UzNER checksum mismatch: {actual}")
 
 
-def _write_remote_config(
-    config_basename: str, release: str
-) -> tuple[Path, dict[str, Any]]:
+def _write_remote_config(config_basename: str, release: str) -> tuple[Path, dict[str, Any]]:
     import yaml
 
     if Path(config_basename).name != config_basename or config_basename not in APPROVED_CONFIGS:
@@ -513,9 +496,7 @@ def prepare_speech(source: str, release: str = DEFAULT_RELEASE) -> dict[str, Any
     volumes={str(REMOTE_PUBLIC_ROOT): data_volume},
     include_source=False,
 )
-def finalize_release(
-    release: str = DEFAULT_RELEASE, jobs_release: str = ""
-) -> dict[str, Any]:
+def finalize_release(release: str = DEFAULT_RELEASE, jobs_release: str = "") -> dict[str, Any]:
     """Merge only complete job outputs and publish one immutable V5 release.
 
     ``jobs_release`` may point at an earlier completed prep release so a new mix
@@ -564,9 +545,7 @@ def finalize_release(
             release_directory,
             {
                 "job_manifest_sha256": {
-                    job: hashlib.sha256(
-                        json.dumps(value, sort_keys=True).encode()
-                    ).hexdigest()
+                    job: hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
                     for job, value in sorted(job_manifests.items())
                 },
                 "jobs_release": jobs_name,
@@ -584,8 +563,7 @@ def _validate_parent_checkpoint() -> None:
     actual = _sha256(REMOTE_CHECKPOINT / "model.safetensors")
     if actual != EXPECTED_PARENT_MODEL_SHA256:
         raise RuntimeError(
-            "uploaded parent checkpoint does not match the expected wave parent: "
-            f"{actual}"
+            f"uploaded parent checkpoint does not match the expected wave parent: {actual}"
         )
 
 
@@ -814,18 +792,13 @@ def evaluate_v5_baseline(release: str = DEFAULT_RELEASE) -> dict[str, Any]:
     release_manifest = _install_release(release)
     release_directory = REMOTE_PUBLIC_ROOT / "releases" / validate_release_name(release)
     output_directory = (
-        REMOTE_OUTPUT_ROOT
-        / "public-v5-baselines"
-        / release
-        / EXPECTED_PARENT_MODEL_SHA256[:12]
+        REMOTE_OUTPUT_ROOT / "public-v5-baselines" / release / EXPECTED_PARENT_MODEL_SHA256[:12]
     )
     output_volume.reload()
     if output_directory.exists():
         cached = _verify_manifest(output_directory)
         if cached.get("parent_model_sha256") != EXPECTED_PARENT_MODEL_SHA256:
-            raise ValueError(
-                "cached baseline parent hash does not match the expected wave parent"
-            )
+            raise ValueError("cached baseline parent hash does not match the expected wave parent")
         return cached
     with tempfile.TemporaryDirectory(prefix="public-v5-baseline-") as temporary:
         local_directory = Path(temporary)
@@ -905,8 +878,8 @@ def main(
         training_calls = [
             ("promoted-v1-baseline", evaluate_v5_baseline.spawn(release)),
             *[
-            (config, train_v5_seed.spawn(config, release))
-            for config in selected_config_basenames(seed)
+                (config, train_v5_seed.spawn(config, release))
+                for config in selected_config_basenames(seed)
             ],
         ]
         result["evaluation_and_training"] = collect_call_results(training_calls)

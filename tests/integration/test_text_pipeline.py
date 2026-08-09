@@ -32,6 +32,7 @@ def test_text_analysis_preserves_raw_input_and_valid_offsets() -> None:
     assert result.raw_transcript == text
     assert result.normalized_transcript == normalized
     assert result.timing.audio_preprocessing_ms == result.timing.stt_ms == 0
+    assert result.models.stt_revision is None
     assert all(value >= 0 for value in result.timing.model_dump().values())
 
 
@@ -72,4 +73,5 @@ def test_audio_flow_uses_prepared_path_and_cleanup(
     result = analyzer.analyze_audio(tmp_path / "source.wav")
     observed.append(temporary)
     assert result.raw_transcript == text
+    assert result.models.stt_revision == "0000000000000000000000000000000000000000"
     assert not observed[0].exists()

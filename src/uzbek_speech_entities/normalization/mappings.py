@@ -8,9 +8,7 @@ APOSTROPHE_VARIANTS: Final[tuple[str, ...]] = ("'", "’", "‘", "ʻ", "ʼ", "`
 _APOSTROPHE_REPLACEMENTS: Final[dict[str, int | str | None]] = {
     variant: CANONICAL_APOSTROPHE for variant in APOSTROPHE_VARIANTS
 }
-APOSTROPHE_TRANSLATION: Final[dict[int, int | str | None]] = str.maketrans(
-    _APOSTROPHE_REPLACEMENTS
-)
+APOSTROPHE_TRANSLATION: Final[dict[int, int | str | None]] = str.maketrans(_APOSTROPHE_REPLACEMENTS)
 
 UZBEK_MONTHS: Final[tuple[str, ...]] = (
     "yanvar",

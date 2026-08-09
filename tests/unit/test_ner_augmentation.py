@@ -40,9 +40,7 @@ def test_transformation_requests_reject_invalid_combinations_and_report_noops() 
     with pytest.raises(ValueError, match="unknown"):
         apply_transformations(["Akmal"], ["B-PER"], ["spelling_noise"])
     with pytest.raises(ValueError, match="mutually exclusive"):
-        apply_transformations(
-            ["Akmal"], ["B-PER"], ["lowercase", "reduce_capitalization"]
-        )
+        apply_transformations(["Akmal"], ["B-PER"], ["lowercase", "reduce_capitalization"])
 
     tokens, tags, applied = apply_transformations(
         ["already", "lowercase"], ["O", "O"], ["lowercase"]
@@ -230,6 +228,7 @@ def test_augmented_dataset_provenance_archives_statistics_and_corpus_hash(
 
     assert provenance["dataset"] == "fixture/dataset"
     assert provenance["augmentation"]["augmented_record_count"] == 3
-    assert provenance["augmentation"]["train_augmented_sha256"] == hashlib.sha256(
-        augmented_bytes
-    ).hexdigest()
+    assert (
+        provenance["augmentation"]["train_augmented_sha256"]
+        == hashlib.sha256(augmented_bytes).hexdigest()
+    )

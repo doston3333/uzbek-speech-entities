@@ -64,10 +64,14 @@ def test_decoded_audio_requires_positive_sample_rate(sample_rate: int) -> None:
         _audio(sample_rate=sample_rate)
 
 
-def test_decode_audio_wraps_decoder_failures(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+def test_decode_audio_wraps_decoder_failures(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     import soundfile as sf
 
-    monkeypatch.setattr(sf, "read", lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("raw")))
+    monkeypatch.setattr(
+        sf, "read", lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("raw"))
+    )
     monkeypatch.setattr(
         "uzbek_speech_entities.audio.loader._decode_with_ffmpeg",
         lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("fallback raw")),
@@ -170,21 +174,37 @@ def test_ffmpeg_fallback_bounds_duration_rate_and_channels(
         ({}, "target sample rate"),
         ({"target_sample_rate": True}, "target sample rate"),
         (
-            {"target_sample_rate": 16_000, "mono": True, "max_seconds": 0, "max_upload_mb": 1, "allowed_extensions": ["wav"]},
+            {
+                "target_sample_rate": 16_000,
+                "mono": True,
+                "max_seconds": 0,
+                "max_upload_mb": 1,
+                "allowed_extensions": ["wav"],
+            },
             "limits",
         ),
         (
-            {"target_sample_rate": 16_000, "mono": True, "max_seconds": 1, "max_upload_mb": 1, "allowed_extensions": []},
+            {
+                "target_sample_rate": 16_000,
+                "mono": True,
+                "max_seconds": 1,
+                "max_upload_mb": 1,
+                "allowed_extensions": [],
+            },
             "extensions",
         ),
     ],
 )
-def test_validation_config_rejects_invalid_mapping(mapping: dict[str, object], message: str) -> None:
+def test_validation_config_rejects_invalid_mapping(
+    mapping: dict[str, object], message: str
+) -> None:
     with pytest.raises(AudioValidationError, match=message):
         AudioValidationConfig.from_mapping(mapping)
 
 
-def test_validation_config_normalizes_extensions_and_is_immutable(audio_config: AudioValidationConfig) -> None:
+def test_validation_config_normalizes_extensions_and_is_immutable(
+    audio_config: AudioValidationConfig,
+) -> None:
     assert audio_config.allowed_extensions == frozenset({"wav", "mp3", "flac"})
     with pytest.raises(AttributeError):
         audio_config.allowed_extensions.add("webm")
@@ -301,7 +321,9 @@ def test_preprocess_downmixes_resamples_scales_and_checks_output(
         processed.samples[0] = 0.0
 
 
-def test_preprocess_rejects_nonfinite_input_and_resampler_output(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_preprocess_rejects_nonfinite_input_and_resampler_output(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     with pytest.raises(AudioValidationError, match="finite"):
         preprocess_audio(_audio(np.array([np.inf], dtype=np.float32)))
     monkeypatch.setattr(
@@ -317,7 +339,9 @@ def test_prepared_audio_reuses_safe_canonical_wav(
 ) -> None:
     source = tmp_path / "source.wav"
     source.write_bytes(b"safe")
-    monkeypatch.setattr("uzbek_speech_entities.audio.preprocessing.validate_audio", lambda *_args: _audio())
+    monkeypatch.setattr(
+        "uzbek_speech_entities.audio.preprocessing.validate_audio", lambda *_args: _audio()
+    )
 
     with prepared_audio(source, audio_config) as prepared:
         assert prepared == source
@@ -342,7 +366,7 @@ def test_prepared_audio_creates_and_cleans_up_temporary_wav(
     )
     observed: Path | None = None
 
-    with (pytest.raises(RuntimeError) if raises else nullcontext()):
+    with pytest.raises(RuntimeError) if raises else nullcontext():
         with prepared_audio(source, audio_config) as prepared:
             observed = prepared
             assert prepared.exists()

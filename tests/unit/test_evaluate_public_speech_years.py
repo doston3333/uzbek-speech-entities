@@ -13,9 +13,7 @@ from training.evaluate_public_speech_years import (
 from uzbek_speech_entities.ner.schemas import Entity, PublicEntityLabel
 
 
-def _entity(
-    text: str, start: int, end: int, label: PublicEntityLabel = "DATE"
-) -> Entity:
+def _entity(text: str, start: int, end: int, label: PublicEntityLabel = "DATE") -> Entity:
     return Entity(text=text[start:end], label=label, start=start, end=end, score=0.9)
 
 
@@ -93,9 +91,7 @@ def test_public_speech_year_fixture_rejects_non_temporal_labels(tmp_path: Path) 
     (checkpoint / "model.safetensors").write_bytes(b"model")
     (checkpoint / "labels.json").write_text("{}\n", encoding="utf-8")
     fixture = tmp_path / "bad.jsonl"
-    fixture.write_text(
-        '{"id":"bad","tokens":["ikki"],"ner_tags":["O"]}\n', encoding="utf-8"
-    )
+    fixture.write_text('{"id":"bad","tokens":["ikki"],"ner_tags":["O"]}\n', encoding="utf-8")
     with pytest.raises(ValueError, match="phrase-only TEMPORAL"):
         evaluate_public_speech_checkpoint(checkpoint, fixture, predictor=None)
 

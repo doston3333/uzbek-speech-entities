@@ -88,9 +88,10 @@ def load_ner_training_config(path: str | Path = "configs/ner_clean.yaml") -> Ner
     seed = _positive_int(training.get("seed"), "training.seed")
     for key in ("epochs", "train_batch_size", "eval_batch_size", "gradient_accumulation_steps"):
         _positive_int(training[key], f"training.{key}")
-    if not isinstance(training["dataloader_num_workers"], int) or training[
-        "dataloader_num_workers"
-    ] < 0:
+    if (
+        not isinstance(training["dataloader_num_workers"], int)
+        or training["dataloader_num_workers"] < 0
+    ):
         raise ValueError("training.dataloader_num_workers must be nonnegative")
     for key in ("learning_rate", "weight_decay", "warmup_ratio"):
         if isinstance(training[key], bool) or not isinstance(training[key], int | float):

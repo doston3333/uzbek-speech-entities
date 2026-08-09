@@ -24,9 +24,7 @@ def test_exact_person_phrase_and_organization_disambiguation() -> None:
     person = rescue.extract("alisher navoiy buyuk shoir", ())
     assert [
         (entity.text, entity.label, entity.source, entity.canonical_text) for entity in person
-    ] == [
-        ("alisher navoiy", "PER", "person_gazetteer", "Alisher Navoiy")
-    ]
+    ] == [("alisher navoiy", "PER", "person_gazetteer", "Alisher Navoiy")]
     organization_text = "alisher navoiy nomidagi universitetda"
     organization = rescue.extract(organization_text, ())
     assert [(entity.text, entity.label, entity.source) for entity in organization] == [

@@ -25,6 +25,7 @@ class AnalysisModels(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
     stt: str | None = None
+    stt_revision: str | None = None
     ner: str
 
 

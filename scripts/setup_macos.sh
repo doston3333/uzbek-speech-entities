@@ -23,9 +23,8 @@ fi
 # shellcheck disable=SC1091
 source .venv/bin/activate
 
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python -m pip install --no-deps -e .
+python -m pip install "uv==0.9.28"
+python -m uv sync --locked --no-dev --group tooling --python "$PYTHON_BIN"
 
 if ! command -v ffmpeg >/dev/null 2>&1; then
   if [[ "$(uname -s)" == "Darwin" ]] && command -v brew >/dev/null 2>&1; then

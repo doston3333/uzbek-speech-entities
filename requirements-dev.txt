@@ -1,8 +1,0 @@
--r requirements.txt
-openpyxl>=3.1,<4
-# Needed to import training/modal_*.py in unit tests without the full GPU stack.
-modal>=1.0,<2
-mypy>=1.10
-pytest>=8.0
-ruff>=0.5
-types-PyYAML>=6.0

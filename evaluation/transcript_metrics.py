@@ -124,8 +124,7 @@ def _occurrence_count(tokens: Sequence[str], phrase: Sequence[str]) -> int:
         return 0
     width = len(phrase)
     return sum(
-        tokens[index : index + width] == list(phrase)
-        for index in range(len(tokens) - width + 1)
+        tokens[index : index + width] == list(phrase) for index in range(len(tokens) - width + 1)
     )
 
 

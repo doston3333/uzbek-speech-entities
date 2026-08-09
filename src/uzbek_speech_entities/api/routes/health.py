@@ -28,6 +28,7 @@ class HealthModels(BaseModel):
 
     stt_loaded: bool
     stt_id: str | None
+    stt_revision: str | None
     ner_loaded: bool
     ner_path: str
 
@@ -64,6 +65,7 @@ async def health(request: Request) -> HealthResponse | JSONResponse:
         models=HealthModels(
             stt_loaded=stt_loaded,
             stt_id=stt.model_id if stt else None,
+            stt_revision=stt.revision if stt else None,
             ner_loaded=ner_loaded,
             ner_path=str(ner.model_path),
         ),

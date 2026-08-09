@@ -9,9 +9,36 @@ from types import MappingProxyType
 from typing import Any
 
 
+def _source_checkout_root() -> Path | None:
+    """Return the checkout root only when this package is running from one."""
+    candidate = Path(__file__).resolve().parents[2]
+    return candidate if (candidate / "configs" / "app.yaml").is_file() else None
+
+
 def project_root() -> Path:
-    """Return the repository root when running from a source checkout."""
-    return Path(__file__).resolve().parents[2]
+    """Return the checkout root, or the working directory for an installed wheel."""
+    return _source_checkout_root() or Path.cwd().resolve()
+
+
+def packaged_resource_path(*parts: str) -> Path:
+    """Return a package-contained runtime resource path."""
+    return Path(__file__).resolve().parent.joinpath(*parts)
+
+
+def default_config_path() -> Path:
+    """Return the checkout default config when present, else its packaged copy."""
+    source_root = _source_checkout_root()
+    if source_root is not None:
+        return source_root / "configs" / "app.yaml"
+    return packaged_resource_path("resources", "configs", "app.yaml")
+
+
+def frontend_directory() -> Path:
+    """Return checkout UI assets when present, else their packaged copy."""
+    source_root = _source_checkout_root()
+    if source_root is not None:
+        return source_root / "web"
+    return packaged_resource_path("web")
 
 
 def resolve_project_path(value: str | Path, root: Path | None = None) -> Path:
@@ -44,11 +71,11 @@ class AppConfig:
         return section
 
 
-def load_config(path: str | Path = "configs/app.yaml") -> AppConfig:
+def load_config(path: str | Path | None = None) -> AppConfig:
     """Load a YAML file without importing YAML until configuration is requested."""
     import yaml
 
-    config_path = resolve_project_path(path)
+    config_path = default_config_path() if path is None else resolve_project_path(path)
     with config_path.open(encoding="utf-8") as config_file:
         values = yaml.safe_load(config_file)
     if not isinstance(values, dict):

@@ -147,8 +147,7 @@ def _dataset_provenance(
         ]
         if missing_augmentation:
             raise ValueError(
-                "augmentation statistics are missing provenance: "
-                f"{missing_augmentation!r}"
+                f"augmentation statistics are missing provenance: {missing_augmentation!r}"
             )
         provenance["augmentation"] = {
             **augmentation_statistics,

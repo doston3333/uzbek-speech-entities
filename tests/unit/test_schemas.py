@@ -53,6 +53,7 @@ def test_analysis_result_is_uniform_for_text_or_audio() -> None:
             ner_ms=1,
             total_ms=2,
         ),
-        models=AnalysisModels(stt=None, ner="models/ner/final"),
+        models=AnalysisModels(stt=None, stt_revision=None, ner="models/ner/final"),
     )
     assert result.models.stt is None
+    assert result.models.stt_revision is None

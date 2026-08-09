@@ -104,9 +104,7 @@ def _entities(row: Mapping[str, Any], key: str) -> list[Mapping[str, Any]]:
         raise ValueError(f"error-analysis input {key} must be an entity array")
     entities = list(value)
     for entity in entities:
-        if entity.get("label") not in APPLICATION_LABELS or not isinstance(
-            entity.get("text"), str
-        ):
+        if entity.get("label") not in APPLICATION_LABELS or not isinstance(entity.get("text"), str):
             raise ValueError(f"error-analysis input {key} contains an invalid entity")
     return entities
 
@@ -227,9 +225,7 @@ def classify_ner_errors(
                 for index, predicted in enumerate(predicted_entities)
                 if index not in matched_predictions
                 and predicted.get("label") == gold_label
-                and (
-                    _surface(predicted) in gold_surface or gold_surface in _surface(predicted)
-                )
+                and (_surface(predicted) in gold_surface or gold_surface in _surface(predicted))
             ),
             None,
         )
@@ -286,9 +282,7 @@ def classify_normalization_errors(
             or normalized_transcript[start:end] != text
         ):
             errors.add("Offset mismatch")
-    return tuple(
-        category for category in NORMALIZATION_ERROR_CATEGORIES if category in errors
-    )
+    return tuple(category for category in NORMALIZATION_ERROR_CATEGORIES if category in errors)
 
 
 def build_error_records(
@@ -319,15 +313,11 @@ def build_error_records(
                 "gold_entities": gold,
                 "predicted_entities": predicted,
                 "stt_error": list(
-                    classify_stt_errors(
-                        gold_transcript, raw_transcript, gold, conditions
-                    )
+                    classify_stt_errors(gold_transcript, raw_transcript, gold, conditions)
                 ),
                 "ner_error": list(classify_ner_errors(gold, predicted)),
                 "normalization_error": list(
-                    classify_normalization_errors(
-                        raw_transcript, normalized_transcript, predicted
-                    )
+                    classify_normalization_errors(raw_transcript, normalized_transcript, predicted)
                 ),
                 "notes": f"conditions: {', '.join(conditions)}; automatic taxonomy needs review",
             }

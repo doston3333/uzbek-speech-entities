@@ -18,9 +18,7 @@ def test_v5_modal_seed_selection_is_parallel_safe_and_whitelisted() -> None:
         "both"
     ) == modal_public_ner_v5.selected_config_basenames("sweep")
     assert len(modal_public_ner_v5.selected_config_basenames("sweep")) == 16
-    outputs = {
-        value.output_name for value in modal_public_ner_v5.APPROVED_CONFIGS.values()
-    }
+    outputs = {value.output_name for value in modal_public_ner_v5.APPROVED_CONFIGS.values()}
     assert len(outputs) == 16
     with pytest.raises(ValueError, match="seed must be"):
         modal_public_ner_v5.selected_config_basenames("seed3")
@@ -81,13 +79,9 @@ def test_parallel_result_collection_waits_for_every_call_and_aggregates_failures
                 raise self.error
             return self.result
 
-    assert modal_public_ner_v5.collect_call_results(
-        [("one", Call(1)), ("two", Call(2))]
-    ) == [1, 2]
+    assert modal_public_ner_v5.collect_call_results([("one", Call(1)), ("two", Call(2))]) == [1, 2]
     with pytest.raises(RuntimeError, match=r"one: ValueError"):
-        modal_public_ner_v5.collect_call_results(
-            [("one", Call(error=ValueError("bad")))]
-        )
+        modal_public_ner_v5.collect_call_results([("one", Call(error=ValueError("bad")))])
 
 
 def test_publication_manifest_is_last_complete_and_tamper_evident(tmp_path: Path) -> None:
@@ -108,9 +102,7 @@ def test_v5_bundle_has_labels_and_parent_hash_is_exact() -> None:
     assert modal_public_ner_v5.EXPECTED_PARENT_MODEL_SHA256 == (
         "498d6bf27179d49af48cfb264bd6eb5cf534f9ed507eaf4435e275157888b976"
     )
-    assert modal_public_ner_v5.LOCAL_PARENT_DIR.name == (
-        "public-v5n5-ft5-lr3e6-ep1-seed2"
-    )
+    assert modal_public_ner_v5.LOCAL_PARENT_DIR.name == ("public-v5n5-ft5-lr3e6-ep1-seed2")
     assert modal_public_ner_v5.DEFAULT_RELEASE == "public-ner-v5n24-20260808"
 
 

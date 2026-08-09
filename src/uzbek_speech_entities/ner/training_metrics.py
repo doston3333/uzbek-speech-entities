@@ -74,10 +74,12 @@ def compute_ner_metrics(
         metrics[f"{entity_type}_recall"] = float(entity_metrics.get("recall", 0.0))
         metrics[f"{entity_type}_f1"] = float(entity_metrics.get("f1-score", 0.0))
         metrics[f"{entity_type}_count"] = int(entity_metrics.get("support", 0))
-    metrics["four_class_macro_f1"] = sum(
-        float(metrics[f"{entity_type}_f1"])
-        for entity_type in ("PER", "LOC", "ORG", "TEMPORAL")
-    ) / 4
+    metrics["four_class_macro_f1"] = (
+        sum(
+            float(metrics[f"{entity_type}_f1"]) for entity_type in ("PER", "LOC", "ORG", "TEMPORAL")
+        )
+        / 4
+    )
     return metrics
 
 

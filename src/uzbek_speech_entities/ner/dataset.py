@@ -13,9 +13,7 @@ DATASET_URL: Final[str] = (
     "https://huggingface.co/datasets/uznlp-uz/uzbek_NER/resolve/"
     f"{DATASET_REVISION}/{DATASET_FILENAME}?download=true"
 )
-DATASET_SHA256: Final[str] = (
-    "45acfdc7fabb8668b383b1fee31d2541c767aa8d05e9a0b1e70475f1b424eac8"
-)
+DATASET_SHA256: Final[str] = "45acfdc7fabb8668b383b1fee31d2541c767aa8d05e9a0b1e70475f1b424eac8"
 SOURCE_COLUMNS: Final[tuple[str, ...]] = (
     "Sentence",
     "TokenOrder",

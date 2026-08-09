@@ -68,9 +68,9 @@ def boundary_expansion_candidates(
 
     def is_temporal_blocker(key: str) -> bool:
         return key in temporal_blockers or any(
-            key.startswith(item) and key[len(item) :] in _HEAD_ENDINGS
-            for item in temporal_blockers
+            key.startswith(item) and key[len(item) :] in _HEAD_ENDINGS for item in temporal_blockers
         )
+
     candidates: list[Candidate] = []
     for entity in model_entities:
         if entity.label not in {"ORG", "LOC"}:

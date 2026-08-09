@@ -19,8 +19,8 @@ def test_analysis_normalization_keeps_display_and_records_exact_source_spans() -
         for token in view.tokens
     )
     assert all(
-        token.source_start is None
-        or display[token.source_start : token.source_end] for token in view.tokens
+        token.source_start is None or display[token.source_start : token.source_end]
+        for token in view.tokens
     )
 
 
@@ -62,19 +62,19 @@ def test_clock_itn_preserves_whether_a_locative_was_spoken() -> None:
 
 
 def test_semantic_heads_truecase_specific_phrases_but_not_generic_heads() -> None:
-    assert normalize_speech_analysis(
-        "yangi oʻzbekiston universitetida"
-    ).analysis_text == "Yangi Oʻzbekiston universitetida"
+    assert (
+        normalize_speech_analysis("yangi oʻzbekiston universitetida").analysis_text
+        == "Yangi Oʻzbekiston universitetida"
+    )
     assert normalize_speech_analysis("ashxobod parkida").analysis_text == "Ashxobod parkida"
-    assert normalize_speech_analysis(
-        "alisher navoiy nomidagi universitet"
-    ).analysis_text == "Alisher Navoiy nomidagi universitet"
+    assert (
+        normalize_speech_analysis("alisher navoiy nomidagi universitet").analysis_text
+        == "Alisher Navoiy nomidagi universitet"
+    )
     assert normalize_speech_analysis("men universitetda oʻqiyman").analysis_text == (
         "men universitetda oʻqiyman"
     )
-    assert normalize_speech_analysis("parkda sayr qildim").analysis_text == (
-        "parkda sayr qildim"
-    )
+    assert normalize_speech_analysis("parkda sayr qildim").analysis_text == ("parkda sayr qildim")
 
 
 def test_projection_rejects_filler_crossing_and_collapsed_temporal_subspan() -> None:

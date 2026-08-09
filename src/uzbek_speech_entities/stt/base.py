@@ -2,8 +2,18 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Protocol, runtime_checkable
+
+IMMUTABLE_REVISION_PATTERN = re.compile(r"[0-9a-f]{40}")
+
+
+def validate_immutable_revision(value: object, *, field_name: str = "STT revision") -> str:
+    """Return a full lowercase Git commit hash or fail before model resolution."""
+    if not isinstance(value, str) or not IMMUTABLE_REVISION_PATTERN.fullmatch(value):
+        raise ValueError(f"{field_name} must be a lowercase 40-character Git commit hash.")
+    return value
 
 
 class ModelLoadError(RuntimeError):
@@ -21,6 +31,11 @@ class SpeechToTextService(Protocol):
     @property
     def model_id(self) -> str:
         """Identifier of the loaded speech model."""
+        ...
+
+    @property
+    def revision(self) -> str:
+        """Immutable Git revision of the loaded speech model."""
         ...
 
     @property

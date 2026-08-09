@@ -73,6 +73,7 @@ class SpeechEntityAnalyzer:
     def _models(self, *, include_stt: bool) -> AnalysisModels:
         return AnalysisModels(
             stt=self.stt_service.model_id if include_stt and self.stt_service else None,
+            stt_revision=(self.stt_service.revision if include_stt and self.stt_service else None),
             ner=str(self.ner_predictor.model_path),
         )
 
@@ -118,18 +119,18 @@ class SpeechEntityAnalyzer:
                     )
                     source_start, source_end = completed.start, completed.end
             supported = (
-                entity.label == "DATE" and "temporal_itn" in transformations
-            ) or (
-                entity.label == "PER"
-                and bool(transformations & {"person_phrase", "person_name"})
-            ) or (
-                entity.label == "ORG" and "organization_case" in transformations
-            ) or (
-                entity.label == "LOC" and "location_case" in transformations
-            ) or (
-                entity.label in {"ORG", "LOC"}
-                and "person_phrase" in transformations
-                and (entity.label, source_start, source_end) in expansion_evidence
+                (entity.label == "DATE" and "temporal_itn" in transformations)
+                or (
+                    entity.label == "PER"
+                    and bool(transformations & {"person_phrase", "person_name"})
+                )
+                or (entity.label == "ORG" and "organization_case" in transformations)
+                or (entity.label == "LOC" and "location_case" in transformations)
+                or (
+                    entity.label in {"ORG", "LOC"}
+                    and "person_phrase" in transformations
+                    and (entity.label, source_start, source_end) in expansion_evidence
+                )
             )
             if supported:
                 candidates.append(

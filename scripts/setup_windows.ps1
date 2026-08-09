@@ -37,9 +37,8 @@ if (-not (Test-Path ".venv")) {
 }
 
 $VenvPython = Join-Path $Root ".venv\Scripts\python.exe"
-& $VenvPython -m pip install --upgrade pip
-& $VenvPython -m pip install -r requirements.txt
-& $VenvPython -m pip install --no-deps -e .
+& $VenvPython -m pip install "uv==0.9.28"
+& $VenvPython -m uv sync --locked --no-dev --group tooling
 
 $ffmpeg = Get-Command ffmpeg -ErrorAction SilentlyContinue
 if (-not $ffmpeg) {

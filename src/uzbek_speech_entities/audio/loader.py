@@ -150,7 +150,5 @@ def _decode_with_ffmpeg(
 
     import soundfile as sf
 
-    samples, sample_rate = sf.read(
-        BytesIO(completed.stdout), dtype="float32", always_2d=False
-    )
+    samples, sample_rate = sf.read(BytesIO(completed.stdout), dtype="float32", always_2d=False)
     return np.asarray(samples, dtype=np.float32), int(sample_rate)

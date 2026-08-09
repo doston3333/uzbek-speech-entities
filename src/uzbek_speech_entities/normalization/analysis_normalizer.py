@@ -185,8 +185,10 @@ def _person_replacements(units: tuple[_SourceUnit, ...]) -> tuple[_Replacement, 
     for index, unit in enumerate(units):
         if not _is_word(unit):
             continue
-        intro = index > 0 and units[index - 1].key == "ismim" and (
-            index < 2 or units[index - 2].key in {"men", "mening"}
+        intro = (
+            index > 0
+            and units[index - 1].key == "ismim"
+            and (index < 2 or units[index - 2].key in {"men", "mening"})
         )
         relation = (
             index + 1 < len(units)
@@ -243,21 +245,16 @@ def _semantic_head_replacements(
         start_index = head_index - 1
         if head_index >= 2:
             earlier = words[head_index - 2]
-            include_earlier = (
-                earlier.comparison_key in safe_modifiers
-                or (
-                    label == "LOC"
-                    and reviewed_single_name(prior.text) is not None
-                    and earlier.comparison_key not in blocked
-                    and earlier.comparison_key.isalpha()
-                )
+            include_earlier = earlier.comparison_key in safe_modifiers or (
+                label == "LOC"
+                and reviewed_single_name(prior.text) is not None
+                and earlier.comparison_key not in blocked
+                and earlier.comparison_key.isalpha()
             )
             if include_earlier and not prior.boundary_before:
                 start_index = head_index - 2
         selected_words = words[start_index : head_index + 1]
-        source_unit_start = unit_indexes.get(
-            (selected_words[0].start, selected_words[0].end)
-        )
+        source_unit_start = unit_indexes.get((selected_words[0].start, selected_words[0].end))
         source_unit_end = unit_indexes.get((head.start, head.end))
         if source_unit_start is None or source_unit_end is None:
             continue

@@ -133,8 +133,7 @@ def test_strict_digit_year_normalization_emits_spoken_words_only() -> None:
     assert extract_numeric_calendar_years("2026 yil davomida ishladik") == []
     assert extract_numeric_calendar_years("1799 yil va 2036 yil") == []
     assert all(
-        parse_spoken_year(calendar_year_to_spoken_words(year)) == year
-        for year in range(1800, 2036)
+        parse_spoken_year(calendar_year_to_spoken_words(year)) == year for year in range(1800, 2036)
     )
 
 
@@ -197,12 +196,8 @@ def test_shard_merge_preserves_transformations_and_prefers_observed_speech() -> 
     digit_records, _ = mine_spoken_year_records(
         corpus, ["2025-yil boshlandi", "2026-yil boshlandi"]
     )
-    observed_records, _ = mine_spoken_year_records(
-        corpus, ["ikki ming yigirma olti yil boshlandi"]
-    )
-    records, stats = merge_spoken_year_record_batches(
-        corpus, [digit_records, observed_records]
-    )
+    observed_records, _ = mine_spoken_year_records(corpus, ["ikki ming yigirma olti yil boshlandi"])
+    records, stats = merge_spoken_year_record_batches(corpus, [digit_records, observed_records])
     by_value = {parse_spoken_year(record["tokens"][:-1]): record for record in records}
     assert by_value[2025]["augmentation"] == {
         "source_text_form": "2025",

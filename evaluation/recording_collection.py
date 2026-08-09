@@ -141,9 +141,7 @@ def _relative_audio_file(sample: EvaluationSample, dataset: EvaluationDataset) -
     return sample.file.relative_to(dataset.metadata_path.parent).as_posix()
 
 
-def load_checklist(
-    path: str | Path, dataset: EvaluationDataset
-) -> dict[str, ChecklistEntry]:
+def load_checklist(path: str | Path, dataset: EvaluationDataset) -> dict[str, ChecklistEntry]:
     """Load an exact-schema checklist and prove it matches the metadata one-to-one."""
     source = Path(path)
     try:
@@ -154,8 +152,7 @@ def load_checklist(
         reader = csv.DictReader(stream)
         if tuple(reader.fieldnames or ()) != CHECKLIST_FIELDS:
             raise RecordingCollectionError(
-                "recording checklist header must exactly match: "
-                + ", ".join(CHECKLIST_FIELDS)
+                "recording checklist header must exactly match: " + ", ".join(CHECKLIST_FIELDS)
             )
         entries: dict[str, ChecklistEntry] = {}
         for line_number, row in enumerate(reader, start=2):
@@ -164,9 +161,7 @@ def load_checklist(
                 raise RecordingCollectionError(f"{location} has unexpected extra columns")
             recording_id = _required_cell(row, "recording_id", location)
             if recording_id in entries:
-                raise RecordingCollectionError(
-                    f"duplicate checklist recording_id: {recording_id}"
-                )
+                raise RecordingCollectionError(f"duplicate checklist recording_id: {recording_id}")
             entries[recording_id] = ChecklistEntry(
                 recording_id=recording_id,
                 speaker_id=_required_cell(row, "speaker_id", location),
@@ -175,9 +170,7 @@ def load_checklist(
                 consent_confirmed=_boolean_cell(row, "consent_confirmed", location),
                 recorded=_boolean_cell(row, "recorded", location),
                 transcript_reviewed=_boolean_cell(row, "transcript_reviewed", location),
-                entity_spans_reviewed=_boolean_cell(
-                    row, "entity_spans_reviewed", location
-                ),
+                entity_spans_reviewed=_boolean_cell(row, "entity_spans_reviewed", location),
             )
 
     samples = {sample.id: sample for sample in dataset.samples}
@@ -220,9 +213,7 @@ def inspect_canonical_audio(path: str | Path) -> float:
     if info.subtype != "PCM_16":
         problems.append(f"subtype is {info.subtype or 'unknown'}, expected PCM_16")
     if info.samplerate != TARGET_SAMPLE_RATE:
-        problems.append(
-            f"sample rate is {info.samplerate}, expected {TARGET_SAMPLE_RATE}"
-        )
+        problems.append(f"sample rate is {info.samplerate}, expected {TARGET_SAMPLE_RATE}")
     if info.channels != 1:
         problems.append(f"channel count is {info.channels}, expected 1")
     if info.frames <= 0:
@@ -245,9 +236,7 @@ def _prepare_source(path: Path) -> ProcessedAudio:
     if size <= 0:
         raise RecordingCollectionError(f"source recording is empty: {path}")
     if size > MAX_SOURCE_BYTES:
-        raise RecordingCollectionError(
-            f"source recording exceeds 25 MB: {path} ({size} bytes)"
-        )
+        raise RecordingCollectionError(f"source recording exceeds 25 MB: {path} ({size} bytes)")
     try:
         decoded = decode_audio(path)
     except AudioDecodingError as error:
@@ -275,9 +264,7 @@ def _prepare_source(path: Path) -> ProcessedAudio:
     return processed
 
 
-def _write_canonical_audio(
-    audio: ProcessedAudio, destination: Path, *, overwrite: bool
-) -> None:
+def _write_canonical_audio(audio: ProcessedAudio, destination: Path, *, overwrite: bool) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     if destination.exists() and not overwrite:
         raise RecordingCollectionError(f"refusing to overwrite audio: {destination}")
@@ -459,12 +446,8 @@ def import_recordings(
 
 def _add_collection_paths(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--metadata", default="data/private_test/metadata.jsonl")
-    parser.add_argument(
-        "--checklist", default="data/private_test/recording_checklist.csv"
-    )
-    parser.add_argument(
-        "--progress", default="reports/evaluation_collection_progress.json"
-    )
+    parser.add_argument("--checklist", default="data/private_test/recording_checklist.csv")
+    parser.add_argument("--progress", default="reports/evaluation_collection_progress.json")
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:

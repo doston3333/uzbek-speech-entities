@@ -105,9 +105,7 @@ def aggregate_bio_predictions(
             continue
         start, end = group[0].start, group[-1].end
         candidates.append(
-            Entity(
-                text=text[start:end], label=application_label, start=start, end=end, score=score
-            )
+            Entity(text=text[start:end], label=application_label, start=start, end=end, score=score)
         )
 
     # Prefer confidence, then earlier/longer spans, then a stable label tie-break.

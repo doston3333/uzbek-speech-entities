@@ -204,9 +204,7 @@ def test_report_records_provisional_limitation_deltas_and_test_only_role(tmp_pat
 
 def test_finalization_evidence_can_replace_provisional_validation_winner(tmp_path: Path) -> None:
     selection = _selection(tmp_path)
-    evidence = _finalization_evidence(
-        selected="augmented", clean_macro=0.8, augmented_macro=0.9
-    )
+    evidence = _finalization_evidence(selected="augmented", clean_macro=0.8, augmented_macro=0.9)
 
     report = build_comparison_report(selection, finalization_evidence=evidence)
 

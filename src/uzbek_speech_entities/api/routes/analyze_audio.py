@@ -6,7 +6,8 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile
+from starlette.concurrency import run_in_threadpool
 
 from ...pipeline.analyzer import SpeechEntityAnalyzer
 from ...pipeline.schemas import AnalysisResult
@@ -47,6 +48,7 @@ def _validated_suffix(upload: UploadFile, analyzer: SpeechEntityAnalyzer) -> str
 async def analyze_audio(
     file: Annotated[UploadFile, File(...)],
     analyzer: Annotated[SpeechEntityAnalyzer, Depends(get_analyzer)],
+    request: Request,
 ) -> AnalysisResult:
     """Stream one upload into a bounded temporary file and always remove it."""
     if not analyzer.ner_predictor.loaded:
@@ -66,7 +68,8 @@ async def analyze_audio(
         temporary.close()
         if written == 0:
             raise HTTPException(status_code=400, detail="empty_audio")
-        return analyzer.analyze_audio(temporary_path)
+        async with request.app.state.inference_lock:
+            return await run_in_threadpool(analyzer.analyze_audio, temporary_path)
     finally:
         temporary.close()
         temporary_path.unlink(missing_ok=True)

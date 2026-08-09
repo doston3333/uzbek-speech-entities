@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel, ConfigDict
+from starlette.concurrency import run_in_threadpool
 
 from ...pipeline.analyzer import SpeechEntityAnalyzer
 from ...pipeline.schemas import AnalysisResult
@@ -35,8 +36,10 @@ class TextAnalysisRequest(BaseModel):
 async def analyze_text(
     payload: TextAnalysisRequest,
     analyzer: Annotated[SpeechEntityAnalyzer, Depends(get_analyzer)],
+    request: Request,
 ) -> AnalysisResult:
     """Analyze text through the injected application-scoped analyzer."""
     if not analyzer.ner_predictor.loaded:
         raise ModelLoadError("NER model is unavailable.")
-    return analyzer.analyze_text(payload.text)
+    async with request.app.state.inference_lock:
+        return await run_in_threadpool(analyzer.analyze_text, payload.text)

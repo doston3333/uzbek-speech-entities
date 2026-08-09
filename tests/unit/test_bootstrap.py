@@ -6,7 +6,13 @@ from pathlib import Path
 
 import pytest
 
-from uzbek_speech_entities.config import load_config, project_root, resolve_project_path
+import uzbek_speech_entities.config as config_module
+from uzbek_speech_entities.config import (
+    load_config,
+    packaged_resource_path,
+    project_root,
+    resolve_project_path,
+)
 from uzbek_speech_entities.constants import APPLICATION_LABELS
 from uzbek_speech_entities.logging_config import diagnostic_transcript_logging_enabled
 
@@ -30,6 +36,46 @@ def test_config_values_are_immutable() -> None:
 
 def test_relative_paths_resolve_against_explicit_root(tmp_path: Path) -> None:
     assert resolve_project_path("nested/file.txt", root=tmp_path) == tmp_path / "nested/file.txt"
+
+
+def test_installed_paths_resolve_against_the_working_directory(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(config_module, "_source_checkout_root", lambda: None)
+    monkeypatch.chdir(tmp_path)
+
+    assert project_root() == tmp_path
+    assert resolve_project_path("models/ner/final") == tmp_path / "models/ner/final"
+
+
+def test_default_config_falls_back_to_the_packaged_copy(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(config_module, "_source_checkout_root", lambda: None)
+
+    config = load_config()
+
+    assert config.path == packaged_resource_path("resources", "configs", "app.yaml")
+    assert config.section("app")["name"] == "Uzbek Speech Entity Extractor"
+
+
+def test_explicit_relative_default_config_uses_the_working_directory(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(config_module, "_source_checkout_root", lambda: None)
+    monkeypatch.chdir(tmp_path)
+    config_path = tmp_path / "configs" / "app.yaml"
+    config_path.parent.mkdir()
+    config_path.write_text("app:\n  name: caller-config\n", encoding="utf-8")
+
+    config = load_config("configs/app.yaml")
+
+    assert config.path == config_path
+    assert config.section("app")["name"] == "caller-config"
+
+
+def test_packaged_default_config_matches_the_checkout_copy() -> None:
+    assert packaged_resource_path("resources", "configs", "app.yaml").read_text(
+        encoding="utf-8"
+    ) == (project_root() / "configs" / "app.yaml").read_text(encoding="utf-8")
 
 
 def test_diagnostic_transcript_logging_is_opt_in(monkeypatch: pytest.MonkeyPatch) -> None:

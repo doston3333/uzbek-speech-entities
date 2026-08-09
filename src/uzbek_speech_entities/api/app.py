@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import asyncio
+import logging
 import os
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -11,13 +13,16 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from ..audio.validation import AudioValidationConfig
-from ..config import AppConfig, load_config, project_root
+from ..config import AppConfig, frontend_directory, load_config
 from ..ner.predictor import NERPredictor
 from ..pipeline.analyzer import SpeechEntityAnalyzer
 from ..stt.base import ModelLoadError
 from ..stt.factory import create_stt_service
+from .audio_request_limit import AudioRequestBodyLimitMiddleware
 from .errors import install_error_handlers
 from .routes import analyze_audio_router, analyze_text_router, health_router
+
+LOGGER = logging.getLogger(__name__)
 
 
 def _mps_available() -> bool:
@@ -78,7 +83,14 @@ def create_app(
     injected = analyzer is not None
     if analyzer is None:
         stt = create_stt_service(app_config)
-        ner = NERPredictor.from_config(app_config)
+        try:
+            ner = NERPredictor.from_config(app_config)
+        except ModelLoadError:
+            LOGGER.warning(
+                "NER model bootstrap failed; starting with local files only.",
+                exc_info=True,
+            )
+            ner = NERPredictor.from_config(app_config, local_files_only=True)
         analyzer = SpeechEntityAnalyzer(
             stt_service=stt,
             ner_predictor=ner,
@@ -96,23 +108,28 @@ def create_app(
                     analyzer.stt_service.load()
                 except ModelLoadError:
                     # Health reports readiness; text analysis may remain usable.
-                    pass
+                    LOGGER.warning("STT model load failed; reporting unavailable.", exc_info=True)
             try:
                 analyzer.ner_predictor.load()
             except ModelLoadError:
                 # Health intentionally reports readiness instead of aborting the server.
-                pass
+                LOGGER.warning("NER model load failed; reporting unavailable.", exc_info=True)
         yield
 
     title = str(app_config.section("app").get("name", "Uzbek Speech Entity Extractor"))
     application = FastAPI(title=title, lifespan=lifespan)
     application.state.analyzer = analyzer
+    application.state.inference_lock = asyncio.Lock()
     application.state.mps_available = _mps_available()
     install_error_handlers(application)
     application.include_router(health_router, prefix="/api")
     application.include_router(analyze_text_router, prefix="/api")
     application.include_router(analyze_audio_router, prefix="/api")
-    web_directory = project_root() / "web"
+    application.add_middleware(
+        AudioRequestBodyLimitMiddleware,
+        max_file_bytes=analyzer.audio_config.max_upload_bytes,
+    )
+    web_directory = frontend_directory()
     application.mount("/assets", StaticFiles(directory=web_directory), name="assets")
 
     @application.get("/", include_in_schema=False)

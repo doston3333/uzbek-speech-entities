@@ -59,7 +59,8 @@ Or step by step:
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-make setup    # pip install + NER GitHub Release + Whisper Uzbek prefetch
+python -m pip install "uv==0.9.28"
+make setup    # locked dependencies + NER GitHub Release + Whisper Uzbek prefetch
 make run
 ```
 
@@ -88,7 +89,15 @@ provide explicit overrides (useful when port 8000 is occupied). Model identifier
 upload limits, confidence thresholds, and speech-only feature flags are also externalized in
 config or documented environment variables.
 
+The runtime pins both Whisper models to immutable 40-character commit revisions in
+`configs/app.yaml`. To override the STT model, set `STT_MODEL_ID` and the matching
+`STT_MODEL_REVISION` together; an ID without a revision, an empty value, or a mutable/non-hex
+revision fails at startup. `STT_MODEL_REVISION` alone may pin the configured model ID.
+
 If Python 3.12 is preferred on Unix, pass `PYTHON=python3.12` to the `make` commands.
+`uv.lock` is the committed reproducibility source for normal runtime, development, and the pinned
+`uv` tooling bootstrap; `requirements-modal.txt` remains only for the isolated Modal image
+workflow.
 
 ## Verification
 
@@ -97,10 +106,20 @@ python -m compileall src training evaluation
 make test
 make lint
 make typecheck
+make format-check
+make coverage
+make package-check
 ```
 
-`make test` skips model-backed slow tests. Run `make test-slow` only after the local Whisper and
-NER artifacts are available; slow tests remain local-files-only.
+`make test` and `make coverage` skip model-backed slow tests and treat warnings as errors.
+`make coverage` enforces 80% branch coverage for `uzbek_speech_entities`. `make package-check`
+builds an isolated wheel and verifies packaged resources without downloading models. Run
+`make test-slow` only after the local Whisper and NER artifacts are available; slow tests remain
+local-files-only.
+
+`make release-check` is deliberately stricter: it also requires the provisioned model suite and
+a compliant, consented private recording corpus, then regenerates the STT, end-to-end, and error
+reports without the smoke-only escape hatch. See [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md).
 
 ## Training and model selection
 

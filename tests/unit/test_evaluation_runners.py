@@ -24,9 +24,13 @@ from evaluation.evaluate_pipeline import (
 from evaluation.evaluate_pipeline import (
     run_evaluation as run_pipeline_evaluation,
 )
-from evaluation.evaluate_stt import evaluate_stt_service
+from evaluation.evaluate_stt import (
+    _configured_model_revision,
+    _resolved_revision,
+    evaluate_stt_service,
+)
 from uzbek_speech_entities.audio.validation import AudioValidationConfig
-from uzbek_speech_entities.config import load_config, project_root
+from uzbek_speech_entities.config import AppConfig, load_config, project_root
 from uzbek_speech_entities.ner.schemas import Entity
 
 
@@ -69,6 +73,39 @@ def test_stt_service_runner_reports_transcript_mentions_and_runtime() -> None:
     assert result.summary["ORG_mention_accuracy"] is None
     assert result.summary["real_time_factor"] >= 0
     assert result.predictions[0]["resolved_revision"] == "test-revision"
+
+
+def test_stt_evaluation_resolves_only_the_configured_immutable_revision(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    revision = "0123456789abcdef0123456789abcdef01234567"
+    app_config = AppConfig(
+        path=Path("configs/app.yaml"),
+        values={
+            "stt": {
+                "model_id": "small",
+                "model_revision": revision,
+                "fallback_model_id": "base",
+                "fallback_model_revision": "76543210fedcba9876543210fedcba9876543210",
+            }
+        },
+    )
+    calls: list[dict[str, object]] = []
+    monkeypatch.setattr(
+        "evaluation.evaluate_stt.snapshot_download",
+        lambda **kwargs: calls.append(kwargs) or f"/cache/snapshots/{revision}",
+    )
+
+    assert _configured_model_revision("small", "small", app_config) == revision
+    assert _resolved_revision("small", revision, local_files_only=True) == revision
+    assert calls == [
+        {
+            "repo_id": "small",
+            "revision": revision,
+            "cache_dir": str(project_root() / "models/cache"),
+            "local_files_only": True,
+        }
+    ]
 
 
 def test_required_ablation_matrix_and_gold_span_evaluation() -> None:
@@ -146,9 +183,7 @@ def test_audio_ablation_reports_aligned_exact_span_f1() -> None:
         peak_rss_mb=12,
         peak_rss_delta_mb=2,
     )
-    stt_rows = {
-        ("base", "audio-001"): {"raw_transcript": dataset.samples[0].gold_transcript}
-    }
+    stt_rows = {("base", "audio-001"): {"raw_transcript": dataset.samples[0].gold_transcript}}
 
     result = evaluate_ablation(
         ablation=ABLATIONS[1],
@@ -201,9 +236,7 @@ def test_pipeline_runner_emits_all_eight_rows_with_fake_models(
         "evaluation.evaluate_pipeline._build_ner_predictor",
         lambda *_args, **_kwargs: predictor,
     )
-    monkeypatch.setattr(
-        "evaluation.evaluate_pipeline._release_accelerator_memory", lambda: None
-    )
+    monkeypatch.setattr("evaluation.evaluate_pipeline._release_accelerator_memory", lambda: None)
     monkeypatch.setattr("evaluation.evaluate_pipeline.write_csv_atomic", lambda *_args: None)
     monkeypatch.setattr("evaluation.evaluate_pipeline.write_jsonl_atomic", lambda *_args: None)
     monkeypatch.setattr("evaluation.evaluate_pipeline.write_json_atomic", lambda *_args: None)
@@ -219,9 +252,7 @@ def test_error_taxonomies_and_required_detailed_columns() -> None:
         {"text": "Akmal", "label": "PER", "start": 0, "end": 5},
         {"text": "Toshkent", "label": "LOC", "start": 6, "end": 14},
     ]
-    predicted = [
-        {"text": "Akmal", "label": "LOC", "start": 0, "end": 5, "score": 0.9}
-    ]
+    predicted = [{"text": "Akmal", "label": "LOC", "start": 0, "end": 5, "score": 0.9}]
     stt_errors = classify_stt_errors(
         "Akmal Toshkent bordi", "Akmal bordi bordi", gold, ["background_noise"]
     )

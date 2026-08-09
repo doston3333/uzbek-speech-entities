@@ -76,12 +76,9 @@ def _apostrophe_representation(
     return converted_tokens, ner_tags
 
 
-def _reduce_capitalization(
-    tokens: list[str], ner_tags: list[str]
-) -> tuple[list[str], list[str]]:
+def _reduce_capitalization(tokens: list[str], ner_tags: list[str]) -> tuple[list[str], list[str]]:
     reduced_tokens = [
-        token.lower() if tag != "O" else token
-        for token, tag in zip(tokens, ner_tags, strict=True)
+        token.lower() if tag != "O" else token for token, tag in zip(tokens, ner_tags, strict=True)
     ]
     return reduced_tokens, ner_tags
 
@@ -196,16 +193,12 @@ def _applicable_transformations(record: Mapping[str, object]) -> list[str]:
     assert isinstance(tokens, Sequence) and not isinstance(tokens, str | bytes)
     assert isinstance(ner_tags, Sequence) and not isinstance(ner_tags, str | bytes)
     return [
-        name
-        for name in TRANSFORMATION_ORDER
-        if apply_transformations(tokens, ner_tags, (name,))[2]
+        name for name in TRANSFORMATION_ORDER if apply_transformations(tokens, ner_tags, (name,))[2]
     ]
 
 
 def _choose_transformations(applicable: Sequence[str], rng: random.Random) -> frozenset[str]:
-    capitalization = [
-        name for name in ("lowercase", "reduce_capitalization") if name in applicable
-    ]
+    capitalization = [name for name in ("lowercase", "reduce_capitalization") if name in applicable]
     others = [name for name in applicable if name not in capitalization]
     candidates = others + ([rng.choice(capitalization)] if capitalization else [])
     rng.shuffle(candidates)
@@ -254,9 +247,7 @@ def augment_records(
     requested_count = round(
         len(source_records) * DEFAULT_AUGMENTATION_NUMERATOR / DEFAULT_AUGMENTATION_DENOMINATOR
     )
-    viable = [
-        record for record in source_records if _applicable_transformations(record)
-    ]
+    viable = [record for record in source_records if _applicable_transformations(record)]
     if requested_count > len(viable):
         raise ValueError(
             "not enough source records with applicable safe transformations: "

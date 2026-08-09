@@ -90,9 +90,7 @@ _CARDINALS = {
     20: "yigirma",
     30: "oʻttiz",
 }
-_APOSTROPHE_TRANSLATION = str.maketrans(
-    {"'": "ʻ", "’": "ʻ", "‘": "ʻ", "ʼ": "ʻ", "`": "ʻ"}
-)
+_APOSTROPHE_TRANSLATION = str.maketrans({"'": "ʻ", "’": "ʻ", "‘": "ʻ", "ʼ": "ʻ", "`": "ʻ"})
 # This is deliberately a fingerprint-only denylist; it is never decoded into
 # training text.  The value protects the held-out 2026-08-06 OGG transcript.
 KNOWN_OGG_TRANSCRIPT_FINGERPRINTS: frozenset[str] = frozenset(
@@ -106,9 +104,7 @@ KNOWN_OGG_TRANSCRIPT_FINGERPRINTS: frozenset[str] = frozenset(
 def normalize_full_text(value: str | Sequence[str]) -> str:
     """Return a comparison key for full-text leakage checks."""
     text = value if isinstance(value, str) else " ".join(value)
-    normalized = (
-        unicodedata.normalize("NFKC", text).translate(_APOSTROPHE_TRANSLATION).casefold()
-    )
+    normalized = unicodedata.normalize("NFKC", text).translate(_APOSTROPHE_TRANSLATION).casefold()
     return " ".join(re.sub(r"[^\wʻ]+", " ", normalized).split())
 
 
@@ -574,9 +570,7 @@ def build_speech_records(
         output.append(template)
         included_template_ngrams.update(template_ngrams)
         template_counts[str(template["augmentation"]["template"])] += 1
-    included_template_ngram_overlap = (
-        included_template_ngrams & protected_authored_template_ngrams
-    )
+    included_template_ngram_overlap = included_template_ngrams & protected_authored_template_ngrams
     if included_template_ngram_overlap:
         raise ValueError("included authored templates overlap protected text n-grams")
     output_fingerprints = [full_text_fingerprint(record["tokens"]) for record in output]

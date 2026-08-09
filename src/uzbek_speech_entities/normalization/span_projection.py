@@ -12,9 +12,7 @@ def project_analysis_span(
     if start < 0 or end <= start or end > len(view.analysis_text):
         return None
     covered = [
-        token
-        for token in view.tokens
-        if token.analysis_start < end and start < token.analysis_end
+        token for token in view.tokens if token.analysis_start < end and start < token.analysis_end
     ]
     if not covered or any(
         token.source_start is None

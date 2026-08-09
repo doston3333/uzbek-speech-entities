@@ -40,8 +40,7 @@ def _assert_acceptable_transcript(
     assert transcript
     observed_wer = wer(normalize_evaluation(expected), normalize_evaluation(transcript))
     assert observed_wer <= float(maximum_wer), (
-        f"normalized WER {observed_wer:.3f} exceeds fixture threshold "
-        f"{float(maximum_wer):.3f}"
+        f"normalized WER {observed_wer:.3f} exceeds fixture threshold {float(maximum_wer):.3f}"
     )
 
 

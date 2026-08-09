@@ -234,9 +234,7 @@ def load_dataset(metadata_path: str | Path, *, require_files: bool = False) -> E
     return EvaluationDataset(metadata_path=path, samples=tuple(samples))
 
 
-def inspect_audio(
-    sample: EvaluationSample, *, display_path: str | None = None
-) -> AudioInspection:
+def inspect_audio(sample: EvaluationSample, *, display_path: str | None = None) -> AudioInspection:
     """Read audio metadata only; errors are captured for honest compliance reports."""
     try:
         info = sf.info(sample.file)

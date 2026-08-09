@@ -20,9 +20,7 @@ REMOTE_CONFIG_DIR = REMOTE_ROOT / "configs"
 REMOTE_CHECKPOINT = REMOTE_ROOT / "models" / "ner" / "final"
 REMOTE_OUTPUT_ROOT = Path("/outputs")
 VOLUME_NAME = "uzbek-speech-ner-continuation-runs"
-EXPECTED_PARENT_MODEL_SHA256 = (
-    "af2993de66f7a36b4ff5c8b6bd68e08f04183e56e9ea160a745238f3d06ed2a0"
-)
+EXPECTED_PARENT_MODEL_SHA256 = "af2993de66f7a36b4ff5c8b6bd68e08f04183e56e9ea160a745238f3d06ed2a0"
 INFERENCE_CHECKPOINT_FILES = frozenset(
     {
         "config.json",
@@ -48,13 +46,7 @@ APPROVED_CONFIGS: dict[str, tuple[int, str]] = {
 image = (
     modal.Image.debian_slim(python_version="3.11")
     .pip_install_from_requirements(str(PROJECT_ROOT / "requirements-modal.txt"))
-    .env(
-        {
-            "PYTHONPATH": ":".join(
-                (str(REMOTE_ROOT / "training"), str(REMOTE_ROOT / "src"))
-            )
-        }
-    )
+    .env({"PYTHONPATH": ":".join((str(REMOTE_ROOT / "training"), str(REMOTE_ROOT / "src")))})
     .add_local_dir(PROJECT_ROOT / "src", remote_path=str(REMOTE_ROOT / "src"))
     .add_local_dir(PROJECT_ROOT / "training", remote_path=str(REMOTE_ROOT / "training"))
     .add_local_dir(PROJECT_ROOT / "configs", remote_path=str(REMOTE_CONFIG_DIR))
@@ -128,8 +120,7 @@ def _validate_parent_checkpoint() -> None:
     actual = _sha256(parent_model)
     if actual != EXPECTED_PARENT_MODEL_SHA256:
         raise RuntimeError(
-            "uploaded parent checkpoint does not match the promoted final NER model: "
-            f"{actual}"
+            f"uploaded parent checkpoint does not match the promoted final NER model: {actual}"
         )
 
 
@@ -216,7 +207,5 @@ def train_continuation_seed(config_basename: str) -> dict[str, str | int | None]
 @app.local_entrypoint()
 def main(seed: str = "both") -> None:
     """Run seed1, seed2, or both sequentially from ``modal run``."""
-    results = [
-        train_continuation_seed.remote(config) for config in selected_config_basenames(seed)
-    ]
+    results = [train_continuation_seed.remote(config) for config in selected_config_basenames(seed)]
     print(json.dumps({"runs": results}, sort_keys=True))

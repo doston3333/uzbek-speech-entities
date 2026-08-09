@@ -28,9 +28,7 @@ SPEAKERS_PATH = PROJECT_ROOT / "data/private_test/speakers.example.json"
 
 
 def _write_plan(directory: Path) -> tuple[Path, Path]:
-    plan = build_recording_plan(
-        load_prompts(PROMPTS_PATH), load_speaker_profiles(SPEAKERS_PATH)
-    )
+    plan = build_recording_plan(load_prompts(PROMPTS_PATH), load_speaker_profiles(SPEAKERS_PATH))
     metadata = directory / "metadata.jsonl"
     checklist = directory / "recording_checklist.csv"
     write_recording_plan(
@@ -130,9 +128,7 @@ def test_import_creates_canonical_wav_and_marks_recorded(tmp_path: Path) -> None
 
 
 @pytest.mark.parametrize("duration", [4.0, 21.0])
-def test_import_rejects_audio_outside_required_duration(
-    tmp_path: Path, duration: float
-) -> None:
+def test_import_rejects_audio_outside_required_duration(tmp_path: Path, duration: float) -> None:
     metadata, checklist = _write_plan(tmp_path)
     recording_id = "speaker-01-prompt-01"
     _confirm_consent(metadata, checklist, recording_id)
@@ -160,16 +156,12 @@ def test_import_is_idempotent_without_overwrite_and_replaces_only_when_explicit(
     raw.mkdir()
     source = raw / f"{recording_id}.wav"
     _write_audio(source, amplitude=0.1)
-    import_recordings(
-        metadata_path=metadata, checklist_path=checklist, raw_directory=raw
-    )
+    import_recordings(metadata_path=metadata, checklist_path=checklist, raw_directory=raw)
     destination = tmp_path / f"audio/{recording_id}.wav"
     original = destination.read_bytes()
 
     _write_audio(source, amplitude=0.7)
-    skipped = import_recordings(
-        metadata_path=metadata, checklist_path=checklist, raw_directory=raw
-    )
+    skipped = import_recordings(metadata_path=metadata, checklist_path=checklist, raw_directory=raw)
     assert skipped.already_present_count == 1
     assert destination.read_bytes() == original
 

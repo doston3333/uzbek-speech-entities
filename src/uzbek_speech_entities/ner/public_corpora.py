@@ -312,9 +312,7 @@ def convert_bioes_to_bio(tokens: Sequence[str], source_tags: Sequence[object]) -
         {
             entity
             for _, entity in parsed
-            if entity
-            and entity not in ENTITY_MAP
-            and entity not in STRIP_TO_O_ENTITY_TYPES
+            if entity and entity not in ENTITY_MAP and entity not in STRIP_TO_O_ENTITY_TYPES
         }
     )
     if unsupported:
@@ -725,15 +723,9 @@ def _spoken_year_statistics(
             "split": corpus.split,
             "text_column": corpus.text_column,
         },
-        "suffix_counts": dict(
-            sorted(Counter(suffix for _, _, suffix, _ in entries).items())
-        ),
-        "transformation_counts": dict(
-            sorted(Counter(kind for _, _, _, kind in entries).items())
-        ),
-        "value_counts": dict(
-            sorted(Counter(str(value) for _, value, _, _ in entries).items())
-        ),
+        "suffix_counts": dict(sorted(Counter(suffix for _, _, suffix, _ in entries).items())),
+        "transformation_counts": dict(sorted(Counter(kind for _, _, _, kind in entries).items())),
+        "value_counts": dict(sorted(Counter(str(value) for _, value, _, _ in entries).items())),
     }
 
 

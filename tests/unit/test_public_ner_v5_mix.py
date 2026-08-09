@@ -70,9 +70,7 @@ def test_v5_mix_is_deterministic_capped_and_keeps_speech_dev_out_of_train(
             _record("speech-d", ["ikki", "ming", "oʻn", "yildan"], "usc"),
         ],
     )
-    protected_bytes = _write(
-        protected, [_record("held-out", ["toʻrt", "ming", "yil"])]
-    )
+    protected_bytes = _write(protected, [_record("held-out", ["toʻrt", "ming", "yil"])])
 
     def build(prefix: str) -> tuple[list[dict[str, object]], list[dict[str, object]], dict]:
         output = tmp_path / f"{prefix}-train.jsonl"
@@ -105,9 +103,7 @@ def test_v5_mix_is_deterministic_capped_and_keeps_speech_dev_out_of_train(
     second_train, second_dev, second_stats = build("second")
     assert first_train == second_train
     assert first_dev == second_dev
-    assert first_stats["selected_source_ids_sha256"] == second_stats[
-        "selected_source_ids_sha256"
-    ]
+    assert first_stats["selected_source_ids_sha256"] == second_stats["selected_source_ids_sha256"]
     assert len(first_train) == 5  # base + one expert + one temporal + two speech-train.
     assert len(first_dev) == 2  # one held out from each public speech source.
     train_fingerprints = {full_text_fingerprint(record["tokens"]) for record in first_train}

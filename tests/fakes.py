@@ -18,6 +18,10 @@ class FakeSTTService:
         return "fake-stt"
 
     @property
+    def revision(self) -> str:
+        return "0000000000000000000000000000000000000000"
+
+    @property
     def loaded(self) -> bool:
         return self._loaded
 

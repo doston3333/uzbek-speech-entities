@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from .config import AppConfig, load_config, resolve_project_path
-from .stt.base import ModelLoadError
+from .stt.base import ModelLoadError, validate_immutable_revision
 
 LOGGER = logging.getLogger(__name__)
 
@@ -37,10 +37,11 @@ NER_REQUIRED_FILES = (
 
 def downloads_enabled() -> bool:
     """Return False when operators explicitly disable network model bootstrap."""
-    raw = os.getenv("SKIP_MODEL_DOWNLOAD") or os.getenv("NER_DOWNLOAD_DISABLED")
-    if raw is None:
-        return True
-    return raw.strip().casefold() not in {"1", "true", "yes", "on"}
+    disabled_values = (os.getenv("SKIP_MODEL_DOWNLOAD"), os.getenv("NER_DOWNLOAD_DISABLED"))
+    return not any(
+        value is not None and value.strip().casefold() in {"1", "true", "yes", "on"}
+        for value in disabled_values
+    )
 
 
 def ner_bundle_ready(model_path: Path) -> bool:
@@ -106,6 +107,55 @@ def _download_url(url: str, destination: Path) -> None:
         raise ModelLoadError(f"Could not download NER release asset from {url}.") from error
 
 
+def _install_ner_bundle(extract_root: Path, model_path: Path) -> None:
+    """Atomically replace an NER bundle without exposing a partial destination."""
+    parent = model_path.parent
+    parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=f".{model_path.name}.staging-", dir=parent))
+    backup_directory: Path | None = None
+    backup_path: Path | None = None
+    activated = False
+    try:
+        shutil.copytree(extract_root, staging, dirs_exist_ok=True)
+        if not ner_bundle_ready(staging):
+            raise ModelLoadError("staged NER bundle is missing required inference files.")
+
+        if model_path.exists():
+            backup_directory = Path(
+                tempfile.mkdtemp(prefix=f".{model_path.name}.backup-", dir=parent)
+            )
+            backup_path = backup_directory / model_path.name
+            model_path.rename(backup_path)
+        try:
+            staging.rename(model_path)
+            activated = True
+        except Exception as activation_error:
+            if backup_path is not None:
+                try:
+                    backup_path.rename(model_path)
+                except Exception as restore_error:
+                    raise ModelLoadError(
+                        "Could not activate staged NER bundle or restore the previous bundle."
+                    ) from restore_error
+            raise ModelLoadError("Could not activate staged NER bundle.") from activation_error
+
+        if backup_directory is not None:
+            try:
+                shutil.rmtree(backup_directory)
+            except OSError:
+                LOGGER.warning(
+                    "Could not remove replaced NER bundle backup at %s", backup_directory
+                )
+            backup_directory = None
+    finally:
+        if staging.exists():
+            shutil.rmtree(staging, ignore_errors=True)
+        if backup_directory is not None and backup_path is not None and not backup_path.exists():
+            shutil.rmtree(backup_directory, ignore_errors=True)
+        if not activated and backup_path is not None and backup_path.exists():
+            LOGGER.error("Previous NER bundle remains in rollback backup at %s", backup_path)
+
+
 def download_ner_bundle(config: AppConfig | None = None, *, force: bool = False) -> Path:
     """Ensure `ner.model_path` contains the pinned GitHub Release inference zip."""
     app_config = config or load_config()
@@ -124,9 +174,7 @@ def download_ner_bundle(config: AppConfig | None = None, *, force: bool = False)
             f"NER model missing at {model_path} and ner.download is disabled or unset."
         )
     if not downloads_enabled():
-        raise ModelLoadError(
-            f"NER model missing at {model_path} and SKIP_MODEL_DOWNLOAD is set."
-        )
+        raise ModelLoadError(f"NER model missing at {model_path} and SKIP_MODEL_DOWNLOAD is set.")
 
     repo = _required_string(section, "github_repo")
     tag = _required_string(section, "release_tag")
@@ -143,8 +191,7 @@ def download_ner_bundle(config: AppConfig | None = None, *, force: bool = False)
         actual_sha = _sha256_file(archive)
         if actual_sha.casefold() != expected_sha:
             raise ModelLoadError(
-                "NER release asset SHA-256 mismatch "
-                f"(expected {expected_sha}, got {actual_sha})."
+                f"NER release asset SHA-256 mismatch (expected {expected_sha}, got {actual_sha})."
             )
         with zipfile.ZipFile(archive) as archive_file:
             archive_file.extractall(extract_root)
@@ -160,10 +207,7 @@ def download_ner_bundle(config: AppConfig | None = None, *, force: bool = False)
             if nested is None:
                 raise ModelLoadError("NER release zip is missing required inference files.")
             extract_root = nested.parent
-        if model_path.exists():
-            shutil.rmtree(model_path)
-        model_path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copytree(extract_root, model_path)
+        _install_ner_bundle(extract_root, model_path)
 
     if not ner_bundle_ready(model_path):
         raise ModelLoadError(f"NER install failed under {model_path}.")
@@ -203,13 +247,22 @@ def prefetch_stt_models(config: AppConfig | None = None) -> list[str]:
 
     app_config = config or load_config()
     stt = app_config.section("stt")
-    model_ids: list[str] = []
-    for key in ("model_id", "fallback_model_id"):
+    models: list[tuple[str, str]] = []
+    for key, revision_key in (
+        ("model_id", "model_revision"),
+        ("fallback_model_id", "fallback_model_revision"),
+    ):
         value = stt.get(key)
-        if isinstance(value, str) and value.strip():
-            model_ids.append(value.strip())
-    if not model_ids:
-        raise ValueError("stt.model_id must be configured to prefetch Whisper models.")
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"stt.{key} must be a non-empty string to prefetch Whisper models.")
+        models.append(
+            (
+                value.strip(),
+                validate_immutable_revision(
+                    stt.get(revision_key), field_name=f"stt.{revision_key}"
+                ),
+            )
+        )
 
     cache_value = os.getenv("MODEL_CACHE_DIR", "./models/cache")
     if not cache_value.strip():
@@ -218,9 +271,9 @@ def prefetch_stt_models(config: AppConfig | None = None) -> list[str]:
     cache_dir.mkdir(parents=True, exist_ok=True)
 
     fetched: list[str] = []
-    for model_id in model_ids:
-        LOGGER.info("Prefetching STT model %s into %s", model_id, cache_dir)
-        snapshot_download(repo_id=model_id, cache_dir=str(cache_dir))
+    for model_id, revision in models:
+        LOGGER.info("Prefetching STT model %s@%s into %s", model_id, revision, cache_dir)
+        snapshot_download(repo_id=model_id, revision=revision, cache_dir=str(cache_dir))
         fetched.append(model_id)
     return fetched
 

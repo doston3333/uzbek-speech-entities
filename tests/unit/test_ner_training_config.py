@@ -119,9 +119,7 @@ def test_v3_configs_continue_from_promoted_final_model(
     assert config.training["learning_rate"] == 0.000005
     assert config.training["epochs"] == 2
     assert config.training["save_only_model"] is True
-    assert config.values["data"]["augmented_train_filename"] == (
-        "train_speech_augmented_v2.jsonl"
-    )
+    assert config.values["data"]["augmented_train_filename"] == ("train_speech_augmented_v2.jsonl")
     assert config.output_directory.name == directory
 
 
@@ -148,9 +146,7 @@ def test_v4_configs_use_dense_year_curriculum_from_promoted_final(
     assert config.checkpoint == "./models/ner/final"
     assert config.seed == seed
     assert config.training["save_only_model"] is True
-    assert config.values["data"]["augmented_train_filename"] == (
-        "train_speech_augmented_v3.jsonl"
-    )
+    assert config.values["data"]["augmented_train_filename"] == ("train_speech_augmented_v3.jsonl")
     assert config.values["data"]["augmentation_statistics_filename"] == (
         "speech_augmentation_v3_statistics.json"
     )

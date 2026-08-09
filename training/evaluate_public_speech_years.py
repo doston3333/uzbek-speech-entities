@@ -39,9 +39,7 @@ def _records(path: Path) -> list[dict[str, Any]]:
             raise ValueError(f"non-object held-out speech-year record at {path}:{line_number}")
         validate_bio_record(record)
         tags = record["ner_tags"]
-        if not tags or tags[0] != "B-TEMPORAL" or any(
-            tag != "I-TEMPORAL" for tag in tags[1:]
-        ):
+        if not tags or tags[0] != "B-TEMPORAL" or any(tag != "I-TEMPORAL" for tag in tags[1:]):
             raise ValueError(
                 f"held-out speech-year record must be phrase-only TEMPORAL: {record.get('id')}"
             )
@@ -81,9 +79,7 @@ def score_public_speech_years(
         if not shared and predicted_dates:
             partial_records += 1
     precision = (
-        true_positive / (true_positive + false_positive)
-        if true_positive + false_positive
-        else 0.0
+        true_positive / (true_positive + false_positive) if true_positive + false_positive else 0.0
     )
     recall = true_positive / len(texts) if texts else 0.0
     f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0

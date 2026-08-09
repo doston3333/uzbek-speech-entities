@@ -112,9 +112,7 @@ class NERPredictor:
         if not local_files_only:
             from ..runtime_models import ensure_ner_model
 
-            model_path = ensure_ner_model(
-                model_path, config, local_files_only=local_files_only
-            )
+            model_path = ensure_ner_model(model_path, config, local_files_only=local_files_only)
         return cls(
             model_path,
             max_length=max_length,

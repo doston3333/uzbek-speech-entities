@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from ..config import AppConfig, load_config, resolve_project_path
+from .base import validate_immutable_revision
 from .transformers_backend import TransformersSpeechToTextService
 
 
@@ -42,6 +43,15 @@ def _device_preference(values: Mapping[str, Any]) -> tuple[str, ...]:
     return preference
 
 
+def _environment_value(name: str) -> str | None:
+    value = os.getenv(name)
+    if value is None:
+        return None
+    if not value.strip():
+        raise ValueError(f"{name} must not be empty.")
+    return value.strip()
+
+
 def create_stt_service(
     config: AppConfig | None = None,
     *,
@@ -57,16 +67,26 @@ def create_stt_service(
     stt = app_config.section("stt")
     selected_key = "fallback_model_id" if use_fallback_model else "model_id"
     configured_model_id = _required_string(stt, selected_key)
-    environment_model_id = os.getenv("STT_MODEL_ID")
-    model_id = environment_model_id.strip() if environment_model_id else configured_model_id
-    if not model_id:
-        raise ValueError("STT_MODEL_ID must not be empty.")
+    configured_revision = validate_immutable_revision(
+        stt.get("fallback_model_revision" if use_fallback_model else "model_revision"),
+        field_name=("stt.fallback_model_revision" if use_fallback_model else "stt.model_revision"),
+    )
+    environment_model_id = _environment_value("STT_MODEL_ID")
+    environment_revision = _environment_value("STT_MODEL_REVISION")
+    if environment_model_id is not None and environment_revision is None:
+        raise ValueError("STT_MODEL_ID requires STT_MODEL_REVISION.")
+    model_id = environment_model_id or configured_model_id
+    revision = validate_immutable_revision(
+        environment_revision or configured_revision,
+        field_name="STT_MODEL_REVISION" if environment_revision else "STT revision",
+    )
     cache_value = os.getenv("MODEL_CACHE_DIR", "./models/cache")
     if not cache_value.strip():
         raise ValueError("MODEL_CACHE_DIR must not be empty.")
     return TransformersSpeechToTextService(
         model_id=model_id,
         cache_dir=resolve_project_path(Path(cache_value)),
+        revision=revision,
         language=_required_string(stt, "language"),
         task=_required_string(stt, "task"),
         chunk_length_seconds=_positive_number(stt, "chunk_length_seconds"),

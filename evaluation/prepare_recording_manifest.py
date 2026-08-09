@@ -23,9 +23,7 @@ from uzbek_speech_entities.config import resolve_project_path
 
 LOGGER = logging.getLogger(__name__)
 _SAFE_ID = re.compile(r"[a-z0-9][a-z0-9-]*\Z")
-_PROMPT_KEYS = frozenset(
-    {"id", "text", "entities", "speech_conditions", "content_tags"}
-)
+_PROMPT_KEYS = frozenset({"id", "text", "entities", "speech_conditions", "content_tags"})
 _PROMPT_ENTITY_KEYS = frozenset({"text", "label"})
 _SPEAKER_KEYS = frozenset({"speaker_id", "conditions"})
 
@@ -143,8 +141,7 @@ def load_prompts(path: str | Path) -> tuple[RecordingPrompt, ...]:
         word_count = len(prompt_text.split())
         if not 12 <= word_count <= 38:
             raise RecordingPlanError(
-                f"{prompt_id}: expected 12-38 words for a 5-20 second recording; found "
-                f"{word_count}"
+                f"{prompt_id}: expected 12-38 words for a 5-20 second recording; found {word_count}"
             )
         raw_entities = values["entities"]
         if not isinstance(raw_entities, list):
@@ -161,17 +158,13 @@ def load_prompts(path: str | Path) -> tuple[RecordingPrompt, ...]:
                 )
             entities.append(
                 PromptEntity(
-                    text=_text(
-                        entity["text"], f"{prompt_id}.entities[{entity_index}].text"
-                    ),
+                    text=_text(entity["text"], f"{prompt_id}.entities[{entity_index}].text"),
                     label=label,
                 )
             )
         if {entity.label for entity in entities} != set(APPLICATION_LABELS):
             raise RecordingPlanError(f"{prompt_id} must cover PER, LOC, ORG, and DATE")
-        speech_conditions = _strings(
-            values["speech_conditions"], f"{prompt_id}.speech_conditions"
-        )
+        speech_conditions = _strings(values["speech_conditions"], f"{prompt_id}.speech_conditions")
         if not set(speech_conditions) <= REQUIRED_CONDITIONS:
             raise RecordingPlanError(f"{prompt_id} has unknown speech conditions")
         content_tags = _strings(values["content_tags"], f"{prompt_id}.content_tags")

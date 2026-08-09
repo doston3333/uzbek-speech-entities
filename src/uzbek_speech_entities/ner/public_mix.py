@@ -107,21 +107,13 @@ def _stable_sample_preferring_types(
     """Fill the cap with preferred-type rows first, then stable-fill the remainder."""
     if cap < 0:
         raise ValueError("public source caps must be nonnegative")
-    preferred = [
-        record
-        for record in records
-        if _entity_types_in_record(record) & preferred_types
-    ]
+    preferred = [record for record in records if _entity_types_in_record(record) & preferred_types]
     other = [
-        record
-        for record in records
-        if not (_entity_types_in_record(record) & preferred_types)
+        record for record in records if not (_entity_types_in_record(record) & preferred_types)
     ]
     selected = _stable_sample(preferred, min(cap, len(preferred)), seed=seed)
     if len(selected) < cap:
-        selected.extend(
-            _stable_sample(other, cap - len(selected), seed=seed + 17)
-        )
+        selected.extend(_stable_sample(other, cap - len(selected), seed=seed + 17))
     return sorted(selected, key=lambda record: str(record["id"]))
 
 
@@ -373,8 +365,7 @@ def build_public_v5_mix(
     # Sampling should not reserve unselected fingerprints against later sources.
     seen = set(base_fingerprints)
     seen.update(
-        full_text_fingerprint(record["tokens"])
-        for record in accepted_by_source["uzner_expert"]
+        full_text_fingerprint(record["tokens"]) for record in accepted_by_source["uzner_expert"]
     )
 
     temporal_candidates, current = _filter_additions(
@@ -388,8 +379,7 @@ def build_public_v5_mix(
         temporal_candidates, temporal_cap, seed=seed + 1
     )
     seen.update(
-        full_text_fingerprint(record["tokens"])
-        for record in accepted_by_source["uzner_temporal"]
+        full_text_fingerprint(record["tokens"]) for record in accepted_by_source["uzner_temporal"]
     )
 
     speech_records: list[dict[str, Any]] = []
@@ -425,9 +415,7 @@ def build_public_v5_mix(
         speech_train, speech_train_cap, seed=seed + 3
     )
 
-    base_loc_rows = [
-        record for record in base if "LOC" in _entity_types_in_record(record)
-    ]
+    base_loc_rows = [record for record in base if "LOC" in _entity_types_in_record(record)]
     base_loc_boost = [
         record
         for record in _upsample_by_type_factors(
@@ -454,9 +442,7 @@ def build_public_v5_mix(
     hard_org_rows = [
         record
         for record in base
-        if _record_has_hard_entity(
-            record, entity_type="ORG", markers=HARD_ORG_TOKEN_MARKERS
-        )
+        if _record_has_hard_entity(record, entity_type="ORG", markers=HARD_ORG_TOKEN_MARKERS)
     ]
     hard_org_boost = [
         record
@@ -528,9 +514,7 @@ def build_public_v5_mix(
             "uzner_temporal": len(source_records["uzner_temporal"]),
             **speech_input_counts,
         },
-        "input_sha256": {
-            name: _sha256(path) for name, path in sorted(source_paths.items())
-        },
+        "input_sha256": {name: _sha256(path) for name, path in sorted(source_paths.items())},
         "known_ogg_denylist_fingerprint_count": len(denylisted_fingerprints),
         "protected_overlap_count": 0,
         "protected_paths": stable_protected_provenance,

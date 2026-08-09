@@ -66,9 +66,7 @@ def load_evaluation_config(path: str | Path = "configs/evaluation.yaml") -> Eval
     dataset = _mapping(root.get("dataset"), "dataset")
     stt = _mapping(root.get("stt"), "stt")
     model_ids_raw = _mapping(stt.get("model_ids"), "stt.model_ids")
-    model_ids = {
-        key: _string(model_ids_raw, key, "stt.model_ids") for key in ("base", "small")
-    }
+    model_ids = {key: _string(model_ids_raw, key, "stt.model_ids") for key in ("base", "small")}
     pipeline = _mapping(root.get("pipeline"), "pipeline")
     reports = _mapping(root.get("reports"), "reports")
     primary_ablation = _string(reports, "primary_ablation", "reports")

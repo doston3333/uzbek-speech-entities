@@ -54,8 +54,7 @@ def test_preparation_reconstructs_sorted_sentences_and_writes_required_artifacts
     }
     assert sum(values["tokens"] for values in statistics["splits"].values()) == 11
     assert all(
-        values["actual_sentence_ratio"] in {0.8, 0.1}
-        for values in statistics["splits"].values()
+        values["actual_sentence_ratio"] in {0.8, 0.1} for values in statistics["splits"].values()
     )
     assert {path.name for path in output.iterdir()} == {
         "train.jsonl",

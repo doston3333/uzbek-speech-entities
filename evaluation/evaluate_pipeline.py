@@ -232,9 +232,7 @@ def evaluate_ablation(
             metrics = calculate_entity_metrics(gold, predicted, mode="surface")
             normalized_gold = normalize_runtime(sample.gold_transcript)
             projected_gold = project_gold_entities(sample.gold_transcript, sample.entities)
-            aligned_predicted = align_entities_to_reference(
-                normalized_gold, ner_input, predicted
-            )
+            aligned_predicted = align_entities_to_reference(normalized_gold, ner_input, predicted)
             exact_span_metrics = calculate_entity_metrics(
                 projected_gold, aligned_predicted, mode="span"
             )
@@ -324,8 +322,7 @@ def _selection_report(
         rows = [by_id[item] for item in ids]
         macro = fmean(number(row, "four_class_macro_f1") for row in rows)
         weakest = min(
-            fmean(number(row, f"{label}_f1") for row in rows)
-            for label in APPLICATION_LABELS
+            fmean(number(row, f"{label}_f1") for row in rows) for label in APPLICATION_LABELS
         )
         overall = fmean(number(row, "overall_exact_entity_f1") for row in rows)
         latency = fmean(number(row, "mean_ner_inference_seconds") for row in rows)
@@ -405,14 +402,38 @@ def run_evaluation(
     summaries.sort(key=lambda row: str(row["ablation"]))
     predictions.sort(key=lambda row: (str(row["ablation"]), str(row["sample_id"])))
     fieldnames = [
-        "ablation", "source", "stt_model", "normalization", "ner_run", "match_mode",
-        "sample_count", "PER_precision", "PER_recall", "PER_f1", "PER_count",
-        "LOC_precision", "LOC_recall", "LOC_f1", "LOC_count", "ORG_precision",
-        "ORG_recall", "ORG_f1", "ORG_count", "DATE_precision", "DATE_recall",
-        "DATE_f1", "DATE_count", "four_class_macro_f1", "overall_precision",
-        "overall_recall", "overall_exact_entity_f1", "overall_exact_span_f1",
-        "ner_model_loading_seconds", "ner_model_load_peak_rss_mb",
-        "ner_inference_seconds", "mean_ner_inference_seconds",
+        "ablation",
+        "source",
+        "stt_model",
+        "normalization",
+        "ner_run",
+        "match_mode",
+        "sample_count",
+        "PER_precision",
+        "PER_recall",
+        "PER_f1",
+        "PER_count",
+        "LOC_precision",
+        "LOC_recall",
+        "LOC_f1",
+        "LOC_count",
+        "ORG_precision",
+        "ORG_recall",
+        "ORG_f1",
+        "ORG_count",
+        "DATE_precision",
+        "DATE_recall",
+        "DATE_f1",
+        "DATE_count",
+        "four_class_macro_f1",
+        "overall_precision",
+        "overall_recall",
+        "overall_exact_entity_f1",
+        "overall_exact_span_f1",
+        "ner_model_loading_seconds",
+        "ner_model_load_peak_rss_mb",
+        "ner_inference_seconds",
+        "mean_ner_inference_seconds",
     ]
     write_csv_atomic(summaries, fieldnames, config.pipeline_summary_path)
     write_jsonl_atomic(predictions, config.pipeline_predictions_path)

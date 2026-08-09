@@ -42,7 +42,7 @@ from uzbek_speech_entities.config import (
 from uzbek_speech_entities.normalization.runtime import (
     normalize_runtime,
 )
-from uzbek_speech_entities.stt.base import SpeechToTextService
+from uzbek_speech_entities.stt.base import SpeechToTextService, validate_immutable_revision
 from uzbek_speech_entities.stt.transformers_backend import (
     TransformersSpeechToTextService,
 )
@@ -72,7 +72,7 @@ def _audio_duration(path: Path) -> float:
 
 
 def _build_stt_service(
-    model_id: str, app_config: AppConfig, *, local_files_only: bool
+    model_id: str, revision: str, app_config: AppConfig, *, local_files_only: bool
 ) -> TransformersSpeechToTextService:
     values = app_config.section("stt")
     cache_dir = resolve_project_path("./models/cache")
@@ -95,6 +95,7 @@ def _build_stt_service(
     return TransformersSpeechToTextService(
         model_id=model_id,
         cache_dir=cache_dir,
+        revision=validate_immutable_revision(revision, field_name="STT evaluation revision"),
         language=language,
         task=task,
         chunk_length_seconds=float(chunk_seconds),
@@ -104,13 +105,31 @@ def _build_stt_service(
     )
 
 
-def _resolved_revision(model_id: str, *, local_files_only: bool) -> str:
+def _resolved_revision(model_id: str, revision: str, *, local_files_only: bool) -> str:
     snapshot = snapshot_download(
         repo_id=model_id,
+        revision=validate_immutable_revision(revision, field_name="STT evaluation revision"),
         cache_dir=str(resolve_project_path("./models/cache")),
         local_files_only=local_files_only,
     )
-    return Path(snapshot).name
+    return validate_immutable_revision(
+        Path(snapshot).name, field_name="resolved STT evaluation revision"
+    )
+
+
+def _configured_model_revision(model_key: str, model_id: str, app_config: AppConfig) -> str:
+    """Return the pinned app revision for an evaluation model, never a mutable ref."""
+    if model_key == "small":
+        id_key, revision_key = "model_id", "model_revision"
+    elif model_key == "base":
+        id_key, revision_key = "fallback_model_id", "fallback_model_revision"
+    else:
+        raise ValueError("model_key must be base or small")
+    stt = app_config.section("stt")
+    configured_id = stt.get(id_key)
+    if not isinstance(configured_id, str) or configured_id.strip() != model_id:
+        raise ValueError(f"evaluation model ID for {model_key} must match app STT configuration")
+    return validate_immutable_revision(stt.get(revision_key), field_name=f"stt.{revision_key}")
 
 
 def evaluate_stt_service(
@@ -199,9 +218,7 @@ def evaluate_stt_service(
             correct += int(label_values["correct"])
             total += int(label_values["total"])
         mention_totals[label] = (correct, total)
-    total_audio_seconds = sum(
-        _numeric_value(row, "audio_duration_seconds") for row in predictions
-    )
+    total_audio_seconds = sum(_numeric_value(row, "audio_duration_seconds") for row in predictions)
     total_processing_seconds = sum(
         _timing_value(row, "audio_processing_seconds") for row in predictions
     )
@@ -280,9 +297,10 @@ def run_evaluation(
     local_files_only = config.stt_local_files_only and not allow_download
     for model_key in selected_models:
         model_id = config.stt_model_ids[model_key]
-        LOGGER.info("Evaluating %s (%s)", model_key, model_id)
+        revision = _configured_model_revision(model_key, model_id, app_config)
+        LOGGER.info("Evaluating %s (%s@%s)", model_key, model_id, revision)
         service = _build_stt_service(
-            model_id, app_config, local_files_only=local_files_only
+            model_id, revision, app_config, local_files_only=local_files_only
         )
         result = evaluate_stt_service(
             model_key=model_key,
@@ -290,7 +308,7 @@ def run_evaluation(
             dataset=dataset,
             audio_config=audio_config,
             resolved_revision=_resolved_revision(
-                model_id, local_files_only=local_files_only
+                model_id, revision, local_files_only=local_files_only
             ),
         )
         summaries.append(result.summary)
@@ -298,15 +316,34 @@ def run_evaluation(
         del service
         _release_accelerator_memory()
     fieldnames = [
-        "model_key", "model_id", "resolved_revision", "device", "sample_count",
-        "total_audio_seconds", "raw_wer", "normalized_wer", "cer",
-        "PER_mention_correct", "PER_mention_total", "PER_mention_accuracy",
-        "LOC_mention_correct", "LOC_mention_total", "LOC_mention_accuracy",
-        "ORG_mention_correct", "ORG_mention_total", "ORG_mention_accuracy",
-        "DATE_mention_correct", "DATE_mention_total", "DATE_mention_accuracy",
-        "model_loading_seconds", "audio_processing_seconds",
-        "mean_audio_processing_seconds", "real_time_factor", "load_peak_rss_mb",
-        "load_peak_rss_delta_mb", "inference_peak_rss_mb",
+        "model_key",
+        "model_id",
+        "resolved_revision",
+        "device",
+        "sample_count",
+        "total_audio_seconds",
+        "raw_wer",
+        "normalized_wer",
+        "cer",
+        "PER_mention_correct",
+        "PER_mention_total",
+        "PER_mention_accuracy",
+        "LOC_mention_correct",
+        "LOC_mention_total",
+        "LOC_mention_accuracy",
+        "ORG_mention_correct",
+        "ORG_mention_total",
+        "ORG_mention_accuracy",
+        "DATE_mention_correct",
+        "DATE_mention_total",
+        "DATE_mention_accuracy",
+        "model_loading_seconds",
+        "audio_processing_seconds",
+        "mean_audio_processing_seconds",
+        "real_time_factor",
+        "load_peak_rss_mb",
+        "load_peak_rss_delta_mb",
+        "inference_peak_rss_mb",
         "inference_peak_rss_delta_mb",
     ]
     write_csv_atomic(summaries, fieldnames, config.stt_summary_path)
@@ -317,9 +354,7 @@ def run_evaluation(
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="configs/evaluation.yaml")
-    parser.add_argument(
-        "--model", action="append", choices=("base", "small"), dest="models"
-    )
+    parser.add_argument("--model", action="append", choices=("base", "small"), dest="models")
     parser.add_argument(
         "--allow-incomplete-dataset",
         action="store_true",

@@ -1,16 +1,15 @@
 PYTHON ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3.11)
+UV ?= $(if $(wildcard .venv/bin/uv),.venv/bin/uv,uv)
 
-.PHONY: install install-dev setup setup-models check-mps prepare-ner train-ner-clean train-ner-augmented evaluate-ner plan-evaluation import-recordings collection-progress validate-evaluation evaluate-stt evaluate-pipeline error-report test test-slow lint typecheck run benchmark
+.PHONY: install install-dev setup setup-models check-mps prepare-ner train-ner-clean train-ner-augmented evaluate-ner plan-evaluation import-recordings collection-progress validate-evaluation evaluate-stt evaluate-pipeline error-report test test-slow lint typecheck format format-check coverage package-check release-check run benchmark
 
 RAW_RECORDINGS ?= data/private_test/incoming
 
 install:
-	$(PYTHON) -m pip install -r requirements.txt
-	$(PYTHON) -m pip install --no-deps -e .
+	$(UV) sync --locked --no-dev --group tooling --python $(PYTHON)
 
 install-dev:
-	$(PYTHON) -m pip install -r requirements-dev.txt
-	$(PYTHON) -m pip install --no-deps -e .
+	$(UV) sync --locked --group dev --group tooling --python $(PYTHON)
 
 # Full local bootstrap on macOS/Linux (venv-aware via PYTHON=).
 setup: install
@@ -57,16 +56,42 @@ error-report:
 	$(PYTHON) -m evaluation.create_error_report --config configs/evaluation.yaml
 
 test:
-	$(PYTHON) -m pytest -m "not slow"
+	$(PYTHON) -W error -m pytest -m "not slow"
 
 test-slow:
-	$(PYTHON) -m pytest -m slow
+	$(PYTHON) -W error -m pytest -m slow
 
 lint:
 	$(PYTHON) -m ruff check .
 
 typecheck:
 	$(PYTHON) -m mypy src training evaluation
+
+format:
+	$(PYTHON) -m ruff format .
+
+format-check:
+	$(PYTHON) -m ruff format --check .
+
+coverage:
+	$(PYTHON) -W error -m pytest -m "not slow" --cov=uzbek_speech_entities
+
+package-check:
+	$(PYTHON) scripts/check_wheel.py
+
+# Fail-closed release gate. This intentionally requires provisioned model assets and a
+# compliant, consented private evaluation corpus; smoke-only evaluation is never accepted.
+release-check:
+	$(MAKE) format-check
+	$(MAKE) lint
+	$(MAKE) typecheck
+	$(MAKE) coverage
+	$(MAKE) package-check
+	$(MAKE) test-slow
+	$(MAKE) validate-evaluation
+	$(MAKE) evaluate-stt
+	$(MAKE) evaluate-pipeline
+	$(MAKE) error-report
 
 run:
 	$(PYTHON) -m uzbek_speech_entities.api.server

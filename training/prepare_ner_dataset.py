@@ -270,9 +270,7 @@ def prepare_dataset(
     splits = _split_records(accepted_records, seed)
     label_counts = Counter(tag for record in accepted_records for tag in record["ner_tags"])
     entity_type_counts = Counter(
-        tag.split("-", maxsplit=1)[1]
-        for tag in label_counts.elements()
-        if tag != "O"
+        tag.split("-", maxsplit=1)[1] for tag in label_counts.elements() if tag != "O"
     )
     accepted_token_count = sum(len(record["tokens"]) for record in accepted_records)
     split_statistics = {

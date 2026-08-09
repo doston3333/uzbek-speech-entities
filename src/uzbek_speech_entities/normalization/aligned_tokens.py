@@ -73,9 +73,8 @@ class AnalysisNormalization:
         prior_analysis_end = 0
         prior_source_end = 0
         for token in self.tokens:
-            if (
-                token.analysis_start < prior_analysis_end
-                or token.analysis_end > len(self.analysis_text)
+            if token.analysis_start < prior_analysis_end or token.analysis_end > len(
+                self.analysis_text
             ):
                 raise ValueError("aligned analysis tokens must be ordered and non-overlapping")
             gap = self.analysis_text[prior_analysis_end : token.analysis_start]

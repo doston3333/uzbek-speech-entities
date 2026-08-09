@@ -73,9 +73,7 @@ def _is_ordinal(key: str, terms: dict[str, frozenset[str]]) -> bool:
 
 def _with_allowed_suffix(key: str, values: frozenset[str]) -> bool:
     return key in values or any(
-        key.removesuffix(suffix) in values
-        for suffix in _TEMPORAL_SUFFIXES
-        if key.endswith(suffix)
+        key.removesuffix(suffix) in values for suffix in _TEMPORAL_SUFFIXES if key.endswith(suffix)
     )
 
 

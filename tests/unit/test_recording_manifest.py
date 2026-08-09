@@ -110,9 +110,7 @@ def test_prompt_pack_rejects_repeated_entity_surface(tmp_path: Path) -> None:
     first_prompt = json.loads(PROMPTS_PATH.read_text(encoding="utf-8").splitlines()[0])
     first_prompt["text"] += " Akmal Karimov uchrashuvni yakunlaydi."
     prompt_path = tmp_path / "prompts.jsonl"
-    prompt_path.write_text(
-        json.dumps(first_prompt, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
+    prompt_path.write_text(json.dumps(first_prompt, ensure_ascii=False) + "\n", encoding="utf-8")
 
     with pytest.raises(RecordingPlanError, match="must occur exactly once"):
         load_prompts(prompt_path)

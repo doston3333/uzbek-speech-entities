@@ -154,9 +154,10 @@ def test_authored_templates_exclude_protected_three_to_five_grams_only() -> None
         not normalized_ngrams(record["tokens"]).intersection(protected) for record in authored
     )
     assert statistics["excluded_protected_authored_template_count"] == 1
-    assert statistics["excluded_protected_authored_template_ids_sha256"] == hashlib.sha256(
-        b"speech-template-org-boundary-000-00"
-    ).hexdigest()
+    assert (
+        statistics["excluded_protected_authored_template_ids_sha256"]
+        == hashlib.sha256(b"speech-template-org-boundary-000-00").hexdigest()
+    )
     assert statistics["protected_authored_template_ngram_count"] == len(protected)
     assert statistics["protected_authored_template_ngram_overlap_count"] == 0
     assert len(statistics["protected_authored_template_ngrams_sha256"]) == 64
@@ -290,9 +291,10 @@ def test_synthetic_records_do_not_match_immutable_speech_fixture() -> None:
     assert fixture.read_bytes() == before
     assert not {full_text_fingerprint(record["tokens"]) for record in generated} & protected
     assert KNOWN_OGG_TRANSCRIPT_FINGERPRINTS
-    assert not {
-        full_text_fingerprint(record["tokens"]) for record in generated
-    } & KNOWN_OGG_TRANSCRIPT_FINGERPRINTS
+    assert (
+        not {full_text_fingerprint(record["tokens"]) for record in generated}
+        & KNOWN_OGG_TRANSCRIPT_FINGERPRINTS
+    )
 
 
 def test_custom_augmented_file_and_statistics_names_are_validated_and_selected(

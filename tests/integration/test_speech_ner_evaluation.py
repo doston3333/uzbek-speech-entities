@@ -48,9 +48,7 @@ def _score(
             _key(item) for item in predicted if label is None or item.label == label
         )
         true_positives += sum((gold_keys & predicted_keys).values())
-        false_positives += sum(predicted_keys.values()) - sum(
-            (gold_keys & predicted_keys).values()
-        )
+        false_positives += sum(predicted_keys.values()) - sum((gold_keys & predicted_keys).values())
         false_negatives += sum(gold_keys.values()) - sum((gold_keys & predicted_keys).values())
     precision = (
         true_positives / (true_positives + false_positives)
@@ -89,9 +87,9 @@ def test_speech_rescue_exact_span_metrics_and_latency_meet_local_gate() -> None:
         validate_entity_spans(text, gold)
         validate_entity_spans(text, baseline)
         validate_entity_spans(text, rescued)
-        assert [_key(entity) for entity in rescued] == [
-            _key(entity) for entity in gold
-        ], record["id"]
+        assert [_key(entity) for entity in rescued] == [_key(entity) for entity in gold], record[
+            "id"
+        ]
         gold_by_sample.append(gold)
         baseline_by_sample.append(baseline)
         rescued_by_sample.append(rescued)
@@ -149,15 +147,12 @@ def test_local_model_normalized_only_candidates_meet_precision_gate() -> None:
             record["text"], normalized_predictions, view, 0.70
         )
         predicted_keys = {(item.label, item.start, item.end) for item in projected}
-        gold_keys = {
-            (item["label"], item["start"], item["end"]) for item in record["entities"]
-        }
+        gold_keys = {(item["label"], item["start"], item["end"]) for item in record["entities"]}
         true_positives += len(predicted_keys & gold_keys)
         false_positives += len(predicted_keys - gold_keys)
         false_negatives += len(gold_keys - predicted_keys)
         assert all(
-            record["text"][item.start : item.end]
-            and item.start < item.end <= len(record["text"])
+            record["text"][item.start : item.end] and item.start < item.end <= len(record["text"])
             for item in projected
         )
 

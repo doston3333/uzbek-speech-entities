@@ -49,9 +49,7 @@ def person_gazetteer_candidates(tokens: tuple[WordToken, ...]) -> tuple[Candidat
     )
 
 
-def gazetteer_boundary_expansion_candidates(
-    tokens: tuple[WordToken, ...]
-) -> tuple[Candidate, ...]:
+def gazetteer_boundary_expansion_candidates(tokens: tuple[WordToken, ...]) -> tuple[Candidate, ...]:
     """Let a phrase plus an immediate semantic head win as one ORG/LOC span."""
     candidates: list[Candidate] = []
     for match in person_phrase_matches(tokens):

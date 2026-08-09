@@ -10,7 +10,7 @@ from typing import Any
 import numpy as np
 
 from ..audio.loader import AudioDecodingError, decode_audio
-from .base import ModelLoadError, TranscriptionError
+from .base import ModelLoadError, TranscriptionError, validate_immutable_revision
 
 LOGGER = logging.getLogger(__name__)
 _DEFAULT_NATIVE_CHUNK_SECONDS = 30.0
@@ -55,9 +55,7 @@ def _split_audio_on_quiet_boundaries(
 
             median_energy = float(np.median([energy for energy, _ in candidates]))
             quiet_threshold = max(1e-4, median_energy * 0.25)
-            strong_pauses = [
-                center for energy, center in candidates if energy <= quiet_threshold
-            ]
+            strong_pauses = [center for energy, center in candidates if energy <= quiet_threshold]
             if strong_pauses:
                 cut = strong_pauses[0]
             else:
@@ -89,16 +87,18 @@ class TransformersSpeechToTextService:
         self,
         model_id: str,
         cache_dir: Path,
+        *,
+        revision: str,
         language: str = "uz",
         task: str = "transcribe",
         chunk_length_seconds: float = 30.0,
         batch_size: int = 1,
         device_preference: tuple[str, ...] = ("mps", "cpu"),
-        *,
         local_files_only: bool = False,
     ) -> None:
         if not isinstance(model_id, str) or not model_id.strip():
             raise ValueError("STT model ID must be a non-empty string.")
+        revision = validate_immutable_revision(revision)
         if (
             not isinstance(language, str)
             or not language.strip()
@@ -115,6 +115,7 @@ class TransformersSpeechToTextService:
         ):
             raise ValueError("STT device preferences must contain only mps or cpu.")
         self._model_id = model_id
+        self._revision = revision
         self.cache_dir = Path(cache_dir)
         self.language = language
         self.task = task
@@ -134,6 +135,11 @@ class TransformersSpeechToTextService:
     def model_id(self) -> str:
         """Return the configured Hugging Face model identifier."""
         return self._model_id
+
+    @property
+    def revision(self) -> str:
+        """Return the immutable Hugging Face model revision."""
+        return self._revision
 
     @property
     def loaded(self) -> bool:
@@ -183,11 +189,13 @@ class TransformersSpeechToTextService:
                 device = self._select_device(torch_module)
                 processor = processor_class.from_pretrained(
                     self.model_id,
+                    revision=self.revision,
                     cache_dir=str(self.cache_dir),
                     local_files_only=self.local_files_only,
                 )
                 model = model_class.from_pretrained(
                     self.model_id,
+                    revision=self.revision,
                     cache_dir=str(self.cache_dir),
                     dtype=torch_module.float32,
                     local_files_only=self.local_files_only,
@@ -198,7 +206,7 @@ class TransformersSpeechToTextService:
                 self._model = model
                 self._torch = torch_module
                 self._device = device
-                LOGGER.info("Loaded STT model %s on %s.", self.model_id, device)
+                LOGGER.info("Loaded STT model %s@%s on %s.", self.model_id, self.revision, device)
             except ModelLoadError as error:
                 self._load_error = error
                 raise
@@ -247,9 +255,7 @@ class TransformersSpeechToTextService:
                 return_timestamps=False,
                 use_model_defaults=False,
             )
-        transcripts = self._processor.batch_decode(
-            generated_ids, skip_special_tokens=True
-        )
+        transcripts = self._processor.batch_decode(generated_ids, skip_special_tokens=True)
         transcript = transcripts[0] if isinstance(transcripts, list) and transcripts else None
         if not isinstance(transcript, str):
             raise TranscriptionError("STT model returned an invalid transcript.")

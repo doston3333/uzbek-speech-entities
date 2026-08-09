@@ -33,13 +33,9 @@ def test_remote_config_rewrites_only_checkpoint_and_output_paths() -> None:
     )
 
     assert original["model"]["checkpoint"] == "./models/ner/final"
-    assert original["output"]["directory"] == (
-        "./models/ner/speech-continuation-20260807-v4-seed1"
-    )
+    assert original["output"]["directory"] == ("./models/ner/speech-continuation-20260807-v4-seed1")
     assert rewritten["model"]["checkpoint"] == str(modal_train_ner.REMOTE_CHECKPOINT)
-    assert rewritten["output"]["directory"] == (
-        "/outputs/speech-continuation-20260807-v4-seed1"
-    )
+    assert rewritten["output"]["directory"] == ("/outputs/speech-continuation-20260807-v4-seed1")
     assert rewritten["training"] == original["training"]
     assert rewritten["data"] == original["data"]
     with pytest.raises(ValueError, match="approved continuation config"):
