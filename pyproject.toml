@@ -33,6 +33,9 @@ dependencies = [
   "uvicorn>=0.29",
 ]
 
+[project.scripts]
+uzbek-speech-setup = "uzbek_speech_entities.setup:main"
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 

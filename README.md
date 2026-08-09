@@ -41,30 +41,54 @@ entity offsets.
 
 ## Install and run
 
-Prerequisites are Python 3.11 or 3.12 and FFmpeg (needed when libsndfile cannot decode M4A,
-WebM, or OGG directly). On macOS, install FFmpeg with `brew install ffmpeg`.
+Prerequisites are Python 3.11 or 3.12. FFmpeg is recommended when libsndfile cannot
+decode M4A, WebM, or OGG directly.
 
-Create a Python 3.11 virtual environment (Python 3.12 is also supported), then install the
-development dependencies and the local package:
+### macOS / Linux
+
+```bash
+git clone https://github.com/doston3333/uzbek-speech-entities.git
+cd uzbek-speech-entities
+chmod +x scripts/setup_macos.sh
+./scripts/setup_macos.sh
+make run
+```
+
+Or step by step:
 
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-make install-dev
-```
-
-If Python 3.12 is preferred, pass `PYTHON=python3.12` to the `make` commands.
-
-Start the configured local server and open <http://127.0.0.1:8000>:
-
-```bash
+make setup    # pip install + NER GitHub Release + Whisper Uzbek prefetch
 make run
 ```
+
+### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/doston3333/uzbek-speech-entities.git
+cd uzbek-speech-entities
+Set-ExecutionPolicy -Scope Process Bypass
+.\scripts\setup_windows.ps1
+.\scripts\run_windows.ps1
+```
+
+`setup` downloads:
+
+- the pinned NER inference zip from GitHub Releases (`runtime-models-v1`)
+- Whisper Uzbek STT models from Hugging Face (`navai-uz/whisper-small-uzbek` and the base fallback)
+
+into gitignored paths under `models/`. First `make run` will also auto-download NER if
+`models/ner/final` is still empty (unless `SKIP_MODEL_DOWNLOAD=1`).
+
+Open <http://127.0.0.1:8000> after the server starts.
 
 `make run` reads `app.host` and `app.port` from `configs/app.yaml`; `APP_HOST` and `APP_PORT`
 provide explicit overrides (useful when port 8000 is occupied). Model identifiers, cache paths,
 upload limits, confidence thresholds, and speech-only feature flags are also externalized in
 config or documented environment variables.
+
+If Python 3.12 is preferred on Unix, pass `PYTHON=python3.12` to the `make` commands.
 
 ## Verification
 

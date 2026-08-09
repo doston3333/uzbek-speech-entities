@@ -38,6 +38,15 @@ ner:
   analysis_normalization_enabled: true
   normalized_confidence_threshold: 0.70
 
+  # Fresh clones download this pinned GitHub Release when models/ner/final is empty.
+  # Disable with ner.download.enabled=false or SKIP_MODEL_DOWNLOAD=1.
+  download:
+    enabled: true
+    github_repo: doston3333/uzbek-speech-entities
+    release_tag: runtime-models-v1
+    asset: ner-final.zip
+    sha256: 16cf065e3c5e6cd8cc86fe0b10e2cb32db00887de50ef8b84f3b33c854614587
+
   visible_labels:
     - PER
     - LOC

@@ -1,6 +1,6 @@
 PYTHON ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3.11)
 
-.PHONY: install install-dev check-mps prepare-ner train-ner-clean train-ner-augmented evaluate-ner plan-evaluation import-recordings collection-progress validate-evaluation evaluate-stt evaluate-pipeline error-report test test-slow lint typecheck run benchmark
+.PHONY: install install-dev setup setup-models check-mps prepare-ner train-ner-clean train-ner-augmented evaluate-ner plan-evaluation import-recordings collection-progress validate-evaluation evaluate-stt evaluate-pipeline error-report test test-slow lint typecheck run benchmark
 
 RAW_RECORDINGS ?= data/private_test/incoming
 
@@ -11,6 +11,13 @@ install:
 install-dev:
 	$(PYTHON) -m pip install -r requirements-dev.txt
 	$(PYTHON) -m pip install --no-deps -e .
+
+# Full local bootstrap on macOS/Linux (venv-aware via PYTHON=).
+setup: install
+	$(PYTHON) -m uzbek_speech_entities.setup
+
+setup-models:
+	$(PYTHON) -m uzbek_speech_entities.setup --models-only
 
 check-mps:
 	$(PYTHON) -c "import torch; print('mps' if torch.backends.mps.is_available() else 'cpu')"

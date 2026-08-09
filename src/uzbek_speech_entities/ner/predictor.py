@@ -108,8 +108,15 @@ class NERPredictor:
             isinstance(key, str) and isinstance(value, str) for key, value in mapping.items()
         ):
             raise ValueError("NER label configuration is invalid.")
+        model_path = resolve_project_path(path_value)
+        if not local_files_only:
+            from ..runtime_models import ensure_ner_model
+
+            model_path = ensure_ner_model(
+                model_path, config, local_files_only=local_files_only
+            )
         return cls(
-            resolve_project_path(path_value),
+            model_path,
             max_length=max_length,
             confidence_threshold=float(threshold),
             visible_labels=tuple(labels),
